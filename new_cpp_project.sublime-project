@@ -1,0 +1,33 @@
+{
+  "build_systems": [
+    {
+      "name": "new_cpp_project Build All",
+      "shell_cmd": "make test",
+      "working_dir": "${project_path}",
+      "file_regex": "(.*):(\\d+):(\\d+)(.*)",
+      "shell": true,
+    }
+  ],
+  "folders": [
+    {
+      "path": ".",
+      "name": "New C++ Project",
+    }
+  ],
+  "settings":
+  {
+    "LSP":
+    {
+      "clangd":
+      {
+        "initializationOptions" : {
+          "binary": "system",
+          "clangd.compile-commands-dir": "build",
+          "clangd.background-index": true,
+          "clangd.header-insertion": "never",
+          "clangd.clang-tidy": true,
+        }
+      },
+    },
+  },
+}

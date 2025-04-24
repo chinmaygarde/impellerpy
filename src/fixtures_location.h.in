@@ -1,0 +1,3 @@
+#pragma once
+
+#cmakedefine TEST_ASSETS_LOCATION "@TEST_ASSETS_LOCATION@" "/"
