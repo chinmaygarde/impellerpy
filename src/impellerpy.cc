@@ -1,9 +1,10 @@
 #include <nanobind/nanobind.h>
+#include <impeller.hpp>
 
-int add(int a, int b) {
-  return a + b;
+int version() {
+  return ImpellerGetVersion();
 }
 
-NB_MODULE(impellerpy, m) {
-  m.def("add", &add);
+NB_MODULE(impellerpy, module) {
+  module.def("version", &version);
 }
