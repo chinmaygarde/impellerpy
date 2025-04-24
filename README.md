@@ -1,6 +1,6 @@
-# A New C++ Project
+# ImpellerPy
 
-This is a project template Chinmay uses for his C++ projects.
+Nothing to see here yet. This is a very early exploratory effort.
 
 ## Prerequisites
 

@@ -5,3 +5,4 @@ build/
 *.orig
 *.perfetto-trace
 *.ini
+vcpkg_installed/

@@ -11,7 +11,7 @@ SetCAndCXXStandard(11 20)
 
 EnableCCache()
 
-project(new_cpp_project)
+project(impellerpy)
 
 enable_testing()
 
