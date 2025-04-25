@@ -3,10 +3,14 @@ name = "impellerpy"
 version = "0.1.0"
 description = "Python bindings for Impeller."
 readme = "README.md"
-requires-python = ">=3.13"
+# This is the version that nanobind uses (via the implicit python dependency).
+requires-python = "~=3.12"
 dependencies = [
     "pytest>=8.3.5",
 ]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = [
+    "src",
+    "build/src"
+]

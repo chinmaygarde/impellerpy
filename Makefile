@@ -7,7 +7,7 @@ build: build/build.ninja
 	cmake --build --preset default
 
 test: .venv build
-	uvx pytest
+	uv run pytest
 
 .venv:
 	uv sync
