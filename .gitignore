@@ -12,3 +12,4 @@ vcpkg_installed/
 *.egg-info
 __pycache__/
 *.pyc
+.vscode/

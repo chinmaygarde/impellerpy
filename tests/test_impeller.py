@@ -1,4 +1,4 @@
-from impeller import impeller
+from impeller import *
 
 def test_version():
-  assert(impeller.version() != 0)
+  assert(get_version() != 0)

@@ -65,7 +65,7 @@ find_package(nanobind
   REQUIRED
 )
 
-nanobind_add_module(impellerpy
+nanobind_add_module(impellerpy LTO
   impellerpy.cc
 )
 
