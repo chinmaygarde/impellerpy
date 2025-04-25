@@ -1,7 +1,7 @@
 #include <nanobind/nanobind.h>
 #include <impeller.hpp>
 
-int version() {
+PY_INT32_T version() {
   return ImpellerGetVersion();
 }
 

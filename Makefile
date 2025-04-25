@@ -6,8 +6,11 @@
 build: build/build.ninja
 	cmake --build --preset default
 
-test: build
+test: .venv build
 	uvx pytest
+
+.venv:
+	uv sync
 
 build/build.ninja:
 	cmake --preset default
