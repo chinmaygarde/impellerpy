@@ -11,3 +11,14 @@ def test_structs():
   assert(r.y == 0)
   assert(r.width == 13)
   assert(r.height == 14)
+
+def test_demo():
+  demo = Demo()
+  assert(demo.GetValue() == 42)
+  demo.Foo()
+  demo.Foo()
+  demo.Foo()
+  demo.Foo()
+  demo.Foo()
+  demo.Foo()
+

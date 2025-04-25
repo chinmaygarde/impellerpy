@@ -1,8 +1,62 @@
 #include <nanobind/nanobind.h>
 #include <impeller.hpp>
+#include <iostream>
+#include <map>
+
+namespace nb = nanobind;
+
+namespace IMPELLER_HPP_NAMESPACE {
+ProcTable gGlobalProcTable;
+}  // namespace IMPELLER_HPP_NAMESPACE
+
+class Demo {
+ public:
+  Demo() {
+    static int count = 0;
+    ++count;
+    std::cout << "Creating " << count << std::endl;
+  }
+
+  ~Demo() {
+    static int count = 0;
+    ++count;
+    std::cout << "Destroying " << count << std::endl;
+  }
+
+  Demo& Foo() {
+    std::cout << "Foo" << std::endl;
+    return *this;
+  }
+
+  int GetValue() const { return 42; }
+};
+
+static void SetupImpellerHPPProcTableOnce() {
+  static std::once_flag sOnceFlag;
+  std::call_once(sOnceFlag, []() {
+    std::map<std::string, void*> proc_map;
+#define IMPELLER_HPP_PROC(name) \
+  proc_map[#name] = reinterpret_cast<void*>(&name);
+    IMPELLER_HPP_EACH_PROC(IMPELLER_HPP_PROC)
+#undef IMPELLER_HPP_PROC
+    impeller::hpp::gGlobalProcTable.Initialize(
+        [&](auto name) { return proc_map.at(name); });
+  });
+}
+
+static void BindDisplayListBuilder(nb::module_& m) {
+  nb::class_<impeller::hpp::DisplayListBuilder>(m, "DisplayListBuilder")
+      .def(nb::init());
+
+  nb::class_<Demo>(m, "Demo")
+      .def(nb::init())
+      .def("GetValue", &Demo::GetValue)
+      .def("Foo", &Demo::Foo, nb::rv_policy::reference);
+}
 
 NB_MODULE(impellerpy, m) {
-  namespace nb = nanobind;
+  SetupImpellerHPPProcTableOnce();
+
   // Version
   m.def("get_version", &ImpellerGetVersion, "Get the Impeller API version.");
   m.attr("VERSION") = IMPELLER_VERSION;
@@ -200,4 +254,6 @@ NB_MODULE(impellerpy, m) {
               &ImpellerContextVulkanInfo::graphics_queue_family_index)
       .def_rw("graphics_queue_index",
               &ImpellerContextVulkanInfo::graphics_queue_index);
+
+  BindDisplayListBuilder(m);
 }
