@@ -6,3 +6,9 @@ build/
 *.perfetto-trace
 *.ini
 vcpkg_installed/
+.pytest_cache/
+.venv/
+*.egg
+*.egg-info
+__pycache__/
+*.pyc

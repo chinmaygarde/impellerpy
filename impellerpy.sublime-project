@@ -2,7 +2,7 @@
   "build_systems": [
     {
       "name": "ImpellerPy Build All",
-      "shell_cmd": "make",
+      "shell_cmd": "make test",
       "working_dir": "${project_path}",
       "file_regex": "(.*):(\\d+):(\\d+)(.*)",
       "shell": true,
