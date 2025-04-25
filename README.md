@@ -11,6 +11,11 @@ Nothing to see here yet. This is a very early exploratory effort.
 * A C11 and C++20 compiler.
 * [vcpkg](https://vcpkg.io/en/index.html) for package management.
   * Ensure that the `VCPKG_ROOT` environment variable is present and valid.
+* The vcpkg step compiles cpython3. To do that successfully on macOS, you need to invoke (look in the failure log for details on dependencies on other platforms):
+  ```sh
+  brew install autoconf automake autoconf-archive
+  ```
+
 
 ## Building
 
