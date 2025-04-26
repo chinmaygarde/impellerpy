@@ -9,28 +9,6 @@ namespace IMPELLER_HPP_NAMESPACE {
 ProcTable gGlobalProcTable;
 }  // namespace IMPELLER_HPP_NAMESPACE
 
-class Demo {
- public:
-  Demo() {
-    static int count = 0;
-    ++count;
-    std::cout << "Creating " << count << std::endl;
-  }
-
-  ~Demo() {
-    static int count = 0;
-    ++count;
-    std::cout << "Destroying " << count << std::endl;
-  }
-
-  Demo& Foo() {
-    std::cout << "Foo" << std::endl;
-    return *this;
-  }
-
-  int GetValue() const { return 42; }
-};
-
 static void SetupImpellerHPPProcTableOnce() {
   static std::once_flag sOnceFlag;
   std::call_once(sOnceFlag, []() {
@@ -45,13 +23,14 @@ static void SetupImpellerHPPProcTableOnce() {
 }
 
 static void BindDisplayListBuilder(nb::module_& m) {
-  nb::class_<impeller::hpp::DisplayListBuilder>(m, "DisplayListBuilder")
-      .def(nb::init());
+  using namespace impeller::hpp;
+  nb::class_<DisplayList>(m, "DisplayList");
 
-  nb::class_<Demo>(m, "Demo")
+  nb::class_<DisplayListBuilder>(m, "DisplayListBuilder")
       .def(nb::init())
-      .def("GetValue", &Demo::GetValue)
-      .def("Foo", &Demo::Foo, nb::rv_policy::reference);
+      .def("build", &DisplayListBuilder::Build, nb::rv_policy::move)
+      .def("clip_oval", &DisplayListBuilder::ClipOval,
+           nb::rv_policy::reference);
 }
 
 NB_MODULE(impellerpy, m) {

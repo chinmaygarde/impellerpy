@@ -12,13 +12,6 @@ def test_structs():
   assert(r.width == 13)
   assert(r.height == 14)
 
-def test_demo():
-  demo = Demo()
-  assert(demo.GetValue() == 42)
-  demo.Foo()
-  demo.Foo()
-  demo.Foo()
-  demo.Foo()
-  demo.Foo()
-  demo.Foo()
-
+def test_display_list_builder():
+  dl_builder = DisplayListBuilder()
+  dl_builder.clip_oval(Rect(), ClipOperation.DIFFERENCE).build()
