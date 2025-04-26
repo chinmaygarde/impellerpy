@@ -1,6 +1,8 @@
 {
   "dependencies": [
+    "glfw3",
     "gtest",
-    "nanobind"
+    "nanobind",
+    "glm"
   ]
 }

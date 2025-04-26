@@ -60,13 +60,37 @@ find_package(Python
   COMPONENTS Interpreter Development
   REQUIRED
 )
+find_package(glfw3
+  CONFIG
+  REQUIRED
+)
+find_package(glm
+  CONFIG
+  REQUIRED
+)
 
 find_package(nanobind
   REQUIRED
 )
 
 nanobind_add_module(impellerpy LTO
+  bindings.cc
+  bindings.h
+  cocoa.h
+  cocoa.mm
   impellerpy.cc
+  setup.cc
+  setup.h
+  window.cc
+  window.h
 )
 
-target_link_libraries(impellerpy PRIVATE impeller)
+target_link_libraries(impellerpy PRIVATE impeller glfw glm::glm)
+
+if(APPLE)
+  target_link_libraries(impellerpy
+    PRIVATE
+        "-framework Metal"
+        "-framework QuartzCore"
+  )
+endif()
