@@ -6,6 +6,7 @@ readme = "README.md"
 # This is the version that nanobind uses (via the implicit python dependency).
 requires-python = "~=3.12"
 dependencies = [
+    "pillow>=11.2.1",
     "pytest>=8.3.5",
 ]
 

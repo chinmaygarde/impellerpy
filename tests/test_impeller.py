@@ -1,4 +1,7 @@
 from impeller import *
+from PIL import Image
+import os
+import pytest
 
 def test_version():
   assert(get_version() != 0)
@@ -49,3 +52,10 @@ def test_can_create_window():
     surface.draw(dl)
 
     surface.present()
+
+
+def test_can_draw_image(pytestconfig):
+  image = Image.open(os.path.join(pytestconfig.rootpath, "assets/airplane.jpg"))
+  assert(image.size[0] > 0)
+  assert(image.size[1] > 0)
+  image.tobytes()
