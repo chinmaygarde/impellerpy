@@ -11,6 +11,8 @@ def test_structs():
   assert(r.y == 0)
   assert(r.width == 13)
   assert(r.height == 14)
+  r2 = Rect()
+  assert(r2.width == 0)
 
 def test_display_list_builder():
   dl_builder = DisplayListBuilder()
