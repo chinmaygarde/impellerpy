@@ -11,7 +11,7 @@ namespace nb = nanobind;
 
 using namespace impeller::hpp;
 
-void BindAttributes(nb::module_& m) {
+static void BindAttributes(nb::module_& m) {
   // Version
   m.def("get_version", &ImpellerGetVersion, "Get the Impeller API version.");
   m.attr("VERSION") = IMPELLER_VERSION;
@@ -21,7 +21,7 @@ void BindAttributes(nb::module_& m) {
   m.attr("VERSION_PATCH") = IMPELLER_VERSION_GET_PATCH(IMPELLER_VERSION);
 }
 
-void BindEnums(nb::module_& m) {
+static void BindEnums(nb::module_& m) {
   // Enums
   nb::enum_<ImpellerFillType>(m, "FillType")
       .value("NON_ZERO", kImpellerFillTypeNonZero)
@@ -134,7 +134,7 @@ void BindEnums(nb::module_& m) {
       .value("VULKAN", ContextBackend::kVulkan);
 }
 
-void BindStructs(nb::module_& m) {
+static void BindStructs(nb::module_& m) {
   // Structs
   nb::class_<ImpellerRect>(m, "Rect")
       .def(nb::init<>())
@@ -220,23 +220,75 @@ void BindStructs(nb::module_& m) {
               &ImpellerContextVulkanInfo::graphics_queue_index);
 }
 
-void BindColorFilter(nb::module_& m) {
+static void BindColorFilter(nb::module_& m) {
   nb::class_<ColorFilter>(m, "ColorFilter");
 }
 
-void BindColorSource(nb::module_& m) {
+static void BindColorSource(nb::module_& m) {
   nb::class_<ColorSource>(m, "ColorSource");
 }
 
-void BindImageFilter(nb::module_& m) {
+static void BindImageFilter(nb::module_& m) {
   nb::class_<ImageFilter>(m, "ImageFilter");
 }
 
-void BindMaskFilter(nb::module_& m) {
+static void BindLineMetrics(nb::module_& m) {
+  nb::class_<LineMetrics>(m, "LineMetrics");
+}
+
+static void BindPath(nb::module_& m) {
+  nb::class_<Path>(m, "Path");
+}
+
+static void BindGlyphInfo(nb::module_& m) {
+  nb::class_<GlyphInfo>(m, "GlyphInfo");
+}
+
+static void BindParagraph(nb::module_& m) {
+  nb::class_<Paragraph>(m, "Paragraph")
+      .def("alphabetic_baseline", &Paragraph::GetAlphabeticBaseline)
+      .def("height", &Paragraph::GetHeight)
+      .def("ideographic_baseline", &Paragraph::GetIdeographicBaseline)
+      .def("line_count", &Paragraph::GetLineCount)
+      .def("longest_line_width", &Paragraph::GetLongestLineWidth)
+      .def("max_intrinsic_width", &Paragraph::GetMaxIntrinsicWidth)
+      .def("max_width", &Paragraph::GetMaxWidth)
+      .def("min_intrinsic_width", &Paragraph::GetMinIntrinsicWidth)
+      .def("line_metrics", &Paragraph::GetLineMetrics)
+      .def("glyph_info_at_code_unit_index",
+           &Paragraph::GlyphInfoAtCodeUnitIndex)
+      .def("glyph_info_at_paragraph_coordinate",
+           &Paragraph::GlyphInfoAtParagraphCoordinates)
+      .def("word_boundary", &Paragraph::GetWordBoundary);
+}
+
+static void BindTexture(nb::module_& m) {
+  nb::class_<Texture>(m, "Texture");
+}
+
+static void BindPathBuilder(nb::module_& m) {
+  nb::class_<PathBuilder>(m, "PathBuilder")
+      .def("build_copy", &PathBuilder::BuildCopy, nb::rv_policy::move)
+      .def("build", &PathBuilder::Build, nb::rv_policy::move)
+      .def("add_arc", &PathBuilder::AddArc, nb::rv_policy::reference)
+      .def("add_oval", &PathBuilder::AddOval, nb::rv_policy::reference)
+      .def("add_rect", &PathBuilder::AddRect, nb::rv_policy::reference)
+      .def("add_rounded_rect", &PathBuilder::AddRoundedRect,
+           nb::rv_policy::reference)
+      .def("close", &PathBuilder::Close, nb::rv_policy::reference)
+      .def("cubic_curve_to", &PathBuilder::CubicCurveTo,
+           nb::rv_policy::reference)
+      .def("line_to", &PathBuilder::LineTo, nb::rv_policy::reference)
+      .def("move_to", &PathBuilder::MoveTo, nb::rv_policy::reference)
+      .def("quadratic_curve_to", &PathBuilder::QuadraticCurveTo,
+           nb::rv_policy::reference);
+}
+
+static void BindMaskFilter(nb::module_& m) {
   nb::class_<MaskFilter>(m, "MaskFilter");
 }
 
-void BindPaint(nb::module_& m) {
+static void BindPaint(nb::module_& m) {
   nb::class_<Paint>(m, "Paint")
       .def(nb::init())
       .def("set_color", &Paint::SetColor, nb::rv_policy::reference)
@@ -259,9 +311,52 @@ void BindDisplayList(nb::module_& m) {
 void BindDisplayListBuilder(nb::module_& m) {
   nb::class_<DisplayListBuilder>(m, "DisplayListBuilder")
       .def(nb::init())
-      .def("build", &DisplayListBuilder::Build, nb::rv_policy::move)
+      .def("build", &DisplayListBuilder::Build, nb::rv_policy::reference)
       .def("clip_oval", &DisplayListBuilder::ClipOval, nb::rv_policy::reference)
-      .def("draw_rect", &DisplayListBuilder::DrawRect,
+      .def("clip_path", &DisplayListBuilder::ClipPath, nb::rv_policy::reference)
+      .def("clip_rect", &DisplayListBuilder::ClipRect, nb::rv_policy::reference)
+      .def("clip_rounded_rect", &DisplayListBuilder::ClipRoundedRect,
+           nb::rv_policy::reference)
+      .def("draw_dashed_line", &DisplayListBuilder::DrawDashedLine,
+           nb::rv_policy::reference)
+      .def("draw_display_list", &DisplayListBuilder::DrawDisplayList,
+           nb::rv_policy::reference)
+      .def("draw_line", &DisplayListBuilder::DrawLine, nb::rv_policy::reference)
+      .def("draw_oval", &DisplayListBuilder::DrawOval, nb::rv_policy::reference)
+      .def("draw_paint", &DisplayListBuilder::DrawPaint,
+           nb::rv_policy::reference)
+      .def("draw_paragraph", &DisplayListBuilder::DrawParagraph,
+           nb::rv_policy::reference)
+      .def("draw_shadow", &DisplayListBuilder::DrawShadow,
+           nb::rv_policy::reference)
+      .def("draw_path", &DisplayListBuilder::DrawPath, nb::rv_policy::reference)
+      .def("draw_rect", &DisplayListBuilder::DrawRect, nb::rv_policy::reference)
+      .def("draw_rounded_rect", &DisplayListBuilder::DrawRoundedRect,
+           nb::rv_policy::reference)
+      .def("draw_rounded_rect_difference",
+           &DisplayListBuilder::DrawRoundedRectDifference,
+           nb::rv_policy::reference)
+      .def("draw_texture", &DisplayListBuilder::DrawTexture,
+           nb::rv_policy::reference)
+      .def("draw_texture_rect", &DisplayListBuilder::DrawTextureRect,
+           nb::rv_policy::reference)
+      .def("save_count", &DisplayListBuilder::GetSaveCount)
+      .def("reset_transform", &DisplayListBuilder::ResetTransform,
+           nb::rv_policy::reference)
+      .def("restore", &DisplayListBuilder::Restore, nb::rv_policy::reference)
+      .def("restore_to_count", &DisplayListBuilder::RestoreToCount,
+           nb::rv_policy::reference)
+      .def("rotate", &DisplayListBuilder::Rotate, nb::rv_policy::reference)
+      .def("save", &DisplayListBuilder::Save, nb::rv_policy::reference)
+      .def("save_layer", &DisplayListBuilder::SaveLayer,
+           nb::rv_policy::reference)
+      .def("scale", &DisplayListBuilder::Save, nb::rv_policy::reference)
+      .def("get_transform", &DisplayListBuilder::GetTransform)
+      .def("set_transform", &DisplayListBuilder::SetTransform,
+           nb::rv_policy::reference)
+      .def("push_transform", &DisplayListBuilder::Transform,
+           nb::rv_policy::reference)
+      .def("translate", &DisplayListBuilder::Translate,
            nb::rv_policy::reference);
 }
 
@@ -287,18 +382,24 @@ void BindSurface(nb::module_& m) {
 
 void BindImpeller(nb::module_& m) {
   BindAttributes(m);
-  BindEnums(m);
-  BindStructs(m);
-  BindSurface(m);
-  BindDisplayList(m);
-  BindWindow(m);
-  BindContext(m);
-  BindPaint(m);
-  BindDisplayListBuilder(m);
   BindColorFilter(m);
   BindColorSource(m);
+  BindContext(m);
+  BindDisplayList(m);
+  BindDisplayListBuilder(m);
+  BindEnums(m);
+  BindGlyphInfo(m);
   BindImageFilter(m);
+  BindLineMetrics(m);
   BindMaskFilter(m);
+  BindPaint(m);
+  BindParagraph(m);
+  BindPath(m);
+  BindPathBuilder(m);
+  BindStructs(m);
+  BindSurface(m);
+  BindTexture(m);
+  BindWindow(m);
 }
 
 }  // namespace impeller::py
