@@ -5,13 +5,16 @@ description = "Python bindings for Impeller."
 readme = "README.md"
 # This is the version that nanobind uses (via the implicit python dependency).
 requires-python = "~=3.12"
-dependencies = [
-    "pillow>=11.2.1",
-    "pytest>=8.3.5",
-]
+dependencies = []
 
 [tool.pytest.ini_options]
 pythonpath = [
     "src",
     "build/src"
+]
+
+[dependency-groups]
+dev = [
+    "pillow>=11.2.1",
+    "pytest>=8.3.5",
 ]
