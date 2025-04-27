@@ -220,10 +220,36 @@ void BindStructs(nb::module_& m) {
               &ImpellerContextVulkanInfo::graphics_queue_index);
 }
 
+void BindColorFilter(nb::module_& m) {
+  nb::class_<ColorFilter>(m, "ColorFilter");
+}
+
+void BindColorSource(nb::module_& m) {
+  nb::class_<ColorSource>(m, "ColorSource");
+}
+
+void BindImageFilter(nb::module_& m) {
+  nb::class_<ImageFilter>(m, "ImageFilter");
+}
+
+void BindMaskFilter(nb::module_& m) {
+  nb::class_<MaskFilter>(m, "MaskFilter");
+}
+
 void BindPaint(nb::module_& m) {
   nb::class_<Paint>(m, "Paint")
       .def(nb::init())
-      .def("set_color", &Paint::SetColor, nb::rv_policy::reference);
+      .def("set_color", &Paint::SetColor, nb::rv_policy::reference)
+      .def("set_blend_mode", &Paint::SetBlendMode, nb::rv_policy::reference)
+      .def("set_draw_style", &Paint::SetDrawStyle, nb::rv_policy::reference)
+      .def("set_stroke_cap", &Paint::SetStrokeCap, nb::rv_policy::reference)
+      .def("set_stroke_join", &Paint::SetStrokeJoin, nb::rv_policy::reference)
+      .def("set_stroke_width", &Paint::SetStrokeWidth, nb::rv_policy::reference)
+      .def("set_stroke_miter", &Paint::SetStrokeMiter, nb::rv_policy::reference)
+      .def("set_color_filter", &Paint::SetColorFilter, nb::rv_policy::reference)
+      .def("set_color_source", &Paint::SetColorSource, nb::rv_policy::reference)
+      .def("set_image_filter", &Paint::SetImageFilter, nb::rv_policy::reference)
+      .def("set_mask_filter", &Paint::SetMaskFilter, nb::rv_policy::reference);
 }
 
 void BindDisplayList(nb::module_& m) {
@@ -269,6 +295,10 @@ void BindImpeller(nb::module_& m) {
   BindContext(m);
   BindPaint(m);
   BindDisplayListBuilder(m);
+  BindColorFilter(m);
+  BindColorSource(m);
+  BindImageFilter(m);
+  BindMaskFilter(m);
 }
 
 }  // namespace impeller::py
