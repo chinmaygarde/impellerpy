@@ -83,6 +83,8 @@ nanobind_add_module(impellerpy LTO
   setup.h
   window.cc
   window.h
+  context.h
+  context.cc
 )
 
 target_link_libraries(impellerpy PRIVATE impeller glfw glm::glm)
@@ -94,3 +96,6 @@ if(APPLE)
         "-framework QuartzCore"
   )
 endif()
+
+find_path(HEDLEY_INCLUDE_DIRS "hedley.h")
+target_include_directories(impellerpy PRIVATE ${HEDLEY_INCLUDE_DIRS})

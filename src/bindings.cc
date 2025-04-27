@@ -2,6 +2,9 @@
 
 #include <impeller.hpp>
 
+#include "context.h"
+#include "window.h"
+
 namespace impeller::py {
 
 namespace nb = nanobind;
@@ -124,6 +127,11 @@ void BindEnums(nb::module_& m) {
   nb::enum_<ImpellerTextDirection>(m, "TextDirection")
       .value("RTL", kImpellerTextDirectionRTL)
       .value("LTR", kImpellerTextDirectionLTR);
+
+  nb::enum_<ContextBackend>(m, "ContextBackend")
+      .value("OPENGLES", ContextBackend::kOpenGLES)
+      .value("METAL", ContextBackend::kMetal)
+      .value("VULKAN", ContextBackend::kVulkan);
 }
 
 void BindStructs(nb::module_& m) {
@@ -212,6 +220,12 @@ void BindStructs(nb::module_& m) {
               &ImpellerContextVulkanInfo::graphics_queue_index);
 }
 
+void BindPaint(nb::module_& m) {
+  nb::class_<Paint>(m, "Paint")
+      .def(nb::init())
+      .def("set_color", &Paint::SetColor, nb::rv_policy::reference);
+}
+
 void BindDisplayList(nb::module_& m) {
   nb::class_<DisplayList> _(m, "DisplayList");
 }
@@ -220,8 +234,23 @@ void BindDisplayListBuilder(nb::module_& m) {
   nb::class_<DisplayListBuilder>(m, "DisplayListBuilder")
       .def(nb::init())
       .def("build", &DisplayListBuilder::Build, nb::rv_policy::move)
-      .def("clip_oval", &DisplayListBuilder::ClipOval,
+      .def("clip_oval", &DisplayListBuilder::ClipOval, nb::rv_policy::reference)
+      .def("draw_rect", &DisplayListBuilder::DrawRect,
            nb::rv_policy::reference);
+}
+
+void BindWindow(nb::module_& m) {
+  m.def("get_main_window", &Window::GetMainWindow, nb::rv_policy::reference);
+
+  nb::class_<Window>(m, "Window")
+      .def("create_render_surface", &Window::CreateRenderSurface,
+           nb::rv_policy::move)
+      .def("should_close", &Window::ShouldClose)
+      .def("poll_events", &Window::PollEvents);
+}
+
+void BindContext(nb::module_& m) {
+  nb::class_<ContextWrapper>(m, "Context").def(nb::init<ContextBackend>());
 }
 
 void BindSurface(nb::module_& m) {
@@ -236,6 +265,9 @@ void BindImpeller(nb::module_& m) {
   BindStructs(m);
   BindSurface(m);
   BindDisplayList(m);
+  BindWindow(m);
+  BindContext(m);
+  BindPaint(m);
   BindDisplayListBuilder(m);
 }
 

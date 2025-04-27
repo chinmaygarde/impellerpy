@@ -4,12 +4,13 @@
 #include <nanobind/nanobind.h>
 #include <glm/glm.hpp>
 #include <impeller.hpp>
+#include "context.h"
 
 namespace impeller::py {
 
 class Window {
  public:
-  static void RegisterPythonBindings(nanobind::module_& m);
+  static Window& GetMainWindow();
 
   Window();
 
@@ -23,8 +24,11 @@ class Window {
 
   Window& operator=(Window&&) = delete;
 
-  impeller::hpp::Surface CreateRenderSurface(
-      const impeller::hpp::Context& context);
+  impeller::hpp::Surface CreateRenderSurface(const ContextWrapper& context);
+
+  bool ShouldClose() const;
+
+  void PollEvents() const;
 
  private:
   ::GLFWwindow* window_ = nullptr;

@@ -7,7 +7,5 @@
 NB_MODULE(impellerpy, m) {
   impeller::py::SetupOnce();
 
-  impeller::py::Window::RegisterPythonBindings(m);
-
   impeller::py::BindImpeller(m);
 }

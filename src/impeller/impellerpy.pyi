@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Optional, Sequence, Callable, Any
+from typing import Optional, Sequence, Callable, Any, Void
 
 def get_version() -> int:
   ...
@@ -109,6 +109,11 @@ class TextDirection(Enum):
     RTL = 0
     LTR = 1
 
+class ContextBackend(Enum):
+    OPENGLES = 0
+    METAL = 1
+    VULKAN = 2
+
 class Rect:
     x: float
     y: float
@@ -198,6 +203,11 @@ class ContextVulkanInfo:
 
     def __init__(self) -> None: ...
 
+class Paint:
+    def __init__(self) -> None: ...
+    def set_color(self, color: Color) -> Paint: ...
+
+
 class DisplayList:
     pass
 
@@ -205,3 +215,19 @@ class DisplayListBuilder:
     def __init__(self) -> None: ...
     def build(self) -> DisplayList: ...
     def clip_oval(self, rect: Rect, op: ClipOperation) -> DisplayListBuilder: ...
+    def draw_rect(self, rect: Rect, paint: Paint) -> DisplayListBuilder: ...
+
+
+class Surface:
+    def draw(self, dl: DisplayList) -> bool: ...
+    def present(self) -> bool: ...
+
+class Context:
+    def __init__(self, backend: ContextBackend) -> None: ...
+
+class Window:
+    def create_render_surface(self, context: Context) -> Surface: ...
+    def should_close(self) -> bool: ...
+    def poll_events(self) -> Void: ...
+
+def get_main_window() -> Window: ...

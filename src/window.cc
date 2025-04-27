@@ -2,9 +2,31 @@
 
 #include "cocoa.h"
 
+#include <iostream>
+#include <mutex>
+
 namespace impeller::py {
 
+Window& Window::GetMainWindow() {
+  static Window window;
+  return window;
+}
+
+static void SetupGLFW() {
+  ::glfwSetErrorCallback([](int error, const char* description) {
+    std::cout << "GLFW Error: (" << error << ") " << description;
+  });
+  ::glfwInit();
+}
+
+static void SetupGLFWOnce() {
+  static std::once_flag sOnce;
+  std::call_once(sOnce, []() { SetupGLFW(); });
+}
+
 Window::Window() {
+  SetupGLFWOnce();
+
   glm::ivec2 size = {800, 600};
   ::glfwDefaultWindowHints();
   ::glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
@@ -24,15 +46,16 @@ Window::~Window() {
 }
 
 impeller::hpp::Surface Window::CreateRenderSurface(
-    const impeller::hpp::Context& context) {
-  return WrapSurface(context, window_);
+    const ContextWrapper& context) {
+  return WrapSurface(context.GetContext(), window_);
 }
 
-void Window::RegisterPythonBindings(nanobind::module_& m) {
-  nanobind::class_<Window>(m, "Window")
-      .def(nanobind::init())
-      .def("create_render_surface", &Window::CreateRenderSurface,
-           nanobind::rv_policy::move);
+bool Window::ShouldClose() const {
+  return ::glfwWindowShouldClose(window_) == GLFW_TRUE;
+}
+
+void Window::PollEvents() const {
+  ::glfwPollEvents();
 }
 
 }  // namespace impeller::py
