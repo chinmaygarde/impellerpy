@@ -2,23 +2,40 @@ from . import impellerpy
 
 
 class Rect(impellerpy.Rect_):
-    pass
+    def __init__(self, x: float = 0, y: float = 0, width: float = 0, height: float = 0):
+        super().__init__()
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
 
 
 class Point(impellerpy.Point_):
-    pass
+    def __init__(self, x: float = 0, y: float = 0):
+        super().__init__()
+        self.x = x
+        self.y = y
 
 
 class Size(impellerpy.Size_):
-    pass
+    def __init__(self, width: float = 0, height: float = 0):
+        super().__init__()
+        self.width = width
+        self.height = height
 
 
 class ISize(impellerpy.ISize_):
-    pass
+    def __init__(self, width: int = 0, height: int = 0):
+        super().__init__()
+        self.width = width
+        self.height = height
 
 
 class Range(impellerpy.Range_):
-    pass
+    def __init__(self, start: int = 0, end: int = 0):
+        super().__init__()
+        self.start = start
+        self.end = end
 
 
 class Matrix(impellerpy.Matrix_):
