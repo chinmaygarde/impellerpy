@@ -1,7 +1,7 @@
 # This project uses CMake and Git sub-modules. This Makefile is just in place
 # to make common tasks easier.
 
-.PHONY: clean build sync test
+.PHONY: clean build sync test format
 
 build: build/build.ninja
 	cmake --build --preset default
@@ -20,3 +20,7 @@ clean:
 
 sync:
 	git submodule update --init --recursive -j 8
+
+format:
+	uv run ruff format src tests
+	uv run ruff format
