@@ -13,3 +13,4 @@ vcpkg_installed/
 __pycache__/
 *.pyc
 .vscode/
+dist/
