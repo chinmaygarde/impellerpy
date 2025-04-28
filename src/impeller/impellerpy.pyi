@@ -3,15 +3,15 @@ from typing import Optional, Sequence, Callable, Any
 
 def get_version() -> int: ...
 
-class FillType(Enum):
+class FillType_(Enum):
     NON_ZERO = 0
     ODD = 1
 
-class ClipOperation(Enum):
+class ClipOperation_(Enum):
     DIFFERENCE = 0
     INTERSECT = 1
 
-class BlendMode(Enum):
+class BlendMode_(Enum):
     CLEAR = 0
     SOURCE = 1
     DESTINATION = 2
@@ -42,46 +42,46 @@ class BlendMode(Enum):
     COLOR = 27
     LUMINOSITY = 28
 
-class DrawStyle(Enum):
+class DrawStyle_(Enum):
     FILL = 0
     STROKE = 1
     STROKE_AND_FILL = 2
 
-class StrokeCap(Enum):
+class StrokeCap_(Enum):
     BUTT = 0
     ROUND = 1
     SQUARE = 2
 
-class StrokeJoin(Enum):
+class StrokeJoin_(Enum):
     MITER = 0
     ROUND = 1
     BEVEL = 2
 
-class PixelFormat(Enum):
+class PixelFormat_(Enum):
     RGBA8888 = 0
 
-class TextureSampling(Enum):
+class TextureSampling_(Enum):
     NEAREST_NEIGHBOR = 0
     LINEAR = 1
 
-class TileMode(Enum):
+class TileMode_(Enum):
     CLAMP = 0
     REPEAT = 1
     MIRROR = 2
     DECAL = 3
 
-class BlurStyle(Enum):
+class BlurStyle_(Enum):
     NORMAL = 0
     SOLID = 1
     OUTER = 2
     INNER = 3
 
-class ColorSpace(Enum):
+class ColorSpace_(Enum):
     SRGB = 0
     EXTENDED_SRGB = 1
     DISPLAY_P3 = 2
 
-class FontWeight(Enum):
+class FontWeight_(Enum):
     W100 = 0
     W200 = 1
     W300 = 2
@@ -92,11 +92,11 @@ class FontWeight(Enum):
     W800 = 7
     W900 = 8
 
-class FontStyle(Enum):
+class FontStyle_(Enum):
     NORMAL = 0
     ITALIC = 1
 
-class TextAlignment(Enum):
+class TextAlignment_(Enum):
     LEFT = 0
     RIGHT = 1
     CENTER = 2
@@ -104,16 +104,16 @@ class TextAlignment(Enum):
     START = 4
     END = 5
 
-class TextDirection(Enum):
+class TextDirection_(Enum):
     RTL = 0
     LTR = 1
 
-class ContextBackend(Enum):
+class ContextBackend_(Enum):
     OPENGLES = 0
     METAL = 1
     VULKAN = 2
 
-class Rect:
+class Rect_:
     x: float
     y: float
     width: float
@@ -121,72 +121,72 @@ class Rect:
 
     def __init__(self) -> None: ...
 
-class Point:
+class Point_:
     x: float
     y: float
 
     def __init__(self) -> None: ...
 
-class Size:
+class Size_:
     width: float
     height: float
 
     def __init__(self) -> None: ...
 
-class ISize:
+class ISize_:
     width: int
     height: int
 
     def __init__(self) -> None: ...
 
-class Range:
+class Range_:
     start: int
     end: int
 
     def __init__(self) -> None: ...
 
-class Matrix:
+class Matrix_:
     m: Sequence[float]  # Assuming a 1D sequence for the matrix
 
     def __init__(self) -> None: ...
 
-class ColorMatrix:
+class ColorMatrix_:
     m: Sequence[float]  # Assuming a 1D sequence for the matrix
 
     def __init__(self) -> None: ...
 
-class RoundingRadii:
-    top_left: Point
-    bottom_left: Point
-    top_right: Point
-    bottom_right: Point
+class RoundingRadii_:
+    top_left: Point_
+    bottom_left: Point_
+    top_right: Point_
+    bottom_right: Point_
 
     def __init__(self) -> None: ...
 
-class Color:
+class Color_:
     red: float
     green: float
     blue: float
     alpha: float
-    color_space: ColorSpace
+    color_space: ColorSpace_
 
     def __init__(self) -> None: ...
 
-class TextureDescriptor:
-    pixel_format: PixelFormat
-    size: ISize
+class TextureDescriptor_:
+    pixel_format: PixelFormat_
+    size: ISize_
     mip_count: int
 
     def __init__(self) -> None: ...
 
-class Mapping:
+class Mapping_:
     data: bytes  # Or a more specific buffer type if needed
     length: int
     on_release: Optional[Callable[[Optional[Any]], None]]  # Callback type
 
     def __init__(self) -> None: ...
 
-class ContextVulkanSettings:
+class ContextVulkanSettings_:
     user_data: Optional[Any]  # Void pointer, so use Any
 
     proc_address_callback: Optional[
@@ -197,7 +197,7 @@ class ContextVulkanSettings:
 
     def __init__(self) -> None: ...
 
-class ContextVulkanInfo:
+class ContextVulkanInfo_:
     vk_instance: Optional[Any]  # Void pointer
 
     vk_physical_device: Optional[Any]  # Void pointer
@@ -210,47 +210,47 @@ class ContextVulkanInfo:
 
     def __init__(self) -> None: ...
 
-class ColorFilter:
+class ColorFilter_:
     pass
 
-class ColorSource:
+class ColorSource_:
     pass
 
-class ImageFilter:
+class ImageFilter_:
     pass
 
-class MaskFilter:
+class MaskFilter_:
     pass
 
-class Paint:
+class Paint_:
     def __init__(self) -> None: ...
-    def set_color(self, color: Color) -> Paint: ...
-    def set_blend_mode(self, blend_mode: BlendMode) -> Paint: ...
-    def set_draw_style(self, style: DrawStyle) -> Paint: ...
-    def set_stroke_cap(self, cap: StrokeCap) -> Paint: ...
-    def set_stroke_join(self, join: StrokeJoin) -> Paint: ...
-    def set_stroke_width(self, width: float) -> Paint: ...
-    def set_stroke_miter(self, miter: float) -> Paint: ...
-    def set_color_filter(self, filter: ColorFilter) -> Paint: ...
-    def set_color_source(self, source: ColorSource) -> Paint: ...
-    def set_image_filter(self, filter: ImageFilter) -> Paint: ...
-    def set_mask_filter(self, filter: MaskFilter) -> Paint: ...
+    def set_color(self, color: Color_) -> Paint_: ...
+    def set_blend_mode(self, blend_mode: BlendMode_) -> Paint_: ...
+    def set_draw_style(self, style: DrawStyle_) -> Paint_: ...
+    def set_stroke_cap(self, cap: StrokeCap_) -> Paint_: ...
+    def set_stroke_join(self, join: StrokeJoin_) -> Paint_: ...
+    def set_stroke_width(self, width: float) -> Paint_: ...
+    def set_stroke_miter(self, miter: float) -> Paint_: ...
+    def set_color_filter(self, filter: ColorFilter_) -> Paint_: ...
+    def set_color_source(self, source: ColorSource_) -> Paint_: ...
+    def set_image_filter(self, filter: ImageFilter_) -> Paint_: ...
+    def set_mask_filter(self, filter: MaskFilter_) -> Paint_: ...
 
-class DisplayList:
+class DisplayList_:
     # Done
     pass
 
-class Path:
+class Path_:
     # Done
     pass
 
-class LineMetrics:
+class LineMetrics_:
     pass
 
-class GlyphInfo:
+class GlyphInfo_:
     pass
 
-class Paragraph:
+class Paragraph_:
     def alphabetic_baseline(self) -> float: ...
     def height(self) -> float: ...
     def ideographic_baseline(self) -> float: ...
@@ -259,136 +259,136 @@ class Paragraph:
     def max_intrinsic_width(self) -> float: ...
     def max_width(self) -> float: ...
     def min_intrinsic_width(self) -> float: ...
-    def line_metrics(self) -> LineMetrics: ...
+    def line_metrics(self) -> LineMetrics_: ...
     def glyph_info_at_code_unit_index(
         self, code_unit_index: int
-    ) -> GlyphInfo: ...
+    ) -> GlyphInfo_: ...
     def glyph_info_at_paragraph_coordinate(
         self, x: float, y: float
-    ) -> GlyphInfo: ...
-    def word_boundary(self, code_unit_index: int) -> Range: ...
+    ) -> GlyphInfo_: ...
+    def word_boundary(self, code_unit_index: int) -> Range_: ...
 
-class Texture:
+class Texture_:
     # Done
     pass
 
-class DisplayListBuilder:
+class DisplayListBuilder_:
     def __init__(self) -> None: ...
-    def build(self) -> DisplayList: ...
+    def build(self) -> DisplayList_: ...
     def clip_oval(
-        self, rect: Rect, op: ClipOperation
-    ) -> DisplayListBuilder: ...
+        self, rect: Rect_, op: ClipOperation_
+    ) -> DisplayListBuilder_: ...
     def clip_path(
-        self, path: Path, op: ClipOperation
-    ) -> DisplayListBuilder: ...
+        self, path: Path_, op: ClipOperation_
+    ) -> DisplayListBuilder_: ...
     def clip_rect(
-        self, rect: Rect, op: ClipOperation
-    ) -> DisplayListBuilder: ...
+        self, rect: Rect_, op: ClipOperation_
+    ) -> DisplayListBuilder_: ...
     def clip_rounded_rect(
-        self, rect: Rect, radii: RoundingRadii, op: ClipOperation
-    ) -> DisplayListBuilder: ...
+        self, rect: Rect_, radii: RoundingRadii_, op: ClipOperation_
+    ) -> DisplayListBuilder_: ...
     def draw_dashed_line(
         self,
-        from_point: Point,
-        to_point: Point,
+        from_point: Point_,
+        to_point: Point_,
         on_length: float,
         off_length: float,
-        paint: Paint,
-    ) -> DisplayListBuilder: ...
+        paint: Paint_,
+    ) -> DisplayListBuilder_: ...
     def draw_display_list(
-        self, dl: DisplayList, opacity: float
-    ) -> DisplayListBuilder: ...
+        self, dl: DisplayList_, opacity: float
+    ) -> DisplayListBuilder_: ...
     def draw_line(
-        self, from_point: Point, to_point: Point, paint: Paint
-    ) -> DisplayListBuilder: ...
+        self, from_point: Point_, to_point: Point_, paint: Paint_
+    ) -> DisplayListBuilder_: ...
     def draw_oval(
-        self, oval_bounds: Rect, paint: Paint
-    ) -> DisplayListBuilder: ...
-    def draw_paint(self, paint: Paint) -> DisplayListBuilder: ...
+        self, oval_bounds: Rect_, paint: Paint_
+    ) -> DisplayListBuilder_: ...
+    def draw_paint(self, paint: Paint_) -> DisplayListBuilder_: ...
     def draw_paragraph(
-        self, paragraph: Paragraph, paint: Paint
-    ) -> DisplayListBuilder: ...
+        self, paragraph: Paragraph_, paint: Paint_
+    ) -> DisplayListBuilder_: ...
     def draw_shadow(
         self,
-        path: Path,
-        shadow_color: Color,
+        path: Path_,
+        shadow_color: Color_,
         elevation: float,
         occuluder_is_transparent: bool,
         device_pixel_ratio: float,
-    ) -> DisplayListBuilder: ...
-    def draw_path(self, path: Path, paint: Paint) -> DisplayListBuilder: ...
-    def draw_rect(self, rect: Rect, paint: Paint) -> DisplayListBuilder: ...
+    ) -> DisplayListBuilder_: ...
+    def draw_path(self, path: Path_, paint: Paint_) -> DisplayListBuilder_: ...
+    def draw_rect(self, rect: Rect_, paint: Paint_) -> DisplayListBuilder_: ...
     def draw_rounded_rect(
-        self, rect: Rect, radii: RoundingRadii, paint: Paint
-    ) -> DisplayListBuilder: ...
+        self, rect: Rect_, radii: RoundingRadii_, paint: Paint_
+    ) -> DisplayListBuilder_: ...
     def draw_rounded_rect_difference(
         self,
-        outer_rect: Rect,
-        outer_radii: RoundingRadii,
-        inner_rect: Rect,
-        inner_radii: RoundingRadii,
-        paint: Paint,
-    ) -> DisplayListBuilder: ...
+        outer_rect: Rect_,
+        outer_radii: RoundingRadii_,
+        inner_rect: Rect_,
+        inner_radii: RoundingRadii_,
+        paint: Paint_,
+    ) -> DisplayListBuilder_: ...
     def draw_texture(
         self,
-        texture: Texture,
-        point: Point,
-        sampling: TextureSampling,
-        paint: Paint,
-    ) -> DisplayListBuilder: ...
+        texture: Texture_,
+        point: Point_,
+        sampling: TextureSampling_,
+        paint: Paint_,
+    ) -> DisplayListBuilder_: ...
     def draw_texture_rect(
         self,
-        texture: Texture,
-        src_rect: Rect,
-        dst_rect: Rect,
-        sampling: TextureSampling,
-        paint: Paint,
-    ) -> DisplayListBuilder: ...
+        texture: Texture_,
+        src_rect: Rect_,
+        dst_rect: Rect_,
+        sampling: TextureSampling_,
+        paint: Paint_,
+    ) -> DisplayListBuilder_: ...
     def save_count(self) -> int: ...
-    def reset_transform(self) -> DisplayListBuilder: ...
-    def restore(self) -> DisplayListBuilder: ...
-    def restore_to_count(self, count: int) -> DisplayListBuilder: ...
-    def rotate(self, angle_in_degrees: float) -> DisplayListBuilder: ...
-    def save(self) -> DisplayListBuilder: ...
+    def reset_transform(self) -> DisplayListBuilder_: ...
+    def restore(self) -> DisplayListBuilder_: ...
+    def restore_to_count(self, count: int) -> DisplayListBuilder_: ...
+    def rotate(self, angle_in_degrees: float) -> DisplayListBuilder_: ...
+    def save(self) -> DisplayListBuilder_: ...
     def save_layer(
-        self, paint: Optional[Paint], backdrop: Optional[ImageFilter]
-    ) -> DisplayListBuilder: ...
-    def scale(self, x: float, y: float) -> DisplayListBuilder: ...
-    def get_transform(self) -> Matrix: ...
-    def set_transform(self, xform: Matrix) -> DisplayListBuilder: ...
-    def push_transform(self, xform: Matrix) -> DisplayListBuilder: ...
-    def translate(self, x: float, y: float) -> DisplayListBuilder: ...
+        self, paint: Optional[Paint_], backdrop: Optional[ImageFilter_]
+    ) -> DisplayListBuilder_: ...
+    def scale(self, x: float, y: float) -> DisplayListBuilder_: ...
+    def get_transform(self) -> Matrix_: ...
+    def set_transform(self, xform: Matrix_) -> DisplayListBuilder_: ...
+    def push_transform(self, xform: Matrix_) -> DisplayListBuilder_: ...
+    def translate(self, x: float, y: float) -> DisplayListBuilder_: ...
 
-class PathBuilder:
+class PathBuilder_:
     def __init__(self) -> None: ...
-    def build_copy(self, fill: FillType) -> Path: ...
-    def build(self, fill: FillType) -> Path: ...
+    def build_copy(self, fill: FillType_) -> Path_: ...
+    def build(self, fill: FillType_) -> Path_: ...
     def add_arc(
         self, start_degrees: float, end_degrees: float
-    ) -> PathBuilder: ...
-    def add_oval(self, oval_bounds: Rect) -> PathBuilder: ...
-    def add_rect(self, rect: Rect) -> PathBuilder: ...
+    ) -> PathBuilder_: ...
+    def add_oval(self, oval_bounds: Rect_) -> PathBuilder_: ...
+    def add_rect(self, rect: Rect_) -> PathBuilder_: ...
     def add_rounded_rect(
-        self, rect: Rect, radii: RoundingRadii
-    ) -> PathBuilder: ...
-    def close(self) -> PathBuilder: ...
+        self, rect: Rect_, radii: RoundingRadii_
+    ) -> PathBuilder_: ...
+    def close(self) -> PathBuilder_: ...
     def cubic_curve_to(
-        self, cp1: Point, cp2: Point, end: Point
-    ) -> PathBuilder: ...
-    def line_to(self, location: Point) -> PathBuilder: ...
-    def move_to(self, location: Point) -> PathBuilder: ...
-    def quadratic_curve_to(self, cp: Point, end: Point) -> PathBuilder: ...
+        self, cp1: Point_, cp2: Point_, end: Point_
+    ) -> PathBuilder_: ...
+    def line_to(self, location: Point_) -> PathBuilder_: ...
+    def move_to(self, location: Point_) -> PathBuilder_: ...
+    def quadratic_curve_to(self, cp: Point_, end: Point_) -> PathBuilder_: ...
 
-class Surface:
-    def draw(self, dl: DisplayList) -> bool: ...
+class Surface_:
+    def draw(self, dl: DisplayList_) -> bool: ...
     def present(self) -> bool: ...
 
-class Context:
-    def __init__(self, backend: ContextBackend) -> None: ...
+class Context_:
+    def __init__(self, backend: ContextBackend_) -> None: ...
 
-class Window:
-    def create_render_surface(self, context: Context) -> Surface: ...
+class Window_:
+    def create_render_surface(self, context: Context_) -> Surface_: ...
     def should_close(self) -> bool: ...
     def poll_events(self) -> None: ...
 
-def get_main_window() -> Window: ...
+def get_main_window() -> Window_: ...

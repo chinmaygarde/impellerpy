@@ -23,15 +23,15 @@ static void BindAttributes(nb::module_& m) {
 
 static void BindEnums(nb::module_& m) {
   // Enums
-  nb::enum_<ImpellerFillType>(m, "FillType")
+  nb::enum_<ImpellerFillType>(m, "FillType_")
       .value("NON_ZERO", kImpellerFillTypeNonZero)
       .value("ODD", kImpellerFillTypeOdd);
 
-  nb::enum_<ImpellerClipOperation>(m, "ClipOperation")
+  nb::enum_<ImpellerClipOperation>(m, "ClipOperation_")
       .value("DIFFERENCE", kImpellerClipOperationDifference)
       .value("INTERSECT", kImpellerClipOperationIntersect);
 
-  nb::enum_<ImpellerBlendMode>(m, "BlendMode")
+  nb::enum_<ImpellerBlendMode>(m, "BlendMode_")
       .value("CLEAR", kImpellerBlendModeClear)
       .value("SOURCE", kImpellerBlendModeSource)
       .value("DESTINATION", kImpellerBlendModeDestination)
@@ -62,46 +62,46 @@ static void BindEnums(nb::module_& m) {
       .value("COLOR", kImpellerBlendModeColor)
       .value("LUMINOSITY", kImpellerBlendModeLuminosity);
 
-  nb::enum_<ImpellerDrawStyle>(m, "DrawStyle")
+  nb::enum_<ImpellerDrawStyle>(m, "DrawStyle_")
       .value("FILL", kImpellerDrawStyleFill)
       .value("STROKE", kImpellerDrawStyleStroke)
       .value("STROKE_AND_FILL", kImpellerDrawStyleStrokeAndFill);
 
-  nb::enum_<ImpellerStrokeCap>(m, "StrokeCap")
+  nb::enum_<ImpellerStrokeCap>(m, "StrokeCap_")
       .value("BUTT", kImpellerStrokeCapButt)
       .value("ROUND", kImpellerStrokeCapRound)
       .value("SQUARE", kImpellerStrokeCapSquare);
 
-  nb::enum_<ImpellerStrokeJoin>(m, "StrokeJoin")
+  nb::enum_<ImpellerStrokeJoin>(m, "StrokeJoin_")
       .value("MITER", kImpellerStrokeJoinMiter)
       .value("ROUND", kImpellerStrokeJoinRound)
       .value("BEVEL", kImpellerStrokeJoinBevel);
 
-  nb::enum_<ImpellerPixelFormat>(m, "PixelFormat")
+  nb::enum_<ImpellerPixelFormat>(m, "PixelFormat_")
       .value("RGBA8888", kImpellerPixelFormatRGBA8888);
 
-  nb::enum_<ImpellerTextureSampling>(m, "TextureSampling")
+  nb::enum_<ImpellerTextureSampling>(m, "TextureSampling_")
       .value("NEAREST_NEIGHBOR", kImpellerTextureSamplingNearestNeighbor)
       .value("LINEAR", kImpellerTextureSamplingLinear);
 
-  nb::enum_<ImpellerTileMode>(m, "TileMode")
+  nb::enum_<ImpellerTileMode>(m, "TileMode_")
       .value("CLAMP", kImpellerTileModeClamp)
       .value("REPEAT", kImpellerTileModeRepeat)
       .value("MIRROR", kImpellerTileModeMirror)
       .value("DECAL", kImpellerTileModeDecal);
 
-  nb::enum_<ImpellerBlurStyle>(m, "BlurStyle")
+  nb::enum_<ImpellerBlurStyle>(m, "BlurStyle_")
       .value("NORMAL", kImpellerBlurStyleNormal)
       .value("SOLID", kImpellerBlurStyleSolid)
       .value("OUTER", kImpellerBlurStyleOuter)
       .value("INNER", kImpellerBlurStyleInner);
 
-  nb::enum_<ImpellerColorSpace>(m, "ColorSpace")
+  nb::enum_<ImpellerColorSpace>(m, "ColorSpace_")
       .value("SRGB", kImpellerColorSpaceSRGB)
       .value("EXTENDED_SRGB", kImpellerColorSpaceExtendedSRGB)
       .value("DISPLAY_P3", kImpellerColorSpaceDisplayP3);
 
-  nb::enum_<ImpellerFontWeight>(m, "FontWeight")
+  nb::enum_<ImpellerFontWeight>(m, "FontWeight_")
       .value("W100", kImpellerFontWeight100)
       .value("W200", kImpellerFontWeight200)
       .value("W300", kImpellerFontWeight300)
@@ -112,11 +112,11 @@ static void BindEnums(nb::module_& m) {
       .value("W800", kImpellerFontWeight800)
       .value("W900", kImpellerFontWeight900);
 
-  nb::enum_<ImpellerFontStyle>(m, "FontStyle")
+  nb::enum_<ImpellerFontStyle>(m, "FontStyle_")
       .value("NORMAL", kImpellerFontStyleNormal)
       .value("ITALIC", kImpellerFontStyleItalic);
 
-  nb::enum_<ImpellerTextAlignment>(m, "TextAlignment")
+  nb::enum_<ImpellerTextAlignment>(m, "TextAlignment_")
       .value("LEFT", kImpellerTextAlignmentLeft)
       .value("RIGHT", kImpellerTextAlignmentRight)
       .value("CENTER", kImpellerTextAlignmentCenter)
@@ -124,11 +124,11 @@ static void BindEnums(nb::module_& m) {
       .value("START", kImpellerTextAlignmentStart)
       .value("END", kImpellerTextAlignmentEnd);
 
-  nb::enum_<ImpellerTextDirection>(m, "TextDirection")
+  nb::enum_<ImpellerTextDirection>(m, "TextDirection_")
       .value("RTL", kImpellerTextDirectionRTL)
       .value("LTR", kImpellerTextDirectionLTR);
 
-  nb::enum_<ContextBackend>(m, "ContextBackend")
+  nb::enum_<ContextBackend>(m, "ContextBackend_")
       .value("OPENGLES", ContextBackend::kOpenGLES)
       .value("METAL", ContextBackend::kMetal)
       .value("VULKAN", ContextBackend::kVulkan);
@@ -136,49 +136,49 @@ static void BindEnums(nb::module_& m) {
 
 static void BindStructs(nb::module_& m) {
   // Structs
-  nb::class_<ImpellerRect>(m, "Rect")
+  nb::class_<ImpellerRect>(m, "Rect_")
       .def(nb::init<>())
       .def_rw("x", &ImpellerRect::x)
       .def_rw("y", &ImpellerRect::y)
       .def_rw("width", &ImpellerRect::width)
       .def_rw("height", &ImpellerRect::height);
 
-  nb::class_<ImpellerPoint>(m, "Point")
+  nb::class_<ImpellerPoint>(m, "Point_")
       .def(nb::init<>())
       .def_rw("x", &ImpellerPoint::x)
       .def_rw("y", &ImpellerPoint::y);
 
-  nb::class_<ImpellerSize>(m, "Size")
+  nb::class_<ImpellerSize>(m, "Size_")
       .def(nb::init<>())
       .def_rw("width", &ImpellerSize::width)
       .def_rw("height", &ImpellerSize::height);
 
-  nb::class_<ImpellerISize>(m, "ISize")
+  nb::class_<ImpellerISize>(m, "ISize_")
       .def(nb::init<>())
       .def_rw("width", &ImpellerISize::width)
       .def_rw("height", &ImpellerISize::height);
 
-  nb::class_<ImpellerRange>(m, "Range")
+  nb::class_<ImpellerRange>(m, "Range_")
       .def(nb::init<>())
       .def_rw("start", &ImpellerRange::start)
       .def_rw("end", &ImpellerRange::end);
 
-  nb::class_<ImpellerMatrix>(m, "Matrix").def(nb::init<>())
+  nb::class_<ImpellerMatrix>(m, "Matrix_").def(nb::init<>())
       // .def_rw("m", &ImpellerMatrix::m)
       ;
 
-  nb::class_<ImpellerColorMatrix>(m, "ColorMatrix").def(nb::init<>())
+  nb::class_<ImpellerColorMatrix>(m, "ColorMatrix_").def(nb::init<>())
       // .def_rw("m", &ImpellerColorMatrix::m)
       ;
 
-  nb::class_<ImpellerRoundingRadii>(m, "RoundingRadii")
+  nb::class_<ImpellerRoundingRadii>(m, "RoundingRadii_")
       .def(nb::init<>())
       .def_rw("top_left", &ImpellerRoundingRadii::top_left)
       .def_rw("bottom_left", &ImpellerRoundingRadii::bottom_left)
       .def_rw("top_right", &ImpellerRoundingRadii::top_right)
       .def_rw("bottom_right", &ImpellerRoundingRadii::bottom_right);
 
-  nb::class_<ImpellerColor>(m, "Color")
+  nb::class_<ImpellerColor>(m, "Color_")
       .def(nb::init<>())
       .def_rw("red", &ImpellerColor::red)
       .def_rw("green", &ImpellerColor::green)
@@ -186,20 +186,20 @@ static void BindStructs(nb::module_& m) {
       .def_rw("alpha", &ImpellerColor::alpha)
       .def_rw("color_space", &ImpellerColor::color_space);
 
-  nb::class_<ImpellerTextureDescriptor>(m, "TextureDescriptor")
+  nb::class_<ImpellerTextureDescriptor>(m, "TextureDescriptor_")
       .def(nb::init<>())
       .def_rw("pixel_format", &ImpellerTextureDescriptor::pixel_format)
       .def_rw("size", &ImpellerTextureDescriptor::size)
       .def_rw("mip_count", &ImpellerTextureDescriptor::mip_count);
 
-  nb::class_<ImpellerMapping>(m, "Mapping")
+  nb::class_<ImpellerMapping>(m, "Mapping_")
       .def(nb::init<>())
       .def_rw("data", &ImpellerMapping::data)
       .def_rw("length", &ImpellerMapping::length)
       // .def_rw("on_release", &ImpellerMapping::on_release)
       ;
 
-  nb::class_<ImpellerContextVulkanSettings>(m, "VulkanSettings")
+  nb::class_<ImpellerContextVulkanSettings>(m, "ContextVulkanSettings_")
       .def(nb::init<>())
       .def_rw("user_data", &ImpellerContextVulkanSettings::user_data)
       // .def_rw("proc_address_callback",
@@ -207,7 +207,7 @@ static void BindStructs(nb::module_& m) {
       .def_rw("enable_vulkan_validation",
               &ImpellerContextVulkanSettings::enable_vulkan_validation);
 
-  nb::class_<ImpellerContextVulkanInfo>(m, "VulkanInfo")
+  nb::class_<ImpellerContextVulkanInfo>(m, "ContextVulkanInfo_")
       .def(nb::init<>())
       .def_rw("vk_instance", &ImpellerContextVulkanInfo::vk_instance)
       .def_rw("vk_physical_device",
@@ -221,31 +221,31 @@ static void BindStructs(nb::module_& m) {
 }
 
 static void BindColorFilter(nb::module_& m) {
-  nb::class_<ColorFilter>(m, "ColorFilter");
+  nb::class_<ColorFilter>(m, "ColorFilter_");
 }
 
 static void BindColorSource(nb::module_& m) {
-  nb::class_<ColorSource>(m, "ColorSource");
+  nb::class_<ColorSource>(m, "ColorSource_");
 }
 
 static void BindImageFilter(nb::module_& m) {
-  nb::class_<ImageFilter>(m, "ImageFilter");
+  nb::class_<ImageFilter>(m, "ImageFilter_");
 }
 
 static void BindLineMetrics(nb::module_& m) {
-  nb::class_<LineMetrics>(m, "LineMetrics");
+  nb::class_<LineMetrics>(m, "LineMetrics_");
 }
 
 static void BindPath(nb::module_& m) {
-  nb::class_<Path>(m, "Path");
+  nb::class_<Path>(m, "Path_");
 }
 
 static void BindGlyphInfo(nb::module_& m) {
-  nb::class_<GlyphInfo>(m, "GlyphInfo");
+  nb::class_<GlyphInfo>(m, "GlyphInfo_");
 }
 
 static void BindParagraph(nb::module_& m) {
-  nb::class_<Paragraph>(m, "Paragraph")
+  nb::class_<Paragraph>(m, "Paragraph_")
       .def("alphabetic_baseline", &Paragraph::GetAlphabeticBaseline)
       .def("height", &Paragraph::GetHeight)
       .def("ideographic_baseline", &Paragraph::GetIdeographicBaseline)
@@ -263,11 +263,11 @@ static void BindParagraph(nb::module_& m) {
 }
 
 static void BindTexture(nb::module_& m) {
-  nb::class_<Texture>(m, "Texture");
+  nb::class_<Texture>(m, "Texture_");
 }
 
 static void BindPathBuilder(nb::module_& m) {
-  nb::class_<PathBuilder>(m, "PathBuilder")
+  nb::class_<PathBuilder>(m, "PathBuilder_")
       .def("build_copy", &PathBuilder::BuildCopy, nb::rv_policy::move)
       .def("build", &PathBuilder::Build, nb::rv_policy::move)
       .def("add_arc", &PathBuilder::AddArc, nb::rv_policy::reference)
@@ -285,11 +285,11 @@ static void BindPathBuilder(nb::module_& m) {
 }
 
 static void BindMaskFilter(nb::module_& m) {
-  nb::class_<MaskFilter>(m, "MaskFilter");
+  nb::class_<MaskFilter>(m, "MaskFilter_");
 }
 
 static void BindPaint(nb::module_& m) {
-  nb::class_<Paint>(m, "Paint")
+  nb::class_<Paint>(m, "Paint_")
       .def(nb::init())
       .def("set_color", &Paint::SetColor, nb::rv_policy::reference)
       .def("set_blend_mode", &Paint::SetBlendMode, nb::rv_policy::reference)
@@ -305,11 +305,11 @@ static void BindPaint(nb::module_& m) {
 }
 
 void BindDisplayList(nb::module_& m) {
-  nb::class_<DisplayList> _(m, "DisplayList");
+  nb::class_<DisplayList> _(m, "DisplayList_");
 }
 
 void BindDisplayListBuilder(nb::module_& m) {
-  nb::class_<DisplayListBuilder>(m, "DisplayListBuilder")
+  nb::class_<DisplayListBuilder>(m, "DisplayListBuilder_")
       .def(nb::init())
       .def("build", &DisplayListBuilder::Build, nb::rv_policy::reference)
       .def("clip_oval", &DisplayListBuilder::ClipOval, nb::rv_policy::reference)
@@ -363,7 +363,7 @@ void BindDisplayListBuilder(nb::module_& m) {
 void BindWindow(nb::module_& m) {
   m.def("get_main_window", &Window::GetMainWindow, nb::rv_policy::reference);
 
-  nb::class_<Window>(m, "Window")
+  nb::class_<Window>(m, "Window_")
       .def("create_render_surface", &Window::CreateRenderSurface,
            nb::rv_policy::move)
       .def("should_close", &Window::ShouldClose)
@@ -371,11 +371,11 @@ void BindWindow(nb::module_& m) {
 }
 
 void BindContext(nb::module_& m) {
-  nb::class_<ContextWrapper>(m, "Context").def(nb::init<ContextBackend>());
+  nb::class_<ContextWrapper>(m, "Context_").def(nb::init<ContextBackend>());
 }
 
 void BindSurface(nb::module_& m) {
-  nb::class_<Surface>(m, "Surface")
+  nb::class_<Surface>(m, "Surface_")
       .def("draw", &Surface::Draw)
       .def("present", &Surface::Present);
 }

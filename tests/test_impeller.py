@@ -1,4 +1,5 @@
 from impeller import *
+from impeller import impeller
 from PIL import Image
 import os
 import pytest
@@ -9,47 +10,43 @@ def test_version():
 
 
 def test_structs():
-    r = Rect()
+    r = Rect_()
     r.width = 13
     r.height = 14
     assert r.x == 0
     assert r.y == 0
     assert r.width == 13
     assert r.height == 14
-    r2 = Rect()
+    r2 = Rect_()
     assert r2.width == 0
 
 
 def test_display_list_builder():
-    dl_builder = DisplayListBuilder()
-    dl_builder.clip_oval(Rect(), ClipOperation.DIFFERENCE).build()
+    dl_builder = DisplayListBuilder_()
+    dl_builder.clip_oval(Rect_(), ClipOperation_.DIFFERENCE).build()
 
 
 def test_can_create_window():
-    context = Context(ContextBackend.METAL)
+    context = Context_(ContextBackend_.METAL)
     window = get_main_window()
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
-        paint = Paint()
+        paint = Paint_()
 
-        color = Color()
-        color.red = 1.0
-        color.green = 1.0
-        color.blue = 1.0
-        color.alpha = 1.0
+        color = impeller.Color(b=1, a=1)
         paint.set_color(color)
 
-        paint = Paint()
+        paint = Paint_()
         paint.set_color(color)
 
-        rect = Rect()
+        rect = Rect_()
         rect.x = 100
         rect.y = 200
         rect.width = 200
         rect.height = 300
 
-        dl_builder = DisplayListBuilder()
+        dl_builder = DisplayListBuilder_()
         dl_builder.draw_rect(rect, paint)
         dl = dl_builder.build()
 
