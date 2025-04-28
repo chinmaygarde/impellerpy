@@ -182,7 +182,7 @@ class TextureDescriptor_:
 class Mapping_:
     data: bytes  # Or a more specific buffer type if needed
     length: int
-    on_release: Optional[Callable[[Optional[Any]], None]]  # Callback type
+    # on_release: Optional[Callable[[Optional[Any]], None]]  # Callback type
 
     def __init__(self) -> None: ...
 
