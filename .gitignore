@@ -14,3 +14,4 @@ __pycache__/
 *.pyc
 .vscode/
 dist/
+.ruff_cache/
