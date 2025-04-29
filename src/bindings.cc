@@ -400,7 +400,21 @@ static void BindImageFilter(nb::module_& m) {
 }
 
 static void BindLineMetrics(nb::module_& m) {
-  nb::class_<LineMetrics>(m, "LineMetrics_");
+  nb::class_<LineMetrics>(m, "LineMetrics_")
+      .def("unscaled_ascent", &LineMetrics::GetUnscaledAscent)
+      .def("ascent", &LineMetrics::GetAscent)
+      .def("descent", &LineMetrics::GetDescent)
+      .def("baseline", &LineMetrics::GetBaseline)
+      .def("is_hardbreak", &LineMetrics::IsHardbreak)
+      .def("width", &LineMetrics::GetWidth)
+      .def("height", &LineMetrics::GetHeight)
+      .def("left", &LineMetrics::GetLeft)
+      .def("code_unit_start_index", &LineMetrics::GetCodeUnitStartIndex)
+      .def("code_unit_end_index", &LineMetrics::GetCodeUnitEndIndex)
+      .def("code_unit_end_index_excluding_whitespace",
+           &LineMetrics::GetCodeUnitEndIndexExcludingWhitespace)
+      .def("code_unit_end_index_including_newline",
+           &LineMetrics::GetCodeUnitEndIndexIncludingNewline);
 }
 
 static void BindPath(nb::module_& m) {
