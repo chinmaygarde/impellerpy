@@ -42,8 +42,8 @@ Window::~Window() {
 }
 
 impeller::hpp::Surface Window::CreateRenderSurface(
-    const ContextWrapper& context) {
-  return WrapSurface(context.GetContext(), window_);
+    const impeller::hpp::Context& context) {
+  return WrapSurface(context, window_);
 }
 
 bool Window::ShouldClose() const {

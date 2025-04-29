@@ -6,7 +6,7 @@
 build: build/build.ninja
 	cmake --build --preset default
 
-test: .venv build
+test: .venv build check
 	uv run pytest -rP
 
 .venv:

@@ -4,7 +4,6 @@
 #include <impeller.hpp>
 #include <memory>
 
-#include "context.h"
 #include "window.h"
 
 namespace impeller::py {
@@ -129,11 +128,6 @@ static void BindEnums(nb::module_& m) {
   nb::enum_<ImpellerTextDirection>(m, "TextDirection_")
       .value("RTL", kImpellerTextDirectionRTL)
       .value("LTR", kImpellerTextDirectionLTR);
-
-  nb::enum_<ContextBackend>(m, "ContextBackend_")
-      .value("OPENGLES", ContextBackend::kOpenGLES)
-      .value("METAL", ContextBackend::kMetal)
-      .value("VULKAN", ContextBackend::kVulkan);
 }
 
 static void BindStructs(nb::module_& m) {
@@ -186,9 +180,29 @@ static void BindStructs(nb::module_& m) {
         return result;
       });
 
-  nb::class_<ImpellerColorMatrix>(m, "ColorMatrix_").def(nb::init<>())
-      // .def_rw("m", &ImpellerColorMatrix::m)
-      ;
+  nb::class_<ImpellerColorMatrix>(m, "ColorMatrix_")
+      .def(nb::init<>())
+      .def("__init__",
+           [](ImpellerColorMatrix* t, nb::list list) {
+             new (t) ImpellerColorMatrix();
+             const auto size = std::min<size_t>(20, list.size());
+             for (size_t i = 0; i < size; i++) {
+               t->m[i] = nb::cast<float>(list[i]);
+             }
+           })
+      .def("__getitem__",
+           [](const ImpellerColorMatrix& mat, int i) -> float {
+             return mat.m[i];
+           })
+      .def("__setitem__", [](ImpellerColorMatrix& mat, int i,
+                             float value) { mat.m[i] = value; })
+      .def("to_list", [](const ImpellerColorMatrix& m) {
+        nb::list result;
+        for (size_t i = 0; i < 20; i++) {
+          result.append(m.m[i]);
+        }
+        return result;
+      });
 
   nb::class_<ImpellerRoundingRadii>(m, "RoundingRadii_")
       .def(nb::init<>())
@@ -210,26 +224,6 @@ static void BindStructs(nb::module_& m) {
       .def_rw("pixel_format", &ImpellerTextureDescriptor::pixel_format)
       .def_rw("size", &ImpellerTextureDescriptor::size)
       .def_rw("mip_count", &ImpellerTextureDescriptor::mip_count);
-
-  nb::class_<ImpellerContextVulkanSettings>(m, "ContextVulkanSettings_")
-      .def(nb::init<>())
-      .def_rw("user_data", &ImpellerContextVulkanSettings::user_data)
-      // .def_rw("proc_address_callback",
-      //         &ImpellerContextVulkanSettings::proc_address_callback)
-      .def_rw("enable_vulkan_validation",
-              &ImpellerContextVulkanSettings::enable_vulkan_validation);
-
-  nb::class_<ImpellerContextVulkanInfo>(m, "ContextVulkanInfo_")
-      .def(nb::init<>())
-      .def_rw("vk_instance", &ImpellerContextVulkanInfo::vk_instance)
-      .def_rw("vk_physical_device",
-              &ImpellerContextVulkanInfo::vk_physical_device)
-      .def_rw("vk_logical_device",
-              &ImpellerContextVulkanInfo::vk_logical_device)
-      .def_rw("graphics_queue_family_index",
-              &ImpellerContextVulkanInfo::graphics_queue_family_index)
-      .def_rw("graphics_queue_index",
-              &ImpellerContextVulkanInfo::graphics_queue_index);
 }
 
 static void BindColorFilter(nb::module_& m) {
@@ -277,7 +271,7 @@ static void BindParagraph(nb::module_& m) {
 static void BindTexture(nb::module_& m) {
   nb::class_<Texture>(m, "Texture_")
       .def_static("with_contents",
-                  [](const ContextWrapper& context,          //
+                  [](const Context& context,                 //
                      const ImpellerTextureDescriptor& desc,  //
                      nb::bytes data                          //
                      ) -> Texture {
@@ -286,7 +280,7 @@ static void BindTexture(nb::module_& m) {
                         data.size(),                                    //
                         nullptr                                         //
                     );
-                    return Texture::WithContents(context.GetContext(), desc,
+                    return Texture::WithContents(context, desc,
                                                  std::move(mapping));
                   });
 }
@@ -394,8 +388,14 @@ static void BindWindow(nb::module_& m) {
       .def("poll_events", &Window::PollEvents);
 }
 
+static ImpellerContext CreateContextNew() {
+  return ImpellerContextCreateMetalNew(IMPELLER_VERSION);
+}
+
 static void BindContext(nb::module_& m) {
-  nb::class_<ContextWrapper>(m, "Context_").def(nb::init<ContextBackend>());
+  nb::class_<Context>(m, "Context_").def("__init__", [](Context* t) {
+    new (t) Context(CreateContextNew(), AdoptTag::kAdopt);
+  });
 }
 
 static void BindTypographyContext(nb::module_& m) {

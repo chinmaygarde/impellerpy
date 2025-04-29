@@ -58,7 +58,6 @@ class Matrix(impellerpy.Matrix_):
         super().__init__(values)
 
 
-
 class ColorMatrix(impellerpy.ColorMatrix_):
     pass
 

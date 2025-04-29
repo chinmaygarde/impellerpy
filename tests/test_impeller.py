@@ -27,7 +27,7 @@ def test_display_list_builder():
 
 
 def test_can_create_window():
-    context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
+    context = impeller.Context()
     window = impeller.Window()
     while not window.should_close():
         window.poll_events()
@@ -61,7 +61,7 @@ def test_can_draw_image(pytestconfig):
         impellerpy.PixelFormat_.RGBA8888,
         impeller.ISize(image.size[0], image.size[1]),
     )
-    context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
+    context = impeller.Context()
     texture = impeller.Texture.with_contents(
         context,
         desc,
@@ -107,7 +107,7 @@ def test_can_draw_text(pytestconfig):
         .draw_paragraph(para, impeller.Point(100, 100))
         .build()
     )
-    context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
+    context = impeller.Context()
     window = impeller.Window()
     while not window.should_close():
         window.poll_events()

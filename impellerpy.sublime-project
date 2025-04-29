@@ -18,7 +18,8 @@
         ".cache",
         ".ruff_cache",
         ".vscode",
-        "dist"
+        "dist",
+        "*.egg-info"
       ]
     }
   ],

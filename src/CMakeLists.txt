@@ -85,8 +85,6 @@ nanobind_add_module(impellerpy LTO
   setup.h
   window.cc
   window.h
-  context.h
-  context.cc
 )
 
 target_link_libraries(impellerpy PRIVATE impeller glfw glm::glm)

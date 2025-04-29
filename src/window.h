@@ -4,7 +4,6 @@
 #include <nanobind/nanobind.h>
 #include <glm/glm.hpp>
 #include <impeller.hpp>
-#include "context.h"
 
 namespace impeller::py {
 
@@ -22,7 +21,8 @@ class Window {
 
   Window& operator=(Window&&) = delete;
 
-  impeller::hpp::Surface CreateRenderSurface(const ContextWrapper& context);
+  impeller::hpp::Surface CreateRenderSurface(
+      const impeller::hpp::Context& context);
 
   bool ShouldClose() const;
 

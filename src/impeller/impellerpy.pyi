@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional, Sequence
+from typing import List, Optional
 
 def get_version() -> int: ...
 
@@ -108,11 +108,6 @@ class TextDirection_(Enum):
     RTL = 0
     LTR = 1
 
-class ContextBackend_(Enum):
-    OPENGLES = 0
-    METAL = 1
-    VULKAN = 2
-
 class Rect_:
     x: float
     y: float
@@ -152,7 +147,10 @@ class Matrix_:
     def to_list(self) -> List[float]: ...
 
 class ColorMatrix_:
-    pass
+    def __init__(self, values: List[float]) -> None: ...
+    def __getitem__(self, key: int) -> float: ...
+    def __setitem__(self, key: int, value: float) -> None: ...
+    def to_list(self) -> List[float]: ...
 
 class RoundingRadii_:
     top_left: Point_
@@ -388,7 +386,7 @@ class Surface_:
     def present(self) -> bool: ...
 
 class Context_:
-    def __init__(self, backend: ContextBackend_) -> None: ...
+    def __init__(self) -> None: ...
 
 class Window_:
     def __init__(self) -> None: ...
