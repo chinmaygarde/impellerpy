@@ -227,7 +227,15 @@ static void BindStructs(nb::module_& m) {
 }
 
 static void BindColorFilter(nb::module_& m) {
-  nb::class_<ColorFilter>(m, "ColorFilter_");
+  nb::class_<ColorFilter>(m, "ColorFilter_")
+      .def_static(
+          "blend",
+          [](const ImpellerColor& color, const ImpellerBlendMode& blend_mode) {
+            return ColorFilter::Blend(color, blend_mode);
+          })
+      .def_static("matrix", [](const ImpellerColorMatrix& matrix) {
+        return ColorFilter::Matrix(matrix);
+      });
 }
 
 static void BindColorSource(nb::module_& m) {

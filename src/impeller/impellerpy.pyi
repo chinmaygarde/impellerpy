@@ -177,7 +177,11 @@ class TextureDescriptor_:
     def __init__(self) -> None: ...
 
 class ColorFilter_:
-    pass
+    @staticmethod
+    def blend(color: Color_, blend_mode: BlendMode_): ...
+
+    @staticmethod
+    def matrix(matrix: ColorMatrix_): ...
 
 class ColorSource_:
     pass
