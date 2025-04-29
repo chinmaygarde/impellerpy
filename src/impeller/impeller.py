@@ -4,7 +4,11 @@ from . import impellerpy
 
 class Rect(impellerpy.Rect_):
     def __init__(
-        self, x: float = 0, y: float = 0, width: float = 0, height: float = 0
+        self,
+        x: float = 0,
+        y: float = 0,
+        width: float = 0,
+        height: float = 0,
     ):
         super().__init__()
         self.x = x
@@ -14,7 +18,11 @@ class Rect(impellerpy.Rect_):
 
 
 class Point(impellerpy.Point_):
-    def __init__(self, x: float = 0, y: float = 0):
+    def __init__(
+        self,
+        x: float = 0,
+        y: float = 0,
+    ):
         super().__init__()
         self.x = x
         self.y = y
@@ -55,7 +63,11 @@ class RoundingRadii(impellerpy.RoundingRadii_):
 
 class Color(impellerpy.Color_):
     def __init__(
-        self, r: float = 0.0, g: float = 0.0, b: float = 0.0, a: float = 0.0
+        self,
+        r: float = 0.0,
+        g: float = 0.0,
+        b: float = 0.0,
+        a: float = 0.0,
     ):
         super().__init__()
         self.red = r

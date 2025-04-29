@@ -179,30 +179,6 @@ class TextureDescriptor_:
 
     def __init__(self) -> None: ...
 
-class ContextVulkanSettings_:
-    user_data: Optional[Any]  # Void pointer, so use Any
-
-    proc_address_callback: Optional[
-        Callable[[str, Optional[Any]], Optional[Any]]
-    ]  # Callback type
-
-    enable_vulkan_validation: bool
-
-    def __init__(self) -> None: ...
-
-class ContextVulkanInfo_:
-    vk_instance: Optional[Any]  # Void pointer
-
-    vk_physical_device: Optional[Any]  # Void pointer
-
-    vk_logical_device: Optional[Any]  # Void pointer
-
-    graphics_queue_family_index: int
-
-    graphics_queue_index: int
-
-    def __init__(self) -> None: ...
-
 class ColorFilter_:
     pass
 
@@ -230,11 +206,9 @@ class Paint_:
     def set_mask_filter(self, filter: MaskFilter_) -> Paint_: ...
 
 class DisplayList_:
-    # Done
     pass
 
 class Path_:
-    # Done
     pass
 
 class LineMetrics_:
@@ -281,7 +255,7 @@ class ParagraphStyle_:
     ) -> ParagraphStyle_: ...
 
 class ParagraphBuilder_:
-    def __init__(self, type_context: TypographyContext): ...
+    def __init__(self, type_context: TypographyContext_): ...
     def build(self, width: float) -> Paragraph_: ...
     def push_style(self, style: ParagraphStyle_) -> ParagraphBuilder_: ...
     def pop_style(self) -> ParagraphBuilder_: ...
@@ -297,7 +271,9 @@ class DisplayListBuilder_:
     def __init__(self) -> None: ...
     def build(self) -> DisplayList_: ...
     def clip_oval(
-        self, rect: Rect_, op: ClipOperation_
+        self,
+        rect: Rect_,
+        op: ClipOperation_,
     ) -> DisplayListBuilder_: ...
     def clip_path(
         self, path: Path_, op: ClipOperation_
@@ -337,7 +313,11 @@ class DisplayListBuilder_:
         occuluder_is_transparent: bool,
         device_pixel_ratio: float,
     ) -> DisplayListBuilder_: ...
-    def draw_path(self, path: Path_, paint: Paint_) -> DisplayListBuilder_: ...
+    def draw_path(
+        self,
+        path: Path_,
+        paint: Paint_,
+    ) -> DisplayListBuilder_: ...
     def draw_rect(self, rect: Rect_, paint: Paint_) -> DisplayListBuilder_: ...
     def draw_rounded_rect(
         self, rect: Rect_, radii: RoundingRadii_, paint: Paint_
@@ -372,7 +352,9 @@ class DisplayListBuilder_:
     def rotate(self, angle_in_degrees: float) -> DisplayListBuilder_: ...
     def save(self) -> DisplayListBuilder_: ...
     def save_layer(
-        self, paint: Optional[Paint_], backdrop: Optional[ImageFilter_]
+        self,
+        paint: Optional[Paint_],
+        backdrop: Optional[ImageFilter_],
     ) -> DisplayListBuilder_: ...
     def scale(self, x: float, y: float) -> DisplayListBuilder_: ...
     def get_transform(self) -> Matrix_: ...
@@ -385,7 +367,9 @@ class PathBuilder_:
     def build_copy(self, fill: FillType_) -> Path_: ...
     def build(self, fill: FillType_) -> Path_: ...
     def add_arc(
-        self, start_degrees: float, end_degrees: float
+        self,
+        start_degrees: float,
+        end_degrees: float,
     ) -> PathBuilder_: ...
     def add_oval(self, oval_bounds: Rect_) -> PathBuilder_: ...
     def add_rect(self, rect: Rect_) -> PathBuilder_: ...
