@@ -408,7 +408,14 @@ static void BindPath(nb::module_& m) {
 }
 
 static void BindGlyphInfo(nb::module_& m) {
-  nb::class_<GlyphInfo>(m, "GlyphInfo_");
+  nb::class_<GlyphInfo>(m, "GlyphInfo_")
+      .def("grapheme_cluster_code_unit_range_begin",
+           &GlyphInfo::GetGraphemeClusterCodeUnitRangeBegin)
+      .def("grapheme_cluster_code_unit_range_end",
+           &GlyphInfo::GetGraphemeClusterCodeUnitRangeEnd)
+      .def("grapheme_cluster_bounds", &GlyphInfo::GetGraphemeClusterBounds)
+      .def("is_ellipsis", &GlyphInfo::IsEllipsis)
+      .def("text_direction", &GlyphInfo::GetTextDirection);
 }
 
 static void BindParagraph(nb::module_& m) {
