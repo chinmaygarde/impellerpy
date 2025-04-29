@@ -1,5 +1,6 @@
 #include "bindings.h"
 
+#include <nanobind/stl/unique_ptr.h>
 #include <impeller.hpp>
 
 #include "context.h"
@@ -263,7 +264,8 @@ static void BindParagraph(nb::module_& m) {
 }
 
 static void BindTexture(nb::module_& m) {
-  nb::class_<Texture>(m, "Texture_");
+  nb::class_<Texture>(m, "Texture_")
+      .def_static("with_contents", &Texture::WithContents);
 }
 
 static void BindPathBuilder(nb::module_& m) {

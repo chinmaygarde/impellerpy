@@ -183,7 +183,6 @@ class Mapping_:
     data: bytes  # Or a more specific buffer type if needed
     length: int
     # on_release: Optional[Callable[[Optional[Any]], None]]  # Callback type
-
     def __init__(self) -> None: ...
 
 class ContextVulkanSettings_:
@@ -269,8 +268,10 @@ class Paragraph_:
     def word_boundary(self, code_unit_index: int) -> Range_: ...
 
 class Texture_:
-    # Done
-    pass
+    @staticmethod
+    def with_contents(
+        context: Context_, desc: TextureDescriptor_, data: Mapping_
+    ) -> Texture_: ...
 
 class DisplayListBuilder_:
     def __init__(self) -> None: ...

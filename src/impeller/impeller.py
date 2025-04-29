@@ -1,8 +1,11 @@
+from typing import ByteString
 from . import impellerpy
 
 
 class Rect(impellerpy.Rect_):
-    def __init__(self, x: float = 0, y: float = 0, width: float = 0, height: float = 0):
+    def __init__(
+        self, x: float = 0, y: float = 0, width: float = 0, height: float = 0
+    ):
         super().__init__()
         self.x = x
         self.y = y
@@ -62,11 +65,23 @@ class Color(impellerpy.Color_):
 
 
 class TextureDescriptor(impellerpy.TextureDescriptor_):
-    pass
+    def __init__(
+        self,
+        pixel_format: impellerpy.PixelFormat_,
+        texture_size: ISize,
+        mip_count: int = 1,
+    ):
+        super().__init__()
+        self.pixel_format = pixel_format
+        self.size = texture_size
+        self.mip_count = mip_count
 
 
 class Mapping(impellerpy.Mapping_):
-    pass
+    def __init__(self, data: bytes):
+        super().__init__()
+        self.data = data
+        self.length = len(data)
 
 
 class ContextVulkanSettings(impellerpy.ContextVulkanSettings_):

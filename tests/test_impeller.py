@@ -8,6 +8,7 @@ import pytest
 def test_version():
     assert impellerpy.get_version() != 0
 
+
 def test_structs():
     r = impeller.Rect(width=13, height=14)
     assert r.x == 0
@@ -20,7 +21,9 @@ def test_structs():
 
 def test_display_list_builder():
     dl_builder = impeller.DisplayListBuilder()
-    dl_builder.clip_oval(impeller.Rect(), impellerpy.ClipOperation_.DIFFERENCE).build()
+    dl_builder.clip_oval(
+        impeller.Rect(), impellerpy.ClipOperation_.DIFFERENCE
+    ).build()
 
 
 def test_can_create_window():
@@ -54,5 +57,34 @@ def test_can_draw_image(pytestconfig):
     )
     assert image.size[0] > 0
     assert image.size[1] > 0
-    image.tobytes()
+    desc = impeller.TextureDescriptor(
+        impellerpy.PixelFormat_.RGBA8888,
+        impeller.ISize(image.size[0], image.size[1]),
+    )
+    data = impeller.Mapping(image.convert("RGBA").tobytes())
+    context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
+    texture = impeller.Texture.with_contents(context, desc, data)
+    window = impellerpy.get_main_window()
+    while not window.should_close():
+        window.poll_events()
+        surface = window.create_render_surface(context)
+        paint = impeller.Paint()
 
+        color = impeller.Color(a=1, b=1)
+        paint.set_color(color)
+
+        paint = impeller.Paint()
+        paint.set_color(color)
+
+        dl_builder = impeller.DisplayListBuilder()
+        dl_builder.draw_texture(
+            texture,
+            impeller.Point(),
+            impellerpy.TextureSampling_.NEAREST_NEIGHBOR,
+            paint,
+        )
+        dl = dl_builder.build()
+
+        surface.draw(dl)
+
+        surface.present()
