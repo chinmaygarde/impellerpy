@@ -358,7 +358,7 @@ static void BindDisplayListBuilder(nb::module_& m) {
       .def("save", &DisplayListBuilder::Save, nb::rv_policy::reference)
       .def("save_layer", &DisplayListBuilder::SaveLayer,
            nb::rv_policy::reference)
-      .def("scale", &DisplayListBuilder::Save, nb::rv_policy::reference)
+      .def("scale", &DisplayListBuilder::Scale, nb::rv_policy::reference)
       .def("get_transform", &DisplayListBuilder::GetTransform)
       .def("set_transform", &DisplayListBuilder::SetTransform,
            nb::rv_policy::reference)

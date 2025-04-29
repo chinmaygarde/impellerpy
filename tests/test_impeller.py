@@ -102,10 +102,16 @@ def test_can_draw_text(pytestconfig):
             impeller.Paint().set_color(impeller.Color(r=1, a=1))
         )
         .set_font_weight(impellerpy.FontWeight_.W900)
+        .set_height(2)
     )
     builder.add_text("Hello")
     para = builder.build(900)
-
+    dl = (
+        impeller.DisplayListBuilder()
+        .scale(5.0, 5.0)
+        .draw_paragraph(para, impeller.Point(100, 100))
+        .build()
+    )
     context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
     window = impeller.Window()
     while not window.should_close():
@@ -118,10 +124,6 @@ def test_can_draw_text(pytestconfig):
 
         paint = impeller.Paint()
         paint.set_color(color)
-
-        dl_builder = impeller.DisplayListBuilder()
-        dl_builder.draw_paragraph(para, impeller.Point(100, 100))
-        dl = dl_builder.build()
 
         surface.draw(dl)
 
