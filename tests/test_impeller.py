@@ -112,14 +112,36 @@ def test_can_draw_text(pytestconfig):
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
-        paint = impeller.Paint()
-
-        color = impeller.Color(a=1, b=1)
-        paint.set_color(color)
-
-        paint = impeller.Paint()
-        paint.set_color(color)
-
         surface.draw(dl)
+        surface.present()
 
+
+def test_can_draw_conical_gradient(pytestconfig):
+    dl = (
+        impeller.DisplayListBuilder()
+        .draw_rect(
+            impeller.Rect(0, 0, 500, 500),
+            impeller.Paint().set_color_source(
+                impeller.ColorSource.conical_gradient(
+                    impeller.Point(500, 500),
+                    100.0,
+                    impeller.Point(0, 0),
+                    200.0,
+                    [0, 1],
+                    [
+                        impeller.Color(r=1, a=1),
+                        impeller.Color(b=1, a=1),
+                    ],
+                    impellerpy.TileMode_.REPEAT,
+                )
+            ),
+        )
+        .build()
+    )
+    context = impeller.Context()
+    window = impeller.Window()
+    while not window.should_close():
+        window.poll_events()
+        surface = window.create_render_surface(context)
+        surface.draw(dl)
         surface.present()

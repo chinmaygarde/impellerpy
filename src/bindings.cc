@@ -238,8 +238,156 @@ static void BindColorFilter(nb::module_& m) {
       });
 }
 
+template <class T>
+std::vector<T> CastFromPython(const nb::list& py_list) {
+  std::vector<T> res;
+  res.reserve(py_list.size());
+  for (size_t i = 0; i < py_list.size(); i++) {
+    res.push_back(nb::cast<T>(py_list[i]));
+  }
+  return res;
+}
+
 static void BindColorSource(nb::module_& m) {
-  nb::class_<ColorSource>(m, "ColorSource_");
+  nb::class_<ColorSource>(m, "ColorSource_")
+      .def_static(
+          "conical_gradient",
+          [](const ImpellerPoint& start_center,    //
+             float start_radius,                   //
+             const ImpellerPoint& end_center,      //
+             float end_radius,                     //
+             nb::list stops,                       //
+             nb::list colors,                      //
+             ImpellerTileMode tile_mode,           //
+             const ImpellerMatrix* transformation  //
+             ) -> ColorSource {
+            auto stops_vector = CastFromPython<float>(stops);
+            auto colors_vector = CastFromPython<ImpellerColor>(colors);
+            return ColorSource::ConicalGradient(start_center,          //
+                                                start_radius,          //
+                                                end_center,            //
+                                                end_radius,            //
+                                                stops_vector.size(),   //
+                                                colors_vector.data(),  //
+                                                stops_vector.data(),   //
+                                                tile_mode              //
+            );
+          },
+          nb::arg("start_center"),                //
+          nb::arg("start_radius"),                //
+          nb::arg("end_center"),                  //
+          nb::arg("end_radius"),                  //
+          nb::arg("stops"),                       //
+          nb::arg("colors"),                      //
+          nb::arg("tile_mode"),                   //
+          nb::arg("transformation") = nb::none()  //
+          )
+      .def_static(
+          "image",
+          [](const Texture& image,                   //
+             ImpellerTileMode horizontal_tile_mode,  //
+             ImpellerTileMode vertical_tile_mode,    //
+             ImpellerTextureSampling sampling,       //
+             const ImpellerMatrix* transformation    //
+             ) -> ColorSource {
+            return ColorSource::Image(image,                 //
+                                      horizontal_tile_mode,  //
+                                      vertical_tile_mode,    //
+                                      sampling,              //
+                                      transformation         //
+            );
+          },
+          nb::arg("image"),                       //
+          nb::arg("horizontal_tile_mode"),        //
+          nb::arg("vertical_tile_mode"),          //
+          nb::arg("sampling"),                    //
+          nb::arg("transformation") = nb::none()  //
+          )
+      .def_static(
+          "linear_gradient",
+          [](const ImpellerPoint& start_point,     //
+             const ImpellerPoint& end_point,       //
+             nb::list colors,                      //
+             nb::list stops,                       //
+             ImpellerTileMode tile_mode,           //
+             const ImpellerMatrix* transformation  //
+             ) -> ColorSource {
+            auto stops_vector = CastFromPython<float>(stops);
+            auto colors_vector = CastFromPython<ImpellerColor>(colors);
+            return ColorSource::LinearGradient(start_point,           //
+                                               end_point,             //
+                                               stops_vector.size(),   //
+                                               colors_vector.data(),  //
+                                               stops_vector.data(),   //
+                                               tile_mode,             //
+                                               transformation         //
+            );
+          },
+          nb::arg("start_point"),                 //
+          nb::arg("end_point"),                   //
+          nb::arg("colors"),                      //
+          nb::arg("stops"),                       //
+          nb::arg("tile_mode"),                   //
+          nb::arg("transformation") = nb::none()  //
+          )
+      .def_static(
+          "radial_gradient",
+          [](const ImpellerPoint& center,          //
+             float radius,                         //
+             nb::list colors,                      //
+             nb::list stops,                       //
+             ImpellerTileMode tile_mode,           //
+             const ImpellerMatrix* transformation  //
+             ) -> ColorSource {
+            auto stops_vector = CastFromPython<float>(stops);
+            auto colors_vector = CastFromPython<ImpellerColor>(colors);
+            return ColorSource::RadialGradient(center,                //
+                                               radius,                //
+                                               stops_vector.size(),   //
+                                               colors_vector.data(),  //
+                                               stops_vector.data(),   //
+                                               tile_mode,             //
+                                               transformation         //
+            );
+          },
+          nb::arg("center"),                      //
+          nb::arg("radius"),                      //
+          nb::arg("colors"),                      //
+          nb::arg("stops"),                       //
+          nb::arg("tile_mode"),                   //
+          nb::arg("transformation") = nb::none()  //
+          )
+
+      .def_static(
+          "sweep_gradient",
+          [](const ImpellerPoint& center,          //
+             float start,                          //
+             float end,                            //
+             nb::list colors,                      //
+             nb::list stops,                       //
+             ImpellerTileMode tile_mode,           //
+             const ImpellerMatrix* transformation  //
+             ) -> ColorSource {
+            auto stops_vector = CastFromPython<float>(stops);
+            auto colors_vector = CastFromPython<ImpellerColor>(colors);
+            return ColorSource::SweepGradient(center,                //
+                                              start,                 //
+                                              end,                   //
+                                              stops_vector.size(),   //
+                                              colors_vector.data(),  //
+                                              stops_vector.data(),   //
+                                              tile_mode,             //
+                                              transformation         //
+            );
+          },
+          nb::arg("center"),                      //
+          nb::arg("start"),                       //
+          nb::arg("end"),                         //
+          nb::arg("colors"),                      //
+          nb::arg("stops"),                       //
+          nb::arg("tile_mode"),                   //
+          nb::arg("transformation") = nb::none()  //
+      );
 }
 
 static void BindImageFilter(nb::module_& m) {

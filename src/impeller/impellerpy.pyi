@@ -178,13 +178,58 @@ class TextureDescriptor_:
 
 class ColorFilter_:
     @staticmethod
-    def blend(color: Color_, blend_mode: BlendMode_): ...
-
+    def blend(color: Color_, blend_mode: BlendMode_) -> ColorFilter_: ...
     @staticmethod
-    def matrix(matrix: ColorMatrix_): ...
+    def matrix(matrix: ColorMatrix_) -> ColorFilter_: ...
 
 class ColorSource_:
-    pass
+    @staticmethod
+    def conical_gradient(
+        start_center: Point_,
+        start_radius: float,
+        end_center: Point_,
+        end_radius: float,
+        stops: List[float],
+        colors: List[Color_],
+        tile_mode: TileMode_,
+        transformation: Optional[Matrix_] = None,
+    ) -> ColorSource_: ...
+    @staticmethod
+    def image(
+        texture: Texture_,
+        horizontal_tile_mode: TileMode_,
+        vertical_tile_mode: TileMode_,
+        sampling: TextureSampling_,
+        transformation: Optional[Matrix_] = None,
+    ) -> ColorSource_: ...
+    @staticmethod
+    def linear_gradient(
+        start_point: Point_,
+        end_point: Point_,
+        colors: List[Color_],
+        stops: List[float],
+        tile_mode: TileMode_,
+        transformation: Optional[Matrix_] = None,
+    ) -> ColorSource_: ...
+    @staticmethod
+    def radial_gradient(
+        center: Point_,
+        radius: float,
+        colors: List[Color_],
+        stops: List[float],
+        tile_mode: TileMode_,
+        transformation: Optional[Matrix_] = None,
+    ) -> ColorSource_: ...
+    @staticmethod
+    def sweep_gradient(
+        center: Point_,
+        start: float,
+        end: float,
+        colors: List[Color_],
+        stops: List[float],
+        tile_mode: TileMode_,
+        transformation: Optional[Matrix_] = None,
+    ) -> ColorSource_: ...
 
 class ImageFilter_:
     pass
