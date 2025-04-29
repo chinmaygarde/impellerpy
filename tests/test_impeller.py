@@ -1,6 +1,7 @@
 from impeller import impellerpy
 from impeller import impeller
 from PIL import Image
+from pyglm import glm
 import os
 
 
@@ -66,29 +67,23 @@ def test_can_draw_image(pytestconfig):
         desc,
         image.convert("RGBA").tobytes(),
     )
+
+    dl = (
+        impeller.DisplayListBuilder()
+        .push_transform(impeller.Matrix(glm.scale(glm.vec3(2)).to_list()))
+        .draw_texture(
+            texture,
+            impeller.Point(100, 100),
+            impellerpy.TextureSampling_.LINEAR,
+            impeller.Paint(),
+        )
+        .build()
+    )
     window = impeller.Window()
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
-        paint = impeller.Paint()
-
-        color = impeller.Color(a=1, b=1)
-        paint.set_color(color)
-
-        paint = impeller.Paint()
-        paint.set_color(color)
-
-        dl_builder = impeller.DisplayListBuilder()
-        dl_builder.draw_texture(
-            texture,
-            impeller.Point(),
-            impellerpy.TextureSampling_.NEAREST_NEIGHBOR,
-            paint,
-        )
-        dl = dl_builder.build()
-
         surface.draw(dl)
-
         surface.present()
 
 

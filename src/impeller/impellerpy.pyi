@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Optional, Sequence
+from typing import List, Optional, Sequence
 
 def get_version() -> int: ...
 
@@ -146,14 +146,13 @@ class Range_:
     def __init__(self) -> None: ...
 
 class Matrix_:
-    m: Sequence[float]  # Assuming a 1D sequence for the matrix
-
-    def __init__(self) -> None: ...
+    def __init__(self, values: List[float]) -> None: ...
+    def __getitem__(self, key: int) -> float: ...
+    def __setitem__(self, key: int, value: float) -> None: ...
+    def to_list(self) -> List[float]: ...
 
 class ColorMatrix_:
-    m: Sequence[float]  # Assuming a 1D sequence for the matrix
-
-    def __init__(self) -> None: ...
+    pass
 
 class RoundingRadii_:
     top_left: Point_

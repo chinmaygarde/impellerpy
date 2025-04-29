@@ -165,9 +165,26 @@ static void BindStructs(nb::module_& m) {
       .def_rw("start", &ImpellerRange::start)
       .def_rw("end", &ImpellerRange::end);
 
-  nb::class_<ImpellerMatrix>(m, "Matrix_").def(nb::init<>())
-      // .def_rw("m", &ImpellerMatrix::m)
-      ;
+  nb::class_<ImpellerMatrix>(m, "Matrix_")
+      .def("__init__",
+           [](ImpellerMatrix* t, nb::list list) {
+             new (t) ImpellerMatrix();
+             const auto size = std::min<size_t>(16, list.size());
+             for (size_t i = 0; i < size; i++) {
+               t->m[i] = nb::cast<float>(list[i]);
+             }
+           })
+      .def("__getitem__",
+           [](const ImpellerMatrix& mat, int i) -> float { return mat.m[i]; })
+      .def("__setitem__",
+           [](ImpellerMatrix& mat, int i, float value) { mat.m[i] = value; })
+      .def("to_list", [](const ImpellerMatrix& m) {
+        nb::list result;
+        for (size_t i = 0; i < 16; i++) {
+          result.append(m.m[i]);
+        }
+        return result;
+      });
 
   nb::class_<ImpellerColorMatrix>(m, "ColorMatrix_").def(nb::init<>())
       // .def_rw("m", &ImpellerColorMatrix::m)

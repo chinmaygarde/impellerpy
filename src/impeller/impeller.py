@@ -1,3 +1,4 @@
+from typing import List
 from . import impellerpy
 
 
@@ -49,7 +50,13 @@ class Range(impellerpy.Range_):
 
 
 class Matrix(impellerpy.Matrix_):
-    pass
+    def __init__(self, row_col_list: List[List[float]]):
+        values = []
+        for col in range(4):
+            for row in range(4):
+                values.append(row_col_list[col][row])
+        super().__init__(values)
+
 
 
 class ColorMatrix(impellerpy.ColorMatrix_):
