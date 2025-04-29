@@ -89,14 +89,6 @@ class TextureDescriptor(impellerpy.TextureDescriptor_):
         self.mip_count = mip_count
 
 
-class ContextVulkanSettings(impellerpy.ContextVulkanSettings_):
-    pass
-
-
-class ContextVulkanInfo(impellerpy.ContextVulkanInfo_):
-    pass
-
-
 class ColorFilter(impellerpy.ColorFilter_):
     pass
 
