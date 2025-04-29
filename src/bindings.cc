@@ -9,7 +9,7 @@
 namespace impeller::py {
 
 namespace nb = nanobind;
-
+using namespace nanobind::literals;
 using namespace impeller::hpp;
 
 static void BindAttributes(nb::module_& m) {
@@ -273,14 +273,14 @@ static void BindColorSource(nb::module_& m) {
                                                 tile_mode              //
             );
           },
-          nb::arg("start_center"),                //
-          nb::arg("start_radius"),                //
-          nb::arg("end_center"),                  //
-          nb::arg("end_radius"),                  //
-          nb::arg("stops"),                       //
-          nb::arg("colors"),                      //
-          nb::arg("tile_mode"),                   //
-          nb::arg("transformation") = nb::none()  //
+          "start_center"_a,                //
+          "start_radius"_a,                //
+          "end_center"_a,                  //
+          "end_radius"_a,                  //
+          "stops"_a,                       //
+          "colors"_a,                      //
+          "tile_mode"_a,                   //
+          "transformation"_a = nb::none()  //
           )
       .def_static(
           "image",
@@ -297,11 +297,11 @@ static void BindColorSource(nb::module_& m) {
                                       transformation         //
             );
           },
-          nb::arg("image"),                       //
-          nb::arg("horizontal_tile_mode"),        //
-          nb::arg("vertical_tile_mode"),          //
-          nb::arg("sampling"),                    //
-          nb::arg("transformation") = nb::none()  //
+          "image"_a,                       //
+          "horizontal_tile_mode"_a,        //
+          "vertical_tile_mode"_a,          //
+          "sampling"_a,                    //
+          "transformation"_a = nb::none()  //
           )
       .def_static(
           "linear_gradient",
@@ -323,12 +323,12 @@ static void BindColorSource(nb::module_& m) {
                                                transformation         //
             );
           },
-          nb::arg("start_point"),                 //
-          nb::arg("end_point"),                   //
-          nb::arg("colors"),                      //
-          nb::arg("stops"),                       //
-          nb::arg("tile_mode"),                   //
-          nb::arg("transformation") = nb::none()  //
+          "start_point"_a,                 //
+          "end_point"_a,                   //
+          "colors"_a,                      //
+          "stops"_a,                       //
+          "tile_mode"_a,                   //
+          "transformation"_a = nb::none()  //
           )
       .def_static(
           "radial_gradient",
@@ -350,12 +350,12 @@ static void BindColorSource(nb::module_& m) {
                                                transformation         //
             );
           },
-          nb::arg("center"),                      //
-          nb::arg("radius"),                      //
-          nb::arg("colors"),                      //
-          nb::arg("stops"),                       //
-          nb::arg("tile_mode"),                   //
-          nb::arg("transformation") = nb::none()  //
+          "center"_a,                      //
+          "radius"_a,                      //
+          "colors"_a,                      //
+          "stops"_a,                       //
+          "tile_mode"_a,                   //
+          "transformation"_a = nb::none()  //
           )
 
       .def_static(
@@ -380,13 +380,13 @@ static void BindColorSource(nb::module_& m) {
                                               transformation         //
             );
           },
-          nb::arg("center"),                      //
-          nb::arg("start"),                       //
-          nb::arg("end"),                         //
-          nb::arg("colors"),                      //
-          nb::arg("stops"),                       //
-          nb::arg("tile_mode"),                   //
-          nb::arg("transformation") = nb::none()  //
+          "center"_a,                      //
+          "start"_a,                       //
+          "end"_a,                         //
+          "colors"_a,                      //
+          "stops"_a,                       //
+          "tile_mode"_a,                   //
+          "transformation"_a = nb::none()  //
       );
 }
 
