@@ -179,11 +179,6 @@ class TextureDescriptor_:
 
     def __init__(self) -> None: ...
 
-class Mapping_:
-    data: bytes  # Or a more specific buffer type if needed
-    length: int
-    # on_release: Optional[Callable[[Optional[Any]], None]]  # Callback type
-    def __init__(self) -> None: ...
 
 class ContextVulkanSettings_:
     user_data: Optional[Any]  # Void pointer, so use Any
@@ -270,7 +265,7 @@ class Paragraph_:
 class Texture_:
     @staticmethod
     def with_contents(
-        context: Context_, desc: TextureDescriptor_, data: Mapping_
+        context: Context_, desc: TextureDescriptor_, data: bytes
     ) -> Texture_: ...
 
 class DisplayListBuilder_:

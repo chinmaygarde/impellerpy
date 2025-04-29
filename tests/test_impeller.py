@@ -55,15 +55,16 @@ def test_can_draw_image(pytestconfig):
     image = Image.open(
         os.path.join(pytestconfig.rootpath, "assets/airplane.jpg")
     )
-    assert image.size[0] > 0
-    assert image.size[1] > 0
+    assert image.size[0] != 0
+    assert image.size[1] != 0
     desc = impeller.TextureDescriptor(
         impellerpy.PixelFormat_.RGBA8888,
         impeller.ISize(image.size[0], image.size[1]),
     )
-    data = impeller.Mapping(image.convert("RGBA").tobytes())
     context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
-    texture = impeller.Texture.with_contents(context, desc, data)
+    texture = impeller.Texture.with_contents(
+        context, desc, image.convert("RGBA").tobytes()
+    )
     window = impellerpy.get_main_window()
     while not window.should_close():
         window.poll_events()

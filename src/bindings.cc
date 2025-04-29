@@ -2,6 +2,7 @@
 
 #include <nanobind/stl/unique_ptr.h>
 #include <impeller.hpp>
+#include <memory>
 
 #include "context.h"
 #include "window.h"
@@ -193,13 +194,6 @@ static void BindStructs(nb::module_& m) {
       .def_rw("size", &ImpellerTextureDescriptor::size)
       .def_rw("mip_count", &ImpellerTextureDescriptor::mip_count);
 
-  nb::class_<ImpellerMapping>(m, "Mapping_")
-      .def(nb::init<>())
-      .def_rw("data", &ImpellerMapping::data)
-      .def_rw("length", &ImpellerMapping::length)
-      // .def_rw("on_release", &ImpellerMapping::on_release)
-      ;
-
   nb::class_<ImpellerContextVulkanSettings>(m, "ContextVulkanSettings_")
       .def(nb::init<>())
       .def_rw("user_data", &ImpellerContextVulkanSettings::user_data)
@@ -265,7 +259,19 @@ static void BindParagraph(nb::module_& m) {
 
 static void BindTexture(nb::module_& m) {
   nb::class_<Texture>(m, "Texture_")
-      .def_static("with_contents", &Texture::WithContents);
+      .def_static("with_contents",
+                  [](const ContextWrapper& context,          //
+                     const ImpellerTextureDescriptor& desc,  //
+                     nb::bytes data                          //
+                     ) -> Texture {
+                    auto mapping = std::make_unique<Mapping>(
+                        reinterpret_cast<const uint8_t*>(data.data()),  //
+                        data.size(),                                    //
+                        nullptr                                         //
+                    );
+                    return Texture::WithContents(context.GetContext(), desc,
+                                                 std::move(mapping));
+                  });
 }
 
 static void BindPathBuilder(nb::module_& m) {

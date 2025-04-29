@@ -77,12 +77,6 @@ class TextureDescriptor(impellerpy.TextureDescriptor_):
         self.mip_count = mip_count
 
 
-class Mapping(impellerpy.Mapping_):
-    def __init__(self, data: bytes):
-        super().__init__()
-        self.data = data
-        self.length = len(data)
-
 
 class ContextVulkanSettings(impellerpy.ContextVulkanSettings_):
     pass
