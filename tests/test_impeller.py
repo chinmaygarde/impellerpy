@@ -89,3 +89,43 @@ def test_can_draw_image(pytestconfig):
         surface.draw(dl)
 
         surface.present()
+
+
+def test_can_draw_text(pytestconfig):
+    ctx = impeller.TypographyContext()
+    builder = impeller.ParagraphBuilder(ctx)
+    builder.push_style(
+        impeller.ParagraphStyle()
+            .set_background(
+                impeller.Paint()
+                    .set_color(impeller.Color(g=1, a=1))
+            )
+            .set_font_foreground(
+                impeller.Paint()
+                    .set_color(impeller.Color(r=1, a=1))
+                )
+            .set_font_weight(impellerpy.FontWeight_.W900)
+    )
+    builder.add_text("Hello")
+    para = builder.build(900)
+
+    context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
+    window = impeller.Window()
+    while not window.should_close():
+        window.poll_events()
+        surface = window.create_render_surface(context)
+        paint = impeller.Paint()
+
+        color = impeller.Color(a=1, b=1)
+        paint.set_color(color)
+
+        paint = impeller.Paint()
+        paint.set_color(color)
+
+        dl_builder = impeller.DisplayListBuilder()
+        dl_builder.draw_paragraph(para, impeller.Point(100, 100))
+        dl = dl_builder.build()
+
+        surface.draw(dl)
+
+        surface.present()

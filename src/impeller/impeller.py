@@ -77,7 +77,6 @@ class TextureDescriptor(impellerpy.TextureDescriptor_):
         self.mip_count = mip_count
 
 
-
 class ContextVulkanSettings(impellerpy.ContextVulkanSettings_):
     pass
 
@@ -150,3 +149,14 @@ class Window(impellerpy.Window_):
     def __init__(self):
         super().__init__()
 
+
+class TypographyContext(impellerpy.TypographyContext_):
+    pass
+
+
+class ParagraphStyle(impellerpy.ParagraphStyle_):
+    pass
+
+
+class ParagraphBuilder(impellerpy.ParagraphBuilder_):
+    pass

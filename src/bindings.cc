@@ -312,11 +312,11 @@ static void BindPaint(nb::module_& m) {
       .def("set_mask_filter", &Paint::SetMaskFilter, nb::rv_policy::reference);
 }
 
-void BindDisplayList(nb::module_& m) {
+static void BindDisplayList(nb::module_& m) {
   nb::class_<DisplayList> _(m, "DisplayList_");
 }
 
-void BindDisplayListBuilder(nb::module_& m) {
+static void BindDisplayListBuilder(nb::module_& m) {
   nb::class_<DisplayListBuilder>(m, "DisplayListBuilder_")
       .def(nb::init())
       .def("build", &DisplayListBuilder::Build, nb::rv_policy::reference)
@@ -368,7 +368,7 @@ void BindDisplayListBuilder(nb::module_& m) {
            nb::rv_policy::reference);
 }
 
-void BindWindow(nb::module_& m) {
+static void BindWindow(nb::module_& m) {
   nb::class_<Window>(m, "Window_")
       .def(nb::init())
       .def("create_render_surface", &Window::CreateRenderSurface,
@@ -377,8 +377,53 @@ void BindWindow(nb::module_& m) {
       .def("poll_events", &Window::PollEvents);
 }
 
-void BindContext(nb::module_& m) {
+static void BindContext(nb::module_& m) {
   nb::class_<ContextWrapper>(m, "Context_").def(nb::init<ContextBackend>());
+}
+
+static void BindTypographyContext(nb::module_& m) {
+  nb::class_<TypographyContext>(m, "TypographyContext_").def(nb::init());
+}
+
+static void BindParagraphStyle(nb::module_& m) {
+  nb::class_<ParagraphStyle>(m, "ParagraphStyle_")
+      .def(nb::init())
+      .def("set_background", &ParagraphStyle::SetBackground,
+           nb::rv_policy::reference)
+      .def("set_font_family", &ParagraphStyle::SetFontFamily,
+           nb::rv_policy::reference)
+      .def("set_font_size", &ParagraphStyle::SetFontSize,
+           nb::rv_policy::reference)
+      .def("set_font_style", &ParagraphStyle::SetFontStyle,
+           nb::rv_policy::reference)
+      .def("set_font_weight", &ParagraphStyle::SetFontWeight,
+           nb::rv_policy::reference)
+      .def("set_font_foreground", &ParagraphStyle::SetForeground,
+           nb::rv_policy::reference)
+      .def("set_height", &ParagraphStyle::SetHeight, nb::rv_policy::reference)
+      .def("set_locale", &ParagraphStyle::SetLocale, nb::rv_policy::reference)
+      .def("set_max_lines", &ParagraphStyle::SetMaxLines,
+           nb::rv_policy::reference)
+      .def("set_text_alignment", &ParagraphStyle::SetTextAlignment,
+           nb::rv_policy::reference)
+      .def("set_text_direction", &ParagraphStyle::SetTextDirection,
+           nb::rv_policy::reference);
+}
+
+static void BindParagraphBuilder(nb::module_& m) {
+  nb::class_<ParagraphBuilder>(m, "ParagraphBuilder_")
+      .def(nb::init<TypographyContext>())
+      .def("build", &ParagraphBuilder::Build, nb::rv_policy::move)
+      .def("push_style", &ParagraphBuilder::PushStyle, nb::rv_policy::reference)
+      .def("pop_style", &ParagraphBuilder::PopStyle, nb::rv_policy::reference)
+      .def(
+          "add_text",
+          [](ParagraphBuilder& self, nb::str text) -> ParagraphBuilder& {
+            const auto str = text.c_str();
+            const auto len = strlen(str);
+            return self.AddText(reinterpret_cast<const uint8_t*>(str), len);
+          },
+          nb::rv_policy::reference);
 }
 
 void BindSurface(nb::module_& m) {
@@ -407,6 +452,9 @@ void BindImpeller(nb::module_& m) {
   BindSurface(m);
   BindTexture(m);
   BindWindow(m);
+  BindParagraphBuilder(m);
+  BindParagraphStyle(m);
+  BindTypographyContext(m);
 }
 
 }  // namespace impeller::py
