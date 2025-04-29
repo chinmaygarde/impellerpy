@@ -232,10 +232,38 @@ class ColorSource_:
     ) -> ColorSource_: ...
 
 class ImageFilter_:
-    pass
+    @staticmethod
+    def blur(
+        x_sigma: float,
+        y_sigma: float,
+    ) -> ImageFilter_: ...
+    @staticmethod
+    def compose(
+        outer: ImageFilter_,
+        inner: ImageFilter_,
+    ) -> ImageFilter_: ...
+    @staticmethod
+    def dilate(
+        x_radius: float,
+        y_radius: float,
+    ) -> ImageFilter_: ...
+    @staticmethod
+    def erode(
+        x_radius: float,
+        y_radius: float,
+    ) -> ImageFilter_: ...
+    @staticmethod
+    def matrix(
+        matrix: Matrix_,
+        sampling: TextureSampling_,
+    ) -> ImageFilter_: ...
 
 class MaskFilter_:
-    pass
+    @staticmethod
+    def blur(
+        style: BlurStyle_,
+        sigma: float,
+    ) -> MaskFilter_: ...
 
 class Paint_:
     def __init__(self) -> None: ...
@@ -252,9 +280,11 @@ class Paint_:
     def set_mask_filter(self, filter: MaskFilter_) -> Paint_: ...
 
 class DisplayList_:
+    # Nothing. Display lists are opaque.
     pass
 
 class Path_:
+    # Nothing. Paths are opaque.
     pass
 
 class LineMetrics_:

@@ -391,7 +391,12 @@ static void BindColorSource(nb::module_& m) {
 }
 
 static void BindImageFilter(nb::module_& m) {
-  nb::class_<ImageFilter>(m, "ImageFilter_");
+  nb::class_<ImageFilter>(m, "ImageFilter_")
+      .def_static("blur", &ImageFilter::Blur)
+      .def_static("compose", &ImageFilter::Compose)
+      .def_static("dilate", &ImageFilter::Dilate)
+      .def_static("erode", &ImageFilter::Erode)
+      .def_static("matrix", &ImageFilter::Matrix);
 }
 
 static void BindLineMetrics(nb::module_& m) {
@@ -460,7 +465,8 @@ static void BindPathBuilder(nb::module_& m) {
 }
 
 static void BindMaskFilter(nb::module_& m) {
-  nb::class_<MaskFilter>(m, "MaskFilter_");
+  nb::class_<MaskFilter>(m, "MaskFilter_")
+      .def_static("blur", &MaskFilter::Blur);
 }
 
 static void BindPaint(nb::module_& m) {
