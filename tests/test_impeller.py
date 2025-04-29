@@ -2,7 +2,6 @@ from impeller import impellerpy
 from impeller import impeller
 from PIL import Image
 import os
-import pytest
 
 
 def test_version():
@@ -63,7 +62,9 @@ def test_can_draw_image(pytestconfig):
     )
     context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
     texture = impeller.Texture.with_contents(
-        context, desc, image.convert("RGBA").tobytes()
+        context,
+        desc,
+        image.convert("RGBA").tobytes(),
     )
     window = impeller.Window()
     while not window.should_close():

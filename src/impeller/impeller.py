@@ -1,4 +1,3 @@
-from typing import ByteString
 from . import impellerpy
 
 

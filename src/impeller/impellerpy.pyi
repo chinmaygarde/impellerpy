@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Optional, Sequence, Callable, Any
+from typing import Optional, Sequence
 
 def get_version() -> int: ...
 
