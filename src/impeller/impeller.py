@@ -147,4 +147,6 @@ class Context(impellerpy.Context_):
 
 
 class Window(impellerpy.Window_):
-    pass
+    def __init__(self):
+        super().__init__()
+

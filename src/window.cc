@@ -7,11 +7,6 @@
 
 namespace impeller::py {
 
-Window& Window::GetMainWindow() {
-  static Window window;
-  return window;
-}
-
 static void SetupGLFW() {
   ::glfwSetErrorCallback([](int error, const char* description) {
     std::cout << "GLFW Error: (" << error << ") " << description;
@@ -40,6 +35,7 @@ Window::Window() {
 
 Window::~Window() {
   if (window_) {
+    ::glfwHideWindow(window_);
     ::glfwSetWindowUserPointer(window_, nullptr);
     ::glfwDestroyWindow(window_);
   }

@@ -369,9 +369,8 @@ void BindDisplayListBuilder(nb::module_& m) {
 }
 
 void BindWindow(nb::module_& m) {
-  m.def("get_main_window", &Window::GetMainWindow, nb::rv_policy::reference);
-
   nb::class_<Window>(m, "Window_")
+      .def(nb::init())
       .def("create_render_surface", &Window::CreateRenderSurface,
            nb::rv_policy::move)
       .def("should_close", &Window::ShouldClose)

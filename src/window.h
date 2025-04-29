@@ -10,8 +10,6 @@ namespace impeller::py {
 
 class Window {
  public:
-  static Window& GetMainWindow();
-
   Window();
 
   ~Window();

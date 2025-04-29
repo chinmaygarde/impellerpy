@@ -28,7 +28,7 @@ def test_display_list_builder():
 
 def test_can_create_window():
     context = impellerpy.Context_(impellerpy.ContextBackend_.METAL)
-    window = impellerpy.get_main_window()
+    window = impeller.Window()
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
@@ -65,7 +65,7 @@ def test_can_draw_image(pytestconfig):
     texture = impeller.Texture.with_contents(
         context, desc, image.convert("RGBA").tobytes()
     )
-    window = impellerpy.get_main_window()
+    window = impeller.Window()
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
