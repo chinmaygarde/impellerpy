@@ -96,15 +96,11 @@ def test_can_draw_text(pytestconfig):
     builder = impeller.ParagraphBuilder(ctx)
     builder.push_style(
         impeller.ParagraphStyle()
-            .set_background(
-                impeller.Paint()
-                    .set_color(impeller.Color(g=1, a=1))
-            )
-            .set_font_foreground(
-                impeller.Paint()
-                    .set_color(impeller.Color(r=1, a=1))
-                )
-            .set_font_weight(impellerpy.FontWeight_.W900)
+        .set_background(impeller.Paint().set_color(impeller.Color(g=1, a=1)))
+        .set_font_foreground(
+            impeller.Paint().set_color(impeller.Color(r=1, a=1))
+        )
+        .set_font_weight(impellerpy.FontWeight_.W900)
     )
     builder.add_text("Hello")
     para = builder.build(900)
