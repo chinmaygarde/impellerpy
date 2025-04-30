@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - main
+env:
+  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+
 jobs:
   build:
     name: Build
@@ -17,5 +20,11 @@ jobs:
           submodules: true
       - name: Install Autoconf
         run: brew install autoconf automake autoconf-archive
+      - name: Export GitHub Actions Cache Environment Variables
+        uses: actions/github-script@v7
+        with:
+          script: |
+              core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+              core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
       - name: Build
         run: make
