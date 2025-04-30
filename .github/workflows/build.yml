@@ -15,5 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
+      - name: Install Autoconf
+        run: brew install autoconf automake autoconf-archive
       - name: Build
         run: make
