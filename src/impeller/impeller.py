@@ -84,7 +84,7 @@ class Color(impellerpy.Color_):
 class TextureDescriptor(impellerpy.TextureDescriptor_):
     def __init__(
         self,
-        pixel_format: impellerpy.PixelFormat_,
+        pixel_format: impellerpy.PixelFormat,
         texture_size: ISize,
         mip_count: int = 1,
     ):

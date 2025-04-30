@@ -3,15 +3,15 @@ from typing import List, Optional
 
 def get_version() -> int: ...
 
-class FillType_(Enum):
+class FillType(Enum):
     NON_ZERO = 0
     ODD = 1
 
-class ClipOperation_(Enum):
+class ClipOperation(Enum):
     DIFFERENCE = 0
     INTERSECT = 1
 
-class BlendMode_(Enum):
+class BlendMode(Enum):
     CLEAR = 0
     SOURCE = 1
     DESTINATION = 2
@@ -42,46 +42,46 @@ class BlendMode_(Enum):
     COLOR = 27
     LUMINOSITY = 28
 
-class DrawStyle_(Enum):
+class DrawStyle(Enum):
     FILL = 0
     STROKE = 1
     STROKE_AND_FILL = 2
 
-class StrokeCap_(Enum):
+class StrokeCap(Enum):
     BUTT = 0
     ROUND = 1
     SQUARE = 2
 
-class StrokeJoin_(Enum):
+class StrokeJoin(Enum):
     MITER = 0
     ROUND = 1
     BEVEL = 2
 
-class PixelFormat_(Enum):
+class PixelFormat(Enum):
     RGBA8888 = 0
 
-class TextureSampling_(Enum):
+class TextureSampling(Enum):
     NEAREST_NEIGHBOR = 0
     LINEAR = 1
 
-class TileMode_(Enum):
+class TileMode(Enum):
     CLAMP = 0
     REPEAT = 1
     MIRROR = 2
     DECAL = 3
 
-class BlurStyle_(Enum):
+class BlurStyle(Enum):
     NORMAL = 0
     SOLID = 1
     OUTER = 2
     INNER = 3
 
-class ColorSpace_(Enum):
+class ColorSpace(Enum):
     SRGB = 0
     EXTENDED_SRGB = 1
     DISPLAY_P3 = 2
 
-class FontWeight_(Enum):
+class FontWeight(Enum):
     W100 = 0
     W200 = 1
     W300 = 2
@@ -92,11 +92,11 @@ class FontWeight_(Enum):
     W800 = 7
     W900 = 8
 
-class FontStyle_(Enum):
+class FontStyle(Enum):
     NORMAL = 0
     ITALIC = 1
 
-class TextAlignment_(Enum):
+class TextAlignment(Enum):
     LEFT = 0
     RIGHT = 1
     CENTER = 2
@@ -104,7 +104,7 @@ class TextAlignment_(Enum):
     START = 4
     END = 5
 
-class TextDirection_(Enum):
+class TextDirection(Enum):
     RTL = 0
     LTR = 1
 
@@ -185,12 +185,12 @@ class Color_:
     green: float
     blue: float
     alpha: float
-    color_space: ColorSpace_
+    color_space: ColorSpace
 
     def __init__(self) -> None: ...
 
 class TextureDescriptor_:
-    pixel_format: PixelFormat_
+    pixel_format: PixelFormat
     size: ISize_
     mip_count: int
 
@@ -200,7 +200,7 @@ class ColorFilter_:
     @staticmethod
     def blend(
         color: Color_,
-        blend_mode: BlendMode_,
+        blend_mode: BlendMode,
     ) -> ColorFilter_: ...
     @staticmethod
     def matrix(
@@ -216,15 +216,15 @@ class ColorSource_:
         end_radius: float,
         stops: List[float],
         colors: List[Color_],
-        tile_mode: TileMode_,
+        tile_mode: TileMode,
         transformation: Optional[Matrix_] = None,
     ) -> ColorSource_: ...
     @staticmethod
     def image(
         texture: Texture_,
-        horizontal_tile_mode: TileMode_,
-        vertical_tile_mode: TileMode_,
-        sampling: TextureSampling_,
+        horizontal_tile_mode: TileMode,
+        vertical_tile_mode: TileMode,
+        sampling: TextureSampling,
         transformation: Optional[Matrix_] = None,
     ) -> ColorSource_: ...
     @staticmethod
@@ -233,7 +233,7 @@ class ColorSource_:
         end_point: Point_,
         colors: List[Color_],
         stops: List[float],
-        tile_mode: TileMode_,
+        tile_mode: TileMode,
         transformation: Optional[Matrix_] = None,
     ) -> ColorSource_: ...
     @staticmethod
@@ -242,7 +242,7 @@ class ColorSource_:
         radius: float,
         colors: List[Color_],
         stops: List[float],
-        tile_mode: TileMode_,
+        tile_mode: TileMode,
         transformation: Optional[Matrix_] = None,
     ) -> ColorSource_: ...
     @staticmethod
@@ -252,7 +252,7 @@ class ColorSource_:
         end: float,
         colors: List[Color_],
         stops: List[float],
-        tile_mode: TileMode_,
+        tile_mode: TileMode,
         transformation: Optional[Matrix_] = None,
     ) -> ColorSource_: ...
 
@@ -280,13 +280,13 @@ class ImageFilter_:
     @staticmethod
     def matrix(
         matrix: Matrix_,
-        sampling: TextureSampling_,
+        sampling: TextureSampling,
     ) -> ImageFilter_: ...
 
 class MaskFilter_:
     @staticmethod
     def blur(
-        style: BlurStyle_,
+        style: BlurStyle,
         sigma: float,
     ) -> MaskFilter_: ...
 
@@ -298,19 +298,19 @@ class Paint_:
     ) -> Paint_: ...
     def set_blend_mode(
         self,
-        blend_mode: BlendMode_,
+        blend_mode: BlendMode,
     ) -> Paint_: ...
     def set_draw_style(
         self,
-        style: DrawStyle_,
+        style: DrawStyle,
     ) -> Paint_: ...
     def set_stroke_cap(
         self,
-        cap: StrokeCap_,
+        cap: StrokeCap,
     ) -> Paint_: ...
     def set_stroke_join(
         self,
-        join: StrokeJoin_,
+        join: StrokeJoin,
     ) -> Paint_: ...
     def set_stroke_width(
         self,
@@ -400,7 +400,7 @@ class GlyphInfo_:
     def grapheme_cluster_code_unit_range_end(self) -> int: ...
     def grapheme_cluster_bounds(self) -> Rect_: ...
     def is_ellipsis(self) -> bool: ...
-    def text_direction(self) -> TextDirection_: ...
+    def text_direction(self) -> TextDirection: ...
 
 class Paragraph_:
     def alphabetic_baseline(self) -> float: ...
@@ -445,11 +445,11 @@ class ParagraphStyle_:
     ) -> ParagraphStyle_: ...
     def set_font_style(
         self,
-        style: FontStyle_,
+        style: FontStyle,
     ) -> ParagraphStyle_: ...
     def set_font_weight(
         self,
-        weight: FontWeight_,
+        weight: FontWeight,
     ) -> ParagraphStyle_: ...
     def set_font_foreground(
         self,
@@ -469,11 +469,11 @@ class ParagraphStyle_:
     ) -> ParagraphStyle_: ...
     def set_text_alignment(
         self,
-        align: TextAlignment_,
+        align: TextAlignment,
     ) -> ParagraphStyle_: ...
     def set_text_direction(
         self,
-        direction: TextDirection_,
+        direction: TextDirection,
     ) -> ParagraphStyle_: ...
 
 class ParagraphBuilder_:
@@ -509,23 +509,23 @@ class DisplayListBuilder_:
     def clip_oval(
         self,
         rect: Rect_,
-        op: ClipOperation_,
+        op: ClipOperation,
     ) -> DisplayListBuilder_: ...
     def clip_path(
         self,
         path: Path_,
-        op: ClipOperation_,
+        op: ClipOperation,
     ) -> DisplayListBuilder_: ...
     def clip_rect(
         self,
         rect: Rect_,
-        op: ClipOperation_,
+        op: ClipOperation,
     ) -> DisplayListBuilder_: ...
     def clip_rounded_rect(
         self,
         rect: Rect_,
         radii: RoundingRadii_,
-        op: ClipOperation_,
+        op: ClipOperation,
     ) -> DisplayListBuilder_: ...
     def draw_dashed_line(
         self,
@@ -596,7 +596,7 @@ class DisplayListBuilder_:
         self,
         texture: Texture_,
         point: Point_,
-        sampling: TextureSampling_,
+        sampling: TextureSampling,
         paint: Paint_,
     ) -> DisplayListBuilder_: ...
     def draw_texture_rect(
@@ -604,7 +604,7 @@ class DisplayListBuilder_:
         texture: Texture_,
         src_rect: Rect_,
         dst_rect: Rect_,
-        sampling: TextureSampling_,
+        sampling: TextureSampling,
         paint: Paint_,
     ) -> DisplayListBuilder_: ...
     def save_count(self) -> int: ...
@@ -648,11 +648,11 @@ class PathBuilder_:
     def __init__(self) -> None: ...
     def build_copy(
         self,
-        fill: FillType_,
+        fill: FillType,
     ) -> Path_: ...
     def build(
         self,
-        fill: FillType_,
+        fill: FillType,
     ) -> Path_: ...
     def add_arc(
         self,

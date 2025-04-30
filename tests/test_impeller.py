@@ -1,12 +1,12 @@
-from impeller import impellerpy
 from impeller.impeller import *
+from impeller.impellerpy import *
 from PIL import Image
 from pyglm import glm
 import os
 
 
 def test_version():
-    assert impellerpy.get_version() != 0
+    assert get_version() != 0
 
 
 def test_structs():
@@ -23,7 +23,7 @@ def test_display_list_builder():
     dl_builder = DisplayListBuilder()
     dl_builder.clip_oval(
         Rect(),
-        impellerpy.ClipOperation_.DIFFERENCE,
+        ClipOperation.DIFFERENCE,
     ).build()
 
 
@@ -59,7 +59,7 @@ def test_can_draw_image(pytestconfig):
     assert image.size[0] != 0
     assert image.size[1] != 0
     desc = TextureDescriptor(
-        impellerpy.PixelFormat_.RGBA8888,
+        PixelFormat.RGBA8888,
         ISize(image.size[0], image.size[1]),
     )
     context = Context()
@@ -75,7 +75,7 @@ def test_can_draw_image(pytestconfig):
         .draw_texture(
             texture,
             Point(100, 100),
-            impellerpy.TextureSampling_.LINEAR,
+            TextureSampling.LINEAR,
             Paint(),
         )
         .build()
@@ -96,7 +96,7 @@ def test_can_draw_text():
             ParagraphStyle()
             .set_background(Paint().set_color(Color(g=1, a=1)))
             .set_font_foreground(Paint().set_color(Color(r=1, a=1)))
-            .set_font_weight(impellerpy.FontWeight_.W900)
+            .set_font_weight(FontWeight.W900)
         )
         .add_text("Hello")
         .build(900)
@@ -132,7 +132,7 @@ def test_can_draw_conical_gradient():
                         Color(r=1, a=1),
                         Color(b=1, a=1),
                     ],
-                    impellerpy.TileMode_.REPEAT,
+                    TileMode.REPEAT,
                 )
             ),
         )

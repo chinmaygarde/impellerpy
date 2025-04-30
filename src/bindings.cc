@@ -24,15 +24,15 @@ static void BindAttributes(nb::module_& m) {
 
 static void BindEnums(nb::module_& m) {
   // Enums
-  nb::enum_<ImpellerFillType>(m, "FillType_")
+  nb::enum_<ImpellerFillType>(m, "FillType")
       .value("NON_ZERO", kImpellerFillTypeNonZero)
       .value("ODD", kImpellerFillTypeOdd);
 
-  nb::enum_<ImpellerClipOperation>(m, "ClipOperation_")
+  nb::enum_<ImpellerClipOperation>(m, "ClipOperation")
       .value("DIFFERENCE", kImpellerClipOperationDifference)
       .value("INTERSECT", kImpellerClipOperationIntersect);
 
-  nb::enum_<ImpellerBlendMode>(m, "BlendMode_")
+  nb::enum_<ImpellerBlendMode>(m, "BlendMode")
       .value("CLEAR", kImpellerBlendModeClear)
       .value("SOURCE", kImpellerBlendModeSource)
       .value("DESTINATION", kImpellerBlendModeDestination)
@@ -63,46 +63,46 @@ static void BindEnums(nb::module_& m) {
       .value("COLOR", kImpellerBlendModeColor)
       .value("LUMINOSITY", kImpellerBlendModeLuminosity);
 
-  nb::enum_<ImpellerDrawStyle>(m, "DrawStyle_")
+  nb::enum_<ImpellerDrawStyle>(m, "DrawStyle")
       .value("FILL", kImpellerDrawStyleFill)
       .value("STROKE", kImpellerDrawStyleStroke)
       .value("STROKE_AND_FILL", kImpellerDrawStyleStrokeAndFill);
 
-  nb::enum_<ImpellerStrokeCap>(m, "StrokeCap_")
+  nb::enum_<ImpellerStrokeCap>(m, "StrokeCap")
       .value("BUTT", kImpellerStrokeCapButt)
       .value("ROUND", kImpellerStrokeCapRound)
       .value("SQUARE", kImpellerStrokeCapSquare);
 
-  nb::enum_<ImpellerStrokeJoin>(m, "StrokeJoin_")
+  nb::enum_<ImpellerStrokeJoin>(m, "StrokeJoin")
       .value("MITER", kImpellerStrokeJoinMiter)
       .value("ROUND", kImpellerStrokeJoinRound)
       .value("BEVEL", kImpellerStrokeJoinBevel);
 
-  nb::enum_<ImpellerPixelFormat>(m, "PixelFormat_")
+  nb::enum_<ImpellerPixelFormat>(m, "PixelFormat")
       .value("RGBA8888", kImpellerPixelFormatRGBA8888);
 
-  nb::enum_<ImpellerTextureSampling>(m, "TextureSampling_")
+  nb::enum_<ImpellerTextureSampling>(m, "TextureSampling")
       .value("NEAREST_NEIGHBOR", kImpellerTextureSamplingNearestNeighbor)
       .value("LINEAR", kImpellerTextureSamplingLinear);
 
-  nb::enum_<ImpellerTileMode>(m, "TileMode_")
+  nb::enum_<ImpellerTileMode>(m, "TileMode")
       .value("CLAMP", kImpellerTileModeClamp)
       .value("REPEAT", kImpellerTileModeRepeat)
       .value("MIRROR", kImpellerTileModeMirror)
       .value("DECAL", kImpellerTileModeDecal);
 
-  nb::enum_<ImpellerBlurStyle>(m, "BlurStyle_")
+  nb::enum_<ImpellerBlurStyle>(m, "BlurStyle")
       .value("NORMAL", kImpellerBlurStyleNormal)
       .value("SOLID", kImpellerBlurStyleSolid)
       .value("OUTER", kImpellerBlurStyleOuter)
       .value("INNER", kImpellerBlurStyleInner);
 
-  nb::enum_<ImpellerColorSpace>(m, "ColorSpace_")
+  nb::enum_<ImpellerColorSpace>(m, "ColorSpace")
       .value("SRGB", kImpellerColorSpaceSRGB)
       .value("EXTENDED_SRGB", kImpellerColorSpaceExtendedSRGB)
       .value("DISPLAY_P3", kImpellerColorSpaceDisplayP3);
 
-  nb::enum_<ImpellerFontWeight>(m, "FontWeight_")
+  nb::enum_<ImpellerFontWeight>(m, "FontWeight")
       .value("W100", kImpellerFontWeight100)
       .value("W200", kImpellerFontWeight200)
       .value("W300", kImpellerFontWeight300)
@@ -113,11 +113,11 @@ static void BindEnums(nb::module_& m) {
       .value("W800", kImpellerFontWeight800)
       .value("W900", kImpellerFontWeight900);
 
-  nb::enum_<ImpellerFontStyle>(m, "FontStyle_")
+  nb::enum_<ImpellerFontStyle>(m, "FontStyle")
       .value("NORMAL", kImpellerFontStyleNormal)
       .value("ITALIC", kImpellerFontStyleItalic);
 
-  nb::enum_<ImpellerTextAlignment>(m, "TextAlignment_")
+  nb::enum_<ImpellerTextAlignment>(m, "TextAlignment")
       .value("LEFT", kImpellerTextAlignmentLeft)
       .value("RIGHT", kImpellerTextAlignmentRight)
       .value("CENTER", kImpellerTextAlignmentCenter)
@@ -125,7 +125,7 @@ static void BindEnums(nb::module_& m) {
       .value("START", kImpellerTextAlignmentStart)
       .value("END", kImpellerTextAlignmentEnd);
 
-  nb::enum_<ImpellerTextDirection>(m, "TextDirection_")
+  nb::enum_<ImpellerTextDirection>(m, "TextDirection")
       .value("RTL", kImpellerTextDirectionRTL)
       .value("LTR", kImpellerTextDirectionLTR);
 }
