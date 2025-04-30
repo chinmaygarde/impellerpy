@@ -23,7 +23,6 @@ sync:
 
 format:
 	uv run ruff format src tests
-	uv run ruff format
 
 check:
 	uv run ruff check
