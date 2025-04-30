@@ -33,4 +33,4 @@ serve_docs:
 
 deploy_docs:
 	rm -rf site
-	uv run mkdocs gh-deploy
+	uv run mkdocs gh-deploy --force
