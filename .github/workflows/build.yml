@@ -12,4 +12,4 @@ jobs:
     runs-on: macos-15
     steps:
       - name: Checks
-        run: which ninja
+        run: which ninja brew vcpkg
