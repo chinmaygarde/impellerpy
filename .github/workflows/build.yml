@@ -11,5 +11,7 @@ jobs:
     name: Build
     runs-on: macos-15
     steps:
-      - name: Checks
-        run: which ninja brew vcpkg
+      - name: Update Dependencies
+        run: make sync
+      - name: Stat Ninja
+        run: ninja --version
