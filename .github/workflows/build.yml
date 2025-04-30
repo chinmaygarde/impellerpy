@@ -1,0 +1,22 @@
+name: Build
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+      - name: Set up Python
+        run: uv python install
+      - name: Sync Dependencies
+        run: make sync
+      - name: Build Default Target
+        run: make
