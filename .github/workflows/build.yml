@@ -11,9 +11,11 @@ jobs:
     name: Build
     runs-on: macos-15
     steps:
-      - name: Update Dependencies
+      - name: Update Submodules
         uses: actions/checkout@v4
         with:
           submodules: true
+      - name: Install Dependencies
+        run: brew install ninja
       - name: Stat Ninja
         run: ninja
