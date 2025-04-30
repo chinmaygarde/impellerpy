@@ -29,3 +29,6 @@ line-length = 80
 [tool.ruff.format]
 line-ending = "lf"
 
+[tool.ruff.lint]
+ignore = ["F403", "F405"]
+

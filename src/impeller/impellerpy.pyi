@@ -547,7 +547,9 @@ class DisplayListBuilder_:
         paint: Paint_,
     ) -> DisplayListBuilder_: ...
     def draw_oval(
-        self, oval_bounds: Rect_, paint: Paint_
+        self,
+        oval_bounds: Rect_,
+        paint: Paint_,
     ) -> DisplayListBuilder_: ...
     def draw_paint(
         self,

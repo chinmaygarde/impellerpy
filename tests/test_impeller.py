@@ -1,5 +1,5 @@
 from impeller import impellerpy
-from impeller import impeller
+from impeller.impeller import *
 from PIL import Image
 from pyglm import glm
 import os
@@ -10,39 +10,40 @@ def test_version():
 
 
 def test_structs():
-    r = impeller.Rect(width=13, height=14)
+    r = Rect(width=13, height=14)
     assert r.x == 0
     assert r.y == 0
     assert r.width == 13
     assert r.height == 14
-    r2 = impeller.Rect()
+    r2 = Rect()
     assert r2.width == 0
 
 
 def test_display_list_builder():
-    dl_builder = impeller.DisplayListBuilder()
+    dl_builder = DisplayListBuilder()
     dl_builder.clip_oval(
-        impeller.Rect(), impellerpy.ClipOperation_.DIFFERENCE
+        Rect(),
+        impellerpy.ClipOperation_.DIFFERENCE,
     ).build()
 
 
 def test_can_create_window():
-    context = impeller.Context()
-    window = impeller.Window()
+    context = Context()
+    window = Window()
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
-        paint = impeller.Paint()
+        paint = Paint()
 
-        color = impeller.Color(a=1, b=1)
+        color = Color(a=1, b=1)
         paint.set_color(color)
 
-        paint = impeller.Paint()
+        paint = Paint()
         paint.set_color(color)
 
-        rect = impeller.Rect(100, 200, 200, 300)
+        rect = Rect(100, 200, 200, 300)
 
-        dl_builder = impeller.DisplayListBuilder()
+        dl_builder = DisplayListBuilder()
         dl_builder.draw_rect(rect, paint)
         dl = dl_builder.build()
 
@@ -57,29 +58,29 @@ def test_can_draw_image(pytestconfig):
     )
     assert image.size[0] != 0
     assert image.size[1] != 0
-    desc = impeller.TextureDescriptor(
+    desc = TextureDescriptor(
         impellerpy.PixelFormat_.RGBA8888,
-        impeller.ISize(image.size[0], image.size[1]),
+        ISize(image.size[0], image.size[1]),
     )
-    context = impeller.Context()
-    texture = impeller.Texture.with_contents(
+    context = Context()
+    texture = Texture.with_contents(
         context,
         desc,
         image.convert("RGBA").tobytes(),
     )
 
     dl = (
-        impeller.DisplayListBuilder()
-        .push_transform(impeller.Matrix(glm.scale(glm.vec3(2)).to_list()))
+        DisplayListBuilder()
+        .push_transform(Matrix(glm.scale(glm.vec3(2)).to_list()))
         .draw_texture(
             texture,
-            impeller.Point(100, 100),
+            Point(100, 100),
             impellerpy.TextureSampling_.LINEAR,
-            impeller.Paint(),
+            Paint(),
         )
         .build()
     )
-    window = impeller.Window()
+    window = Window()
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
@@ -87,28 +88,27 @@ def test_can_draw_image(pytestconfig):
         surface.present()
 
 
-def test_can_draw_text(pytestconfig):
-    ctx = impeller.TypographyContext()
-    builder = impeller.ParagraphBuilder(ctx)
-    builder.push_style(
-        impeller.ParagraphStyle()
-        .set_background(impeller.Paint().set_color(impeller.Color(g=1, a=1)))
-        .set_font_foreground(
-            impeller.Paint().set_color(impeller.Color(r=1, a=1))
+def test_can_draw_text():
+    ctx = TypographyContext()
+    para = (
+        ParagraphBuilder(ctx)
+        .push_style(
+            ParagraphStyle()
+            .set_background(Paint().set_color(Color(g=1, a=1)))
+            .set_font_foreground(Paint().set_color(Color(r=1, a=1)))
+            .set_font_weight(impellerpy.FontWeight_.W900)
         )
-        .set_font_weight(impellerpy.FontWeight_.W900)
-        .set_height(2)
+        .add_text("Hello")
+        .build(900)
     )
-    builder.add_text("Hello")
-    para = builder.build(900)
     dl = (
-        impeller.DisplayListBuilder()
+        DisplayListBuilder()
         .scale(5.0, 5.0)
-        .draw_paragraph(para, impeller.Point(100, 100))
+        .draw_paragraph(para, Point(100, 100))
         .build()
     )
-    context = impeller.Context()
-    window = impeller.Window()
+    context = Context()
+    window = Window()
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
@@ -116,21 +116,21 @@ def test_can_draw_text(pytestconfig):
         surface.present()
 
 
-def test_can_draw_conical_gradient(pytestconfig):
+def test_can_draw_conical_gradient():
     dl = (
-        impeller.DisplayListBuilder()
+        DisplayListBuilder()
         .draw_rect(
-            impeller.Rect(0, 0, 500, 500),
-            impeller.Paint().set_color_source(
-                impeller.ColorSource.conical_gradient(
-                    impeller.Point(500, 500),
+            Rect(0, 0, 500, 500),
+            Paint().set_color_source(
+                ColorSource.conical_gradient(
+                    Point(500, 500),
                     100.0,
-                    impeller.Point(0, 0),
+                    Point(0, 0),
                     200.0,
                     [0, 1],
                     [
-                        impeller.Color(r=1, a=1),
-                        impeller.Color(b=1, a=1),
+                        Color(r=1, a=1),
+                        Color(b=1, a=1),
                     ],
                     impellerpy.TileMode_.REPEAT,
                 )
@@ -138,8 +138,8 @@ def test_can_draw_conical_gradient(pytestconfig):
         )
         .build()
     )
-    context = impeller.Context()
-    window = impeller.Window()
+    context = Context()
+    window = Window()
     while not window.should_close():
         window.poll_events()
         surface = window.create_render_surface(context)
