@@ -17,6 +17,7 @@ build/build.ninja:
 
 clean:
 	rm -rf build
+	rm -rf .venv
 
 sync:
 	git submodule update --init --recursive -j 8
