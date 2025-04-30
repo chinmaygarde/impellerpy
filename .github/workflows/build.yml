@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
-      - name: Check VCPKG
-        run: echo $VCPKG_INSTALLATION_ROOT
+      - name: Checks
+        run: which ninja
