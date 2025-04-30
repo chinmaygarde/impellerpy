@@ -1,7 +1,7 @@
 # This project uses CMake and Git sub-modules. This Makefile is just in place
 # to make common tasks easier.
 
-.PHONY: clean build sync test format check serve_docs
+.PHONY: clean build sync test format check serve_docs deploy_docs
 
 build: build/build.ninja
 	cmake --build --preset default
@@ -30,3 +30,7 @@ check:
 
 serve_docs:
 	uv run mkdocs serve
+
+deploy_docs:
+	rm -rf site
+	uv run mkdocs gh-deploy --force
