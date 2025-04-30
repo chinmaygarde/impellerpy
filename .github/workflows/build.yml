@@ -11,13 +11,9 @@ jobs:
     name: Build
     runs-on: macos-latest
     steps:
-      - name: Install Dependencies
-        run: brew install ninja cmake
-      - name: Install UV
-        uses: astral-sh/setup-uv@v5
-      - name: Set up Python
-        run: uv python install
       - name: Sync Dependencies
         run: make sync
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
       - name: Build Default Target
         run: make
