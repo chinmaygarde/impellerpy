@@ -20,7 +20,5 @@ jobs:
         run: brew install autoconf automake autoconf-archive
       - name: Setup vcpkg (potentially from a cache)
         uses: lukka/run-vcpkg@v11
-      - name: Find VCPKG
-        run: echo $VCPKG_ROOT
-      - name: Build
+      - name: Build Default Target
         run: make
