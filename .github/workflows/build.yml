@@ -11,9 +11,5 @@ jobs:
     name: Build
     runs-on: macos-latest
     steps:
-      - name: Sync Dependencies
-        run: make sync
-      - name: Install UV
-        uses: astral-sh/setup-uv@v5
-      - name: Build Default Target
-        run: make
+      - name: Check VCPKG
+        run: echo $VCPKG_INSTALLATION_ROOT
