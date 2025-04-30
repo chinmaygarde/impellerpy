@@ -8,10 +8,13 @@ Nothing to see here yet. This is a very early exploratory effort.
 * CMake (3.22 or above).
 * Git.
 * Ninja.
-* The vcpkg step compiles cpython3. To do that successfully on macOS, you need to invoke (look in the failure log for details on dependencies on other platforms):
+* [vcpkg](https://vcpkg.io/en/index.html) for package management.
+  * Ensure that the `VCPKG_ROOT` environment variable is present and valid.
+* vcpkg compiles cpython3. To do that successfully on macOS, you need to invoke the following on macOS:
   ```sh
   brew install autoconf automake autoconf-archive
   ```
+  * Look in the failure log for details on dependencies on other platforms.
 
 
 ## Building
