@@ -1,0 +1,26 @@
+name: Build
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-15
+    steps:
+      - name: Update Submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Install Autoconf
+        run: brew install autoconf automake autoconf-archive
+      - name: Setup vcpkg (potentially from a cache)
+        uses: lukka/run-vcpkg@v11
+      - name: Find VCPKG
+        run: echo $VCPKG_ROOT
+      - name: Build
+        run: make
