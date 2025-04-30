@@ -20,5 +20,7 @@ jobs:
         run: brew install autoconf automake autoconf-archive
       - name: Setup vcpkg (potentially from a cache)
         uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: '${{ github.workspace }}/third_party/vcpkg'
       - name: Build
         run: make
