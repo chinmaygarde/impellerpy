@@ -8,6 +8,7 @@ on:
       - main
 env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+  VCPKG_INSTALL_OPTIONS: "--debug"
 
 jobs:
   build:
