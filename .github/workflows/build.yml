@@ -12,6 +12,8 @@ jobs:
     runs-on: macos-15
     steps:
       - name: Update Dependencies
-        run: make sync
+        uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: Stat Ninja
-        run: ninja --version
+        run: ninja
