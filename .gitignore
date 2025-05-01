@@ -17,3 +17,4 @@ dist/
 vcpkg_installed/
 wheels/
 site/
+.aider*
