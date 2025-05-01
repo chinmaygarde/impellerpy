@@ -1,6 +1,5 @@
-from impeller.impeller import *
-from impeller.impellerpy import *
-
+from impellerpy.impeller import *
+from impellerpy.impellerpy import *
 
 def test_paint_creation():
     """Test Paint_ creation and basic properties."""

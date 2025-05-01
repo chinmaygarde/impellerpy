@@ -13,8 +13,11 @@ pythonpath = [
     "build/src"
 ]
 
+
+[tool.hatch]
 [dependency-groups]
 dev = [
+    "hatch>=1.14.1",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.12",
     "pillow>=11.2.1",
@@ -32,3 +35,7 @@ line-ending = "lf"
 [tool.ruff.lint]
 ignore = ["F403", "F405", "E722"]
 
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

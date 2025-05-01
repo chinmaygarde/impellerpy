@@ -1,11 +1,11 @@
-from impeller.impeller import *
-from impeller.impellerpy import *
+from impellerpy.impeller import *
+from impellerpy.impellerpy import *
 
 
 def test_typography_context_creation():
     """Test TypographyContext_ creation."""
     # Create a typography context
-    typography_ctx = TypographyContext_()
+    typography_ctx = TypographyContext()
 
     # We can't directly test the properties of the context, but we can verify it was created
     assert typography_ctx is not None
