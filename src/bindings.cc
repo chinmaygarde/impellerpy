@@ -469,6 +469,7 @@ static void BindTexture(nb::module_& m) {
 
 static void BindPathBuilder(nb::module_& m) {
   nb::class_<PathBuilder>(m, "PathBuilder_")
+      .def(nb::init())
       .def("build_copy", &PathBuilder::BuildCopy, nb::rv_policy::move)
       .def("build", &PathBuilder::Build, nb::rv_policy::move)
       .def("add_arc", &PathBuilder::AddArc, nb::rv_policy::reference)
@@ -551,7 +552,11 @@ static void BindDisplayListBuilder(nb::module_& m) {
       .def("rotate", &DisplayListBuilder::Rotate, nb::rv_policy::reference)
       .def("save", &DisplayListBuilder::Save, nb::rv_policy::reference)
       .def("save_layer", &DisplayListBuilder::SaveLayer,
-           nb::rv_policy::reference)
+           nb::rv_policy::reference,  //
+           "bounds"_a,                //
+           "paint"_a = nb::none(),    //
+           "backdrop"_a = nb::none()  //
+           )
       .def("scale", &DisplayListBuilder::Scale, nb::rv_policy::reference)
       .def("get_transform", &DisplayListBuilder::GetTransform)
       .def("set_transform", &DisplayListBuilder::SetTransform,

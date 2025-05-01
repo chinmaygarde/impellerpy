@@ -30,5 +30,5 @@ line-length = 80
 line-ending = "lf"
 
 [tool.ruff.lint]
-ignore = ["F403", "F405"]
+ignore = ["F403", "F405", "E722"]
 

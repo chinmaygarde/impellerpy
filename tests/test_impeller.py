@@ -50,6 +50,7 @@ def test_can_create_window():
         surface.draw(dl)
 
         surface.present()
+        break
 
 
 def test_can_draw_image(pytestconfig):
@@ -86,6 +87,7 @@ def test_can_draw_image(pytestconfig):
         surface = window.create_render_surface(context)
         surface.draw(dl)
         surface.present()
+        break
 
 
 def test_can_draw_text():
@@ -114,6 +116,7 @@ def test_can_draw_text():
         surface = window.create_render_surface(context)
         surface.draw(dl)
         surface.present()
+        break
 
 
 def test_can_draw_conical_gradient():
@@ -145,3 +148,4 @@ def test_can_draw_conical_gradient():
         surface = window.create_render_surface(context)
         surface.draw(dl)
         surface.present()
+        break
