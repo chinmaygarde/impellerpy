@@ -259,8 +259,7 @@ class ColorSource_:
 class ImageFilter_:
     @staticmethod
     def blur(
-        x_sigma: float,
-        y_sigma: float,
+        x_sigma: float, y_sigma: float, tile_mode: TileMode
     ) -> ImageFilter_: ...
     @staticmethod
     def compose(
@@ -621,8 +620,9 @@ class DisplayListBuilder_:
     def save(self) -> DisplayListBuilder_: ...
     def save_layer(
         self,
-        paint: Optional[Paint_],
-        backdrop: Optional[ImageFilter_],
+        bounds: Rect_,
+        paint: Optional[Paint_] = None,
+        backdrop: Optional[ImageFilter_] = None,
     ) -> DisplayListBuilder_: ...
     def scale(
         self,
@@ -656,6 +656,7 @@ class PathBuilder_:
     ) -> Path_: ...
     def add_arc(
         self,
+        rect: Rect_,
         start_degrees: float,
         end_degrees: float,
     ) -> PathBuilder_: ...
