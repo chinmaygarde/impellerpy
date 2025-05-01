@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional, Tuple, Union
+from typing import List, Optional
 
 def get_version() -> int:
     """
