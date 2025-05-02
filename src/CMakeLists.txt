@@ -98,3 +98,6 @@ install(TARGETS impellerpy
   LIBRARY
   DESTINATION impellerpy
 )
+install(IMPORTED_RUNTIME_ARTIFACTS impeller
+  DESTINATION impellerpy
+)
