@@ -1,5 +1,5 @@
-from impeller.impeller import *
-from impeller.impellerpy import *
+from impellerpy.impeller import *
+from impellerpy.impellerpy import *
 
 
 def test_typography_context_creation():
