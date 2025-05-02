@@ -13,12 +13,8 @@ EnableCCache()
 
 project(impellerpy)
 
-enable_testing()
-
-include(GoogleTest)
-include(CTest)
-
-find_package(GTest CONFIG REQUIRED)
+set(GLFW_INSTALL OFF)
+add_subdirectory(third_party/glfw EXCLUDE_FROM_ALL)
 
 # Project
 add_subdirectory(src)

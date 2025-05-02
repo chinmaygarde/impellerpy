@@ -1,10 +1,9 @@
 # This project uses CMake and Git sub-modules. This Makefile is just in place
 # to make common tasks easier.
 
-.PHONY: clean build sync test format check serve_docs deploy_docs
+.PHONY: clean build sync test format check serve_docs deploy_docs package
 
-build: build/build.ninja
-	cmake --build --preset default
+build: package
 
 test: .venv build check
 	uv run pytest -rP
@@ -12,12 +11,10 @@ test: .venv build check
 .venv:
 	uv sync
 
-build/build.ninja:
-	cmake --preset default
-
 clean:
 	rm -rf build
 	rm -rf .venv
+	rm -rf dist
 
 sync:
 	git submodule update --init --recursive -j 8
@@ -34,3 +31,6 @@ serve_docs:
 deploy_docs:
 	rm -rf site
 	uv run mkdocs gh-deploy --force
+
+package:
+	uv build
