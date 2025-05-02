@@ -18,3 +18,5 @@ vcpkg_installed/
 wheels/
 site/
 .aider*
+wheelhouse/
+skbuild/
