@@ -1,5 +1,3 @@
-AddRecommendedWarningFlags()
-
 # ------------------------------------------------------------------------------
 # --- Setup Impeller -----------------------------------------------------------
 # ------------------------------------------------------------------------------
@@ -62,20 +60,13 @@ find_package(Python
   COMPONENTS Interpreter Development
   REQUIRED
 )
-find_package(glfw3
-  CONFIG
-  REQUIRED
-)
-find_package(glm
-  CONFIG
-  REQUIRED
-)
 
 find_package(nanobind
   REQUIRED
 )
 
-nanobind_add_module(impellerpy LTO
+nanobind_add_module(impellerpy
+  LTO STABLE_ABI NB_STATIC
   bindings.cc
   bindings.h
   cocoa.h
@@ -87,7 +78,11 @@ nanobind_add_module(impellerpy LTO
   window.h
 )
 
-target_link_libraries(impellerpy PRIVATE impeller glfw glm::glm)
+target_link_libraries(impellerpy
+  PRIVATE
+    impeller
+    glfw
+)
 
 if(APPLE)
   target_link_libraries(impellerpy
@@ -96,6 +91,3 @@ if(APPLE)
         "-framework QuartzCore"
   )
 endif()
-
-find_path(HEDLEY_INCLUDE_DIRS "hedley.h")
-target_include_directories(impellerpy PRIVATE ${HEDLEY_INCLUDE_DIRS})

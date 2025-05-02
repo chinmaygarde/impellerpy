@@ -22,12 +22,11 @@ static void SetupGLFWOnce() {
 Window::Window() {
   SetupGLFWOnce();
 
-  glm::ivec2 size = {800, 600};
   ::glfwDefaultWindowHints();
   ::glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
   ::glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
-  window_ = ::glfwCreateWindow(size.x, size.y, "Window", nullptr, nullptr);
+  window_ = ::glfwCreateWindow(800, 600, "Window", nullptr, nullptr);
   ::glfwSetWindowUserPointer(window_, this);
 
   ConfigureCocoaWindow(window_);

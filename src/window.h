@@ -2,7 +2,6 @@
 
 #include <GLFW/glfw3.h>
 #include <nanobind/nanobind.h>
-#include <glm/glm.hpp>
 #include <impeller.hpp>
 
 namespace impeller::py {
