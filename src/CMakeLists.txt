@@ -56,9 +56,11 @@ endif(APPLE)
 # --- Build Python Module ------------------------------------------------------
 # ------------------------------------------------------------------------------
 
-find_package(Python 3.8
-  REQUIRED COMPONENTS Interpreter Development.Module
-  OPTIONAL_COMPONENTS Development.SABIModule)
+find_package(
+  Python 3.8 REQUIRED
+  COMPONENTS Interpreter Development.Module
+  OPTIONAL_COMPONENTS Development.SABIModule
+)
 
 find_package(nanobind
   CONFIG
@@ -92,4 +94,7 @@ if(APPLE)
   )
 endif()
 
-install(TARGETS impellerpy LIBRARY DESTINATION impellerpy)
+install(TARGETS impellerpy
+  LIBRARY
+  DESTINATION impellerpy
+)

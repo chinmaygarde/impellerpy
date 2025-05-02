@@ -1,5 +1,4 @@
 version = 1
-revision = 1
 requires-python = ">=3.12, <4"
 
 [[package]]
@@ -73,7 +72,7 @@ name = "click"
 version = "8.1.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "colorama", marker = "platform_system == 'Windows'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b9/2e/0090cbf739cee7d23781ad4b89a9894a41538e4fcf4c31dcdd705b78eb8b/click-8.1.8.tar.gz", hash = "sha256:ed53c9d8990d83c2a27deae68e4ee337473f6330c040a31d4225c9574d16096a", size = 226593 }
 wheels = [
@@ -117,7 +116,6 @@ source = { editable = "." }
 
 [package.dev-dependencies]
 dev = [
-    { name = "impellerpy" },
     { name = "mkdocs" },
     { name = "mkdocs-material" },
     { name = "pillow" },
@@ -130,7 +128,6 @@ dev = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "impellerpy", editable = "." },
     { name = "mkdocs", specifier = ">=1.6.1" },
     { name = "mkdocs-material", specifier = ">=9.6.12" },
     { name = "pillow", specifier = ">=11.2.1" },
@@ -222,7 +219,7 @@ version = "1.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
-    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "colorama", marker = "platform_system == 'Windows'" },
     { name = "ghp-import" },
     { name = "jinja2" },
     { name = "markdown" },

@@ -42,4 +42,4 @@ deploy_docs:
 	uv run mkdocs gh-deploy --force
 
 package: clean_package
-	uv build --wheel
+	uv build --wheel -v
