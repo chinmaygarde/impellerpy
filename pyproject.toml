@@ -23,6 +23,7 @@ pythonpath = [
 
 [dependency-groups]
 dev = [
+    "impellerpy",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.12",
     "pillow>=11.2.1",
@@ -43,4 +44,7 @@ ignore = [
     "F405", # Defined from * imports
     "E722" # Do not use bare except
 ]
+
+[tool.uv.sources]
+impellerpy = { workspace = true }
 
