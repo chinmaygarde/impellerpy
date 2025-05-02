@@ -56,12 +56,12 @@ endif(APPLE)
 # --- Build Python Module ------------------------------------------------------
 # ------------------------------------------------------------------------------
 
-find_package(Python
-  COMPONENTS Interpreter Development
-  REQUIRED
-)
+find_package(Python 3.8
+  REQUIRED COMPONENTS Interpreter Development.Module
+  OPTIONAL_COMPONENTS Development.SABIModule)
 
 find_package(nanobind
+  CONFIG
   REQUIRED
 )
 
@@ -91,3 +91,5 @@ if(APPLE)
         "-framework QuartzCore"
   )
 endif()
+
+install(TARGETS impellerpy LIBRARY DESTINATION impellerpy)
