@@ -9,7 +9,7 @@ on:
 
 jobs:
   build_wheels:
-    name: Wheel on ${{ matrix.os }}
+    name: Python Wheel ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
@@ -21,10 +21,13 @@ jobs:
         with:
           submodules: true
 
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+
       - name: Build Wheel
         uses: pypa/cibuildwheel@v2.23.3
 
-      - name: Upload Wheel ${{ matrix.os }}
+      - name: Upload Wheel
         uses: actions/upload-artifact@v4
         with:
           name: cibw-wheels-${{ matrix.os }}-${{ strategy.job-index }}
