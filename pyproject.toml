@@ -3,7 +3,7 @@ name = "impellerpy"
 version = "0.1.0"
 description = "Python bindings for Impeller, Flutters rendering engine."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.12"
 dependencies = []
 classifiers = [
     "Development Status :: 4 - Beta",
