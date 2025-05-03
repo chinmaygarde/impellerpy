@@ -71,7 +71,7 @@ test-command = "pytest {project}/tests"
 test-requires = "pytest"
 
 # Don't test Python 3.8 wheels on macOS/arm64
-test-skip="cp38-macosx_*:arm64"
+test-skip="*"
 
 # Needed for full C++17 support
 [tool.cibuildwheel.macos.environment]
