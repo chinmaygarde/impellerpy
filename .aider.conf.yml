@@ -22,18 +22,6 @@
 ## Specify the api base url
 #openai-api-base: xxx
 
-## (deprecated, use --set-env OPENAI_API_TYPE=<value>)
-#openai-api-type: xxx
-
-## (deprecated, use --set-env OPENAI_API_VERSION=<value>)
-#openai-api-version: xxx
-
-## (deprecated, use --set-env OPENAI_API_DEPLOYMENT_ID=<value>)
-#openai-api-deployment-id: xxx
-
-## (deprecated, use --set-env OPENAI_ORGANIZATION=<value>)
-#openai-organization-id: xxx
-
 ## Set an environment variable (to control API settings, can be used multiple times)
 #set-env: xxx
 ## Specify multiple values like this:
@@ -412,38 +400,3 @@ watch-files: true
 ## Specify which editor to use for the /editor command
 #editor: xxx
 
-############################
-# Deprecated model settings:
-
-## Use claude-3-opus-20240229 model for the main chat (deprecated, use --model)
-#opus: false
-
-## Use anthropic/claude-3-7-sonnet-20250219 model for the main chat (deprecated, use --model)
-#sonnet: false
-
-## Use claude-3-5-haiku-20241022 model for the main chat (deprecated, use --model)
-#haiku: false
-
-## Use gpt-4-0613 model for the main chat (deprecated, use --model)
-#4: false
-
-## Use gpt-4o model for the main chat (deprecated, use --model)
-#4o: false
-
-## Use gpt-4o-mini model for the main chat (deprecated, use --model)
-#mini: false
-
-## Use gpt-4-1106-preview model for the main chat (deprecated, use --model)
-#4-turbo: false
-
-## Use gpt-3.5-turbo model for the main chat (deprecated, use --model)
-#35turbo: false
-
-## Use deepseek/deepseek-chat model for the main chat (deprecated, use --model)
-#deepseek: false
-
-## Use o1-mini model for the main chat (deprecated, use --model)
-#o1-mini: false
-
-## Use o1-preview model for the main chat (deprecated, use --model)
-#o1-preview: false
