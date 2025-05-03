@@ -21,9 +21,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Install UV
-        uses: astral-sh/setup-uv@v5
-
       - name: Build Wheel
         uses: pypa/cibuildwheel@v2.23.3
 
