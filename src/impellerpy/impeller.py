@@ -1,6 +1,5 @@
 from typing import List
-from . import impellerpy
-
+from impellerpy import impellerpy
 
 class Rect(impellerpy.Rect_):
     def __init__(
