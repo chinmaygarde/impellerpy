@@ -3,17 +3,13 @@
 
 .PHONY: clean build sync test format check serve_docs deploy_docs clean_package package
 
-build: build/build.ninja
-	cmake --build --preset default
+build: package
 
 test: .venv build check
 	uv run pytest -rP
 
 .venv:
 	uv sync
-
-build/build.ninja:
-	cmake --preset default
 
 clean: clean_package
 	@echo "Cleaning directories used for local development."

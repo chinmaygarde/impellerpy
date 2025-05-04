@@ -116,7 +116,6 @@ source = { editable = "." }
 
 [package.dev-dependencies]
 dev = [
-    { name = "impellerpy" },
     { name = "mkdocs" },
     { name = "mkdocs-material" },
     { name = "pillow" },
@@ -129,7 +128,6 @@ dev = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "impellerpy", editable = "." },
     { name = "mkdocs", specifier = ">=1.6.1" },
     { name = "mkdocs-material", specifier = ">=9.6.12" },
     { name = "pillow", specifier = ">=11.2.1" },

@@ -16,13 +16,11 @@ classifiers = [
 
 [tool.pytest.ini_options]
 pythonpath = [
-    "src",
-    "build/src"
+    "src"
 ]
 
 [dependency-groups]
 dev = [
-    "impellerpy",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.12",
     "pillow>=11.2.1",
@@ -75,6 +73,3 @@ test-requires = "pytest"
 # Needed for full C++17 support
 [tool.cibuildwheel.macos.environment]
 MACOSX_DEPLOYMENT_TARGET = "11.0"
-
-[tool.uv.sources]
-impellerpy = { workspace = true }
