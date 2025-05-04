@@ -2,6 +2,7 @@
 
 #include <impeller.hpp>
 #include <map>
+#include <mutex>
 
 namespace IMPELLER_HPP_NAMESPACE {
 ProcTable gGlobalProcTable;
