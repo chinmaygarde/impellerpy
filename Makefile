@@ -5,11 +5,8 @@
 
 build: package
 
-test: .venv build check
+test: build check
 	uv run pytest -rP
-
-.venv:
-	uv sync
 
 clean: clean_package
 	@echo "Cleaning directories used for local development."
