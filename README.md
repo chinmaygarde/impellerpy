@@ -1,6 +1,6 @@
 # ImpellerPy
 
-Nothing to see here yet. This is a very early exploratory effort.
+Python Bindings to [Impeller](https://github.com/flutter/flutter/blob/main/engine/src/flutter/impeller/README.md). [Flutters](https://flutter.dev/) rendering engine.
 
 ## Prerequisites
 
