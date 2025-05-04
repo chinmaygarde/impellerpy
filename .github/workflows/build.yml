@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - main
+  release:
+    types:
+      - published
 
 jobs:
   build_wheels:
@@ -31,11 +34,11 @@ jobs:
           path: ./wheelhouse/*.whl
           name: cibw-wheel-${{ matrix.os }}-${{ strategy.job-index }}
 
-  upload_all:
-    name: Upload
-    needs: [build_wheels]
+  upload_to_test_pypy:
+    name: Upload to Test PyPI
+    needs: [ build_wheels ]
     runs-on: ubuntu-latest
-    # if: github.event_name == 'release' && github.event.action == 'published'
+    if: github.event_name == 'release' && github.event.action == 'published'
     permissions:
       # Permission for PyPy Trusted Publishing.
       # https://docs.pypi.org/trusted-publishers/
@@ -49,8 +52,9 @@ jobs:
         path: dist
         pattern: cibw-wheel-*
         merge-multiple: true
-    - name: Publish to PyPI
+    - name: Publish to Test PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         repository-url: https://test.pypi.org/legacy/
+        verbose: true
 
