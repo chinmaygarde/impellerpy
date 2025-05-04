@@ -28,6 +28,7 @@ theme:
 plugins:
   - offline
   - search
+  - mkdocstrings
 
 markdown_extensions:
   - admonition

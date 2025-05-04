@@ -36,6 +36,7 @@ dev = [
     "cibuildwheel>=2.23.3",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.12",
+    "mkdocstrings-python>=1.16.10",
     "pillow>=11.2.1",
     "pyglm>=2.8.2",
     "pytest>=8.3.5",
