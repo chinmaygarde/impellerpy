@@ -6,12 +6,21 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 1 - Planning",
+    "Environment :: GPU",
+    "Environment :: MacOS X",
     "Intended Audience :: Developers",
     "Intended Audience :: End Users/Desktop",
     "License :: OSI Approved :: MIT License",
-    "Topic :: Multimedia :: Graphics",
+    "Programming Language :: C",
+    "Programming Language :: C++",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Multimedia :: Graphics",
+    "Typing :: Typed",
 ]
 
 [tool.pytest.ini_options]
