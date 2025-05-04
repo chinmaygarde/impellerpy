@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - main
+  release:
+    types:
+      - published
 
 jobs:
   build_wheels:
@@ -33,9 +36,9 @@ jobs:
 
   upload_to_test_pypy:
     name: Upload to Test PyPI
-    needs: [build_wheels]
+    needs: [ build_wheels ]
     runs-on: ubuntu-latest
-    # if: github.event_name == 'release' && github.event.action == 'published'
+    if: github.event_name == 'release' && github.event.action == 'published'
     permissions:
       # Permission for PyPy Trusted Publishing.
       # https://docs.pypi.org/trusted-publishers/
