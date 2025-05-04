@@ -1,6 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
-
+from impellerpy import *
 
 def test_color_filter_blend():
     """Test ColorFilter_ blend static method."""

@@ -1,6 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
-
+from impellerpy import *
 
 def test_rect():
     """Test Rect_ class functionality."""

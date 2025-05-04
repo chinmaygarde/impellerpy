@@ -1,6 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
-
+from impellerpy import *
 
 def test_context_creation():
     """Test Context_ creation."""

@@ -1,6 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
-
+from impellerpy import *
 
 def test_display_list_builder_creation():
     """Test DisplayListBuilder_ creation."""

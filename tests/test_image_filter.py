@@ -1,6 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
-
+from impellerpy import *
 
 def test_image_filter_blur():
     """Test ImageFilter_ blur static method."""

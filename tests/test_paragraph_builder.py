@@ -1,6 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
-
+from impellerpy import *
 
 def test_paragraph_builder_comprehensive():
     """Test all features of the ParagraphBuilder class."""
