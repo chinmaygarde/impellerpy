@@ -36,7 +36,10 @@ jobs:
     needs: [build_wheels]
     runs-on: ubuntu-latest
     # if: github.event_name == 'release' && github.event.action == 'published'
-
+    permissions:
+      # Permission for PyPy Trusted Publishing.
+      # https://docs.pypi.org/trusted-publishers/
+      id-token: write
     steps:
     - uses: actions/setup-python@v5
       name: Setup Python
@@ -46,10 +49,8 @@ jobs:
         path: dist
         pattern: cibw-wheel-*
         merge-multiple: true
-    - uses: pypa/gh-action-pypi-publish@release/v1
-      name: Publish to PyPi
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        user: __token__
-        password: ${{ secrets.pypi_password }}
         repository-url: https://test.pypi.org/legacy/
 
