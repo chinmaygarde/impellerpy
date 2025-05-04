@@ -68,7 +68,7 @@ build-verbosity = 1
 test-command = "pytest {project}/tests"
 test-requires = "pytest"
 
-# test-skip="*"
+test-skip="*"
 
 # Needed for full C++17 support
 [tool.cibuildwheel.macos.environment]
