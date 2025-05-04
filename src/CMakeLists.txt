@@ -44,10 +44,6 @@ list(APPEND CMAKE_INSTALL_RPATH ${impeller_sdk_SOURCE_DIR}/lib)
 list(APPEND CMAKE_BUILD_RPATH ${impeller_sdk_SOURCE_DIR}/lib)
 
 if(APPLE)
-# The ID in the dylib may need to be tinkered with depending on how you are
-# distributing the library.
-# Since we setup the RPath above, we'll just try to find the library relative to
-# it.
 execute_process(COMMAND install_name_tool -id "@rpath/libimpeller.dylib" libimpeller.dylib
                 WORKING_DIRECTORY ${impeller_sdk_SOURCE_DIR}/lib)
 endif(APPLE)

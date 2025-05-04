@@ -16,19 +16,19 @@ classifiers = [
 
 [tool.pytest.ini_options]
 pythonpath = [
-    "src",
-    "build/src"
+    "src"
 ]
 
 [dependency-groups]
 dev = [
-    "impellerpy",
+    "cibuildwheel>=2.23.3",
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.12",
     "pillow>=11.2.1",
     "pyglm>=2.8.2",
     "pytest>=8.3.5",
     "ruff>=0.11.7",
+    "twine>=6.1.0",
 ]
 
 [tool.ruff]
@@ -68,14 +68,10 @@ build-verbosity = 1
 
 # Run pytest to ensure that the package was correctly built
 test-command = "pytest {project}/tests"
-test-requires = "pytest"
+test-requires = ["pytest", "pyglm"]
 
-# Don't test Python 3.8 wheels on macOS/arm64
-test-skip="cp38-macosx_*:arm64"
+test-skip="*"
 
 # Needed for full C++17 support
 [tool.cibuildwheel.macos.environment]
-MACOSX_DEPLOYMENT_TARGET = "10.14"
-
-[tool.uv.sources]
-impellerpy = { workspace = true }
+MACOSX_DEPLOYMENT_TARGET = "11.0"

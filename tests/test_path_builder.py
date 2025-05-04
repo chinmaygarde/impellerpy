@@ -1,5 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
+from impellerpy import *
 import math
 
 

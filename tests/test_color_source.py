@@ -1,6 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
-
+from impellerpy import *
 
 def test_color_source_conical_gradient():
     """Test ColorSource_ conical_gradient static method."""

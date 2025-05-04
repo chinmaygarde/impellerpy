@@ -1,5 +1,4 @@
-from impellerpy.impeller import *
-from impellerpy.impellerpy import *
+from impellerpy import *
 from PIL import Image
 from pyglm import glm
 import os

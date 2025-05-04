@@ -8,17 +8,49 @@ on:
       - main
 
 jobs:
-  build:
-    name: Build
-    runs-on: macos-15
+  build_wheels:
+    name: Python Wheel ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        # macos-13 is an Intel runner, macos-15 is Apple Silicon
+        os: [ macos-13, macos-15 ]
     steps:
       - name: Update Submodules
         uses: actions/checkout@v4
         with:
           submodules: true
-      - name: Install Autoconf
-        run: brew install autoconf automake autoconf-archive
-      - name: Setup vcpkg (potentially from a cache)
-        uses: lukka/run-vcpkg@v11
-      - name: Build Default Target
-        run: make
+
+      - name: Build Wheel
+        uses: pypa/cibuildwheel@v2.23.3
+
+      - name: Upload Wheel
+        uses: actions/upload-artifact@v4
+        with:
+          path: ./wheelhouse/*.whl
+          name: cibw-wheel-${{ matrix.os }}-${{ strategy.job-index }}
+
+  upload_all:
+    name: Upload
+    needs: [build_wheels]
+    runs-on: ubuntu-latest
+    # if: github.event_name == 'release' && github.event.action == 'published'
+    permissions:
+      # Permission for PyPy Trusted Publishing.
+      # https://docs.pypi.org/trusted-publishers/
+      id-token: write
+    steps:
+    - uses: actions/setup-python@v5
+      name: Setup Python
+    - uses: actions/download-artifact@v4
+      name: Download Previously Built Wheels.
+      with:
+        path: dist
+        pattern: cibw-wheel-*
+        merge-multiple: true
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+
