@@ -3,6 +3,7 @@
 #include <nanobind/stl/unique_ptr.h>
 #include <impeller.hpp>
 #include <memory>
+#include <cstring>
 
 #include "window.h"
 
