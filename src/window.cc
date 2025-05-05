@@ -1,6 +1,6 @@
 #include "window.h"
 
-#include "cocoa.h"
+#include "platform.h"
 
 #include <iostream>
 #include <mutex>
@@ -24,12 +24,13 @@ Window::Window() {
 
   ::glfwDefaultWindowHints();
   ::glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-  ::glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+  ApplyGLFWWindowHints();
 
   window_ = ::glfwCreateWindow(800, 600, "Window", nullptr, nullptr);
   ::glfwSetWindowUserPointer(window_, this);
 
-  ConfigureCocoaWindow(window_);
+  ConfigurePlatformWindow(window_);
 }
 
 Window::~Window() {

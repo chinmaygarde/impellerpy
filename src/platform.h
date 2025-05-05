@@ -5,7 +5,9 @@
 
 namespace impeller::py {
 
-bool ConfigureCocoaWindow(GLFWwindow* window);
+void ApplyGLFWWindowHints();
+
+bool ConfigurePlatformWindow(GLFWwindow* window);
 
 impeller::hpp::Surface WrapSurface(const impeller::hpp::Context& context,
                                    GLFWwindow* window);
