@@ -70,7 +70,7 @@ build-backend = "scikit_build_core.build"
 minimum-version = "build-system.requires"
 
 # Setuptools-style build caching in a local directory
-build-dir = "skbuild/{wheel_tag}"
+build-dir = "build/{wheel_tag}"
 
 # Build stable ABI wheels for CPython 3.12+
 wheel.py-api = "cp312"

@@ -3,20 +3,19 @@
 
 .PHONY: clean build sync test format check serve_docs deploy_docs clean_package package
 
-build: package
+build: build/args.gn
+	cmake --build --preset default
+
+build/args.gn:
+	cmake --preset default
 
 test: build check
 	uv run pytest -rP
 
 clean: clean_package
-	@echo "Cleaning directories used for local development."
 	rm -rf build
 	rm -rf .venv
-
-clean_package:
-	@echo "Cleaning directories used to build the package."
 	rm -rf dist
-	rm -rf skbuild
 
 sync:
 	git submodule update --init --recursive -j 8
