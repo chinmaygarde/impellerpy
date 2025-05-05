@@ -395,11 +395,13 @@ class ColorMatrix_:
     A 4x5 color transformation matrix used for transforming color values.
 
     The matrix is used to transform RGBA colors using the formula:
+    ```
     | R' |   | m[0]  m[1]  m[2]  m[3]  m[4]  |   | R |
     | G' |   | m[5]  m[6]  m[7]  m[8]  m[9]  |   | G |
     | B' | = | m[10] m[11] m[12] m[13] m[14] | * | B |
     | A' |   | m[15] m[16] m[17] m[18] m[19] |   | A |
     | 1  |   | 0     0     0     0     1     |   | 1 |
+    ```
     """
     def __init__(
         self,
