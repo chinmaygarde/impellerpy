@@ -1,13 +1,14 @@
 from impellerpy import *
 
+
 def test_surface_methods():
     """Test Surface_ methods."""
     # This test is more of a mock test since we can't create a Surface directly
     # We'll just verify the methods exist and have the right signatures
 
     # Create a context and window to get a surface
-    context = Context_()
-    window = Window_()
+    context = Context()
+    window = Window()
 
     # Get a surface from the window
     surface = window.create_render_surface(context)
@@ -16,8 +17,8 @@ def test_surface_methods():
     assert surface is not None
 
     # Create a simple display list to draw
-    dl_builder = DisplayListBuilder_()
-    paint = Paint_()
+    dl_builder = DisplayListBuilder()
+    paint = Paint()
     paint.set_color(Color(r=1.0, g=0.0, b=0.0, a=1.0))
     dl_builder.draw_rect(Rect(50, 50, 100, 100), paint)
     dl = dl_builder.build()

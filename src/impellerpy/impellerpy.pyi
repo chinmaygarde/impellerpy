@@ -19,8 +19,6 @@ class FillType(Enum):
     Determines how overlapping contours in a path are filled.
     """
 
-
-
     NON_ZERO = 0
     """
     Uses the non-zero winding rule for filling paths.
@@ -30,7 +28,6 @@ class FillType(Enum):
     """
     Uses the even-odd rule for filling paths.
     """
-
 
 class ClipOperation(Enum):
     """

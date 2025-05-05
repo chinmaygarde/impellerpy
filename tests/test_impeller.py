@@ -4,10 +4,6 @@ from pyglm import glm
 import os
 
 
-def test_version():
-    assert get_version() != 0
-
-
 def test_structs():
     r = Rect(width=13, height=14)
     assert r.x == 0

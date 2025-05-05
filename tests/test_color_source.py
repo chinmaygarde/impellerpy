@@ -1,5 +1,6 @@
 from impellerpy import *
 
+
 def test_color_source_conical_gradient():
     """Test ColorSource_ conical_gradient static method."""
     # Create points and colors for the gradient
@@ -16,7 +17,7 @@ def test_color_source_conical_gradient():
     tile_mode = TileMode.CLAMP
 
     # Create a conical gradient color source
-    color_source = ColorSource_.conical_gradient(
+    color_source = ColorSource.conical_gradient(
         start_center,
         start_radius,
         end_center,
@@ -59,7 +60,7 @@ def test_color_source_conical_gradient():
         ]
     )
 
-    color_source_with_transform = ColorSource_.conical_gradient(
+    color_source_with_transform = ColorSource.conical_gradient(
         start_center,
         start_radius,
         end_center,
@@ -86,7 +87,7 @@ def test_color_source_linear_gradient():
     tile_mode = TileMode.REPEAT
 
     # Create a linear gradient color source
-    color_source = ColorSource_.linear_gradient(
+    color_source = ColorSource.linear_gradient(
         start_point, end_point, colors, stops, tile_mode
     )
 
@@ -94,7 +95,7 @@ def test_color_source_linear_gradient():
     assert color_source is not None
 
     # Test with different tile mode
-    color_source2 = ColorSource_.linear_gradient(
+    color_source2 = ColorSource.linear_gradient(
         start_point, end_point, colors, stops, TileMode.MIRROR
     )
     assert color_source2 is not None
@@ -114,7 +115,7 @@ def test_color_source_radial_gradient():
     tile_mode = TileMode.CLAMP
 
     # Create a radial gradient color source
-    color_source = ColorSource_.radial_gradient(
+    color_source = ColorSource.radial_gradient(
         center, radius, colors, stops, tile_mode
     )
 
@@ -137,7 +138,7 @@ def test_color_source_sweep_gradient():
     tile_mode = TileMode.CLAMP
 
     # Create a sweep gradient color source
-    color_source = ColorSource_.sweep_gradient(
+    color_source = ColorSource.sweep_gradient(
         center, start, end, colors, stops, tile_mode
     )
 
@@ -157,7 +158,7 @@ def test_color_source_with_paint():
     ]
     tile_mode = TileMode.CLAMP
 
-    color_source = ColorSource_.linear_gradient(
+    color_source = ColorSource.linear_gradient(
         start_point, end_point, colors, stops, tile_mode
     )
 

@@ -1,6 +1,7 @@
 from typing import List
 from .impellerpy import *
 
+
 class Rect(Rect_):
     def __init__(
         self,
@@ -49,12 +50,27 @@ class Range(Range_):
 
 
 class Matrix(Matrix_):
-    def __init__(self, row_col_list: List[List[float]]):
+    def __init__(self, row_col_list: List[List[float]]) -> None:
         values = []
         for col in range(4):
             for row in range(4):
                 values.append(row_col_list[col][row])
         super().__init__(values)
+
+    @staticmethod
+    def with_diagonal(diagonal: float):
+        return Matrix(
+            [
+                [diagonal, 0.0, 0.0, 0.0],
+                [0.0, diagonal, 0.0, 0.0],
+                [0.0, 0.0, diagonal, 0.0],
+                [0.0, 0.0, 0.0, diagonal],
+            ]
+        )
+
+    @staticmethod
+    def identity():
+        return Matrix.with_diagonal(1.0)
 
 
 class ColorMatrix(ColorMatrix_):

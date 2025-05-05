@@ -1,5 +1,6 @@
 from impellerpy import *
 
+
 def test_rect():
     """Test Rect_ class functionality."""
     rect = Rect(10, 20, 30, 40)
@@ -9,7 +10,7 @@ def test_rect():
     assert rect.height == 40
 
     # Test default constructor
-    rect2 = Rect_()
+    rect2 = Rect()
     assert rect2.x == 0
     assert rect2.y == 0
     assert rect2.width == 0
@@ -33,7 +34,7 @@ def test_point():
     assert point.y == 20
 
     # Test default constructor
-    point2 = Point_()
+    point2 = Point()
     assert point2.x == 0
     assert point2.y == 0
 
@@ -102,24 +103,12 @@ def test_matrix():
     """Test Matrix_ class functionality."""
     # Create a matrix with identity values
     values = [
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0,
+        [1.0, 0.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0],
     ]
-    matrix = Matrix_(values)
+    matrix = Matrix(values)
 
     # Test getitem
     assert matrix[0] == 1.0
@@ -165,7 +154,7 @@ def test_color_matrix():
         0.3,
         1.0,  # Color vector
     ]
-    color_matrix = ColorMatrix_(values)
+    color_matrix = ColorMatrix(values)
 
     # Test getitem
     assert color_matrix[0] == 1.0
@@ -190,7 +179,7 @@ def test_color_matrix():
 
 def test_rounding_radii():
     """Test RoundingRadii_ class functionality."""
-    radii = RoundingRadii_()
+    radii = RoundingRadii()
 
     # Test default values
     assert radii.top_left.x == 0
@@ -224,7 +213,7 @@ def test_rounding_radii():
 
 def test_color():
     """Test Color_ class functionality."""
-    color = Color_()
+    color = Color()
 
     # Test default values
     assert color.red == 0
@@ -249,7 +238,7 @@ def test_color():
 
 def test_texture_descriptor():
     """Test TextureDescriptor_ class functionality."""
-    desc = TextureDescriptor_()
+    desc = TextureDescriptor(PixelFormat.RGBA8888, ISize(), 0)
 
     # Test default values
     assert desc.pixel_format == PixelFormat.RGBA8888

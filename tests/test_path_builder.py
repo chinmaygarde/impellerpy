@@ -5,7 +5,7 @@ import math
 def test_path_builder_creation():
     """Test PathBuilder_ creation."""
     # Create a path builder
-    path_builder = PathBuilder_()
+    path_builder = PathBuilder()
 
     # We can't directly test the default properties, but we can verify it was created
     assert path_builder is not None
@@ -23,7 +23,7 @@ def test_path_builder_build():
     assert path is not None
 
     # Create another path builder
-    path_builder2 = PathBuilder_()
+    path_builder2 = PathBuilder()
 
     # Build a path with odd fill type
     path2 = path_builder2.build(FillType.ODD)
@@ -71,7 +71,7 @@ def test_path_builder_add_arc():
 def test_path_builder_add_oval():
     """Test PathBuilder_ add_oval method."""
     # Create a path builder
-    path_builder = PathBuilder_()
+    path_builder = PathBuilder()
 
     # Add an oval
     oval_bounds = Rect(50, 50, 100, 100)
@@ -88,7 +88,7 @@ def test_path_builder_add_oval():
 def test_path_builder_add_rect():
     """Test PathBuilder_ add_rect method."""
     # Create a path builder
-    path_builder = PathBuilder_()
+    path_builder = PathBuilder()
 
     # Add a rectangle
     rect = Rect(50, 50, 100, 100)
@@ -109,7 +109,7 @@ def test_path_builder_add_rounded_rect():
 
     # Create a rectangle and rounding radii
     rect = Rect(50, 50, 100, 100)
-    radii = RoundingRadii_()
+    radii = RoundingRadii()
     radii.top_left.x = 10
     radii.top_left.y = 10
     radii.top_right.x = 10
@@ -238,7 +238,7 @@ def test_path_builder_quadratic_curve_to():
 def test_path_builder_complex_path():
     """Test creating a complex path with PathBuilder_."""
     # Create a path builder
-    path_builder = PathBuilder_()
+    path_builder = PathBuilder()
 
     # Create a star shape
     center_x = 100

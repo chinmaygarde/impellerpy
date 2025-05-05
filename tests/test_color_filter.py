@@ -1,21 +1,22 @@
 from impellerpy import *
 
+
 def test_color_filter_blend():
     """Test ColorFilter_ blend static method."""
     # Create a color
     color = Color(r=0.5, g=0.6, b=0.7, a=0.8)
 
     # Create a color filter with blend mode
-    color_filter = ColorFilter_.blend(color, BlendMode.SOURCE_OVER)
+    color_filter = ColorFilter.blend(color, BlendMode.SOURCE_OVER)
 
     # We can't directly test the properties of the filter, but we can verify it was created
     assert color_filter is not None
 
     # Test with different blend modes
-    color_filter2 = ColorFilter_.blend(color, BlendMode.MULTIPLY)
+    color_filter2 = ColorFilter.blend(color, BlendMode.MULTIPLY)
     assert color_filter2 is not None
 
-    color_filter3 = ColorFilter_.blend(color, BlendMode.SCREEN)
+    color_filter3 = ColorFilter.blend(color, BlendMode.SCREEN)
     assert color_filter3 is not None
 
 
@@ -44,10 +45,10 @@ def test_color_filter_matrix():
         0.3,
         0.4,  # Color vector
     ]
-    color_matrix = ColorMatrix_(values)
+    color_matrix = ColorMatrix(values)
 
     # Create a color filter with matrix
-    color_filter = ColorFilter_.matrix(color_matrix)
+    color_filter = ColorFilter.matrix(color_matrix)
 
     # We can't directly test the properties of the filter, but we can verify it was created
     assert color_filter is not None
@@ -75,8 +76,8 @@ def test_color_filter_matrix():
         0.0,
         0.0,  # Color vector
     ]
-    color_matrix2 = ColorMatrix_(values2)
-    color_filter2 = ColorFilter_.matrix(color_matrix2)
+    color_matrix2 = ColorMatrix(values2)
+    color_filter2 = ColorFilter.matrix(color_matrix2)
     assert color_filter2 is not None
 
 
@@ -86,7 +87,7 @@ def test_color_filter_with_paint():
     color = Color(r=0.5, g=0.6, b=0.7, a=0.8)
 
     # Create a color filter with blend mode
-    color_filter = ColorFilter_.blend(color, BlendMode.SOURCE_OVER)
+    color_filter = ColorFilter.blend(color, BlendMode.SOURCE_OVER)
 
     # Create a paint and set the color filter
     paint = Paint()

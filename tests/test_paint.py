@@ -1,9 +1,10 @@
 from impellerpy import *
 
+
 def test_paint_creation():
     """Test Paint_ creation and basic properties."""
     # Create a paint
-    paint = Paint_()
+    paint = Paint()
 
     # We can't directly test the default properties, but we can verify it was created
     assert paint is not None
@@ -12,7 +13,7 @@ def test_paint_creation():
 def test_paint_set_color():
     """Test Paint_ set_color method."""
     # Create a paint
-    paint = Paint_()
+    paint = Paint()
 
     # Create a color
     color = Color(r=0.5, g=0.6, b=0.7, a=0.8)
@@ -27,7 +28,7 @@ def test_paint_set_color():
 def test_paint_set_blend_mode():
     """Test Paint_ set_blend_mode method."""
     # Create a paint
-    paint = Paint_()
+    paint = Paint()
 
     # Set different blend modes
     blend_modes = [
@@ -48,7 +49,7 @@ def test_paint_set_blend_mode():
 def test_paint_set_draw_style():
     """Test Paint_ set_draw_style method."""
     # Create a paint
-    paint = Paint_()
+    paint = Paint()
 
     # Set different draw styles
     draw_styles = [DrawStyle.FILL, DrawStyle.STROKE, DrawStyle.STROKE_AND_FILL]
@@ -62,7 +63,7 @@ def test_paint_set_draw_style():
 def test_paint_set_stroke_properties():
     """Test Paint_ stroke-related methods."""
     # Create a paint
-    paint = Paint_()
+    paint = Paint()
 
     # Test set_stroke_cap
     caps = [StrokeCap.BUTT, StrokeCap.ROUND, StrokeCap.SQUARE]
@@ -88,21 +89,21 @@ def test_paint_set_stroke_properties():
 def test_paint_set_filters():
     """Test Paint_ filter-related methods."""
     # Create a paint
-    paint = Paint_()
+    paint = Paint()
 
     # Test set_color_filter
     color = Color(r=0.5, g=0.6, b=0.7, a=0.8)
-    color_filter = ColorFilter_.blend(color, BlendMode.SOURCE_OVER)
+    color_filter = ColorFilter.blend(color, BlendMode.SOURCE_OVER)
     result = paint.set_color_filter(color_filter)
     assert result is paint
 
     # Test set_image_filter
-    image_filter = ImageFilter_.blur(5.0, 5.0, TileMode.CLAMP)
+    image_filter = ImageFilter.blur(5.0, 5.0, TileMode.CLAMP)
     result = paint.set_image_filter(image_filter)
     assert result is paint
 
     # Test set_mask_filter
-    mask_filter = MaskFilter_.blur(BlurStyle.NORMAL, 5.0)
+    mask_filter = MaskFilter.blur(BlurStyle.NORMAL, 5.0)
     result = paint.set_mask_filter(mask_filter)
     assert result is paint
 
@@ -110,7 +111,7 @@ def test_paint_set_filters():
 def test_paint_set_color_source():
     """Test Paint_ set_color_source method."""
     # Create a paint
-    paint = Paint_()
+    paint = Paint()
 
     # Create a linear gradient color source
     start_point = Point(0, 0)
@@ -122,7 +123,7 @@ def test_paint_set_color_source():
     ]
     tile_mode = TileMode.CLAMP
 
-    color_source = ColorSource_.linear_gradient(
+    color_source = ColorSource.linear_gradient(
         start_point, end_point, colors, stops, tile_mode
     )
 

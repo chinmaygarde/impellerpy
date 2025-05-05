@@ -1,9 +1,10 @@
 from impellerpy import *
 
+
 def test_display_list_builder_creation():
     """Test DisplayListBuilder_ creation."""
     # Create a display list builder
-    dl_builder = DisplayListBuilder_()
+    dl_builder = DisplayListBuilder()
 
     # We can't directly test the default properties, but we can verify it was created
     assert dl_builder is not None
@@ -12,7 +13,7 @@ def test_display_list_builder_creation():
 def test_display_list_builder_build():
     """Test DisplayListBuilder_ build method."""
     # Create a display list builder
-    dl_builder = DisplayListBuilder_()
+    dl_builder = DisplayListBuilder()
 
     # Build a display list
     dl = dl_builder.build()
@@ -24,7 +25,7 @@ def test_display_list_builder_build():
 def test_display_list_builder_clip_methods():
     """Test DisplayListBuilder_ clip methods."""
     # Create a display list builder
-    dl_builder = DisplayListBuilder_()
+    dl_builder = DisplayListBuilder()
 
     # Test clip_rect
     rect = Rect(50, 50, 100, 100)
@@ -38,7 +39,7 @@ def test_display_list_builder_clip_methods():
 
     # Test clip_rounded_rect
     rounded_rect = Rect(50, 50, 100, 100)
-    radii = RoundingRadii_()
+    radii = RoundingRadii()
     radii.top_left.x = 10
     radii.top_left.y = 10
     radii.top_right.x = 10
@@ -53,7 +54,7 @@ def test_display_list_builder_clip_methods():
     assert result is dl_builder
 
     # Test clip_path
-    path_builder = PathBuilder_()
+    path_builder = PathBuilder()
     path_builder.add_rect(Rect(50, 50, 100, 100))
     path = path_builder.build(FillType.NON_ZERO)
     result = dl_builder.clip_path(path, ClipOperation.INTERSECT)
@@ -67,10 +68,10 @@ def test_display_list_builder_clip_methods():
 def test_display_list_builder_draw_methods():
     """Test DisplayListBuilder_ draw methods."""
     # Create a display list builder
-    dl_builder = DisplayListBuilder_()
+    dl_builder = DisplayListBuilder()
 
     # Create a paint
-    paint = Paint_()
+    paint = Paint()
     paint.set_color(Color(r=1.0, g=0.0, b=0.0, a=1.0))
 
     # Test draw_rect
@@ -85,7 +86,7 @@ def test_display_list_builder_draw_methods():
 
     # Test draw_rounded_rect
     rounded_rect = Rect(350, 50, 100, 100)
-    radii = RoundingRadii_()
+    radii = RoundingRadii()
     radii.top_left.x = 10
     radii.top_left.y = 10
     radii.top_right.x = 10
@@ -112,7 +113,7 @@ def test_display_list_builder_draw_methods():
     assert result is dl_builder
 
     # Test draw_path
-    path_builder = PathBuilder_()
+    path_builder = PathBuilder()
     path_builder.move_to(Point(350, 200))
     path_builder.line_to(Point(450, 200))
     path_builder.line_to(Point(400, 300))
@@ -133,7 +134,7 @@ def test_display_list_builder_draw_methods():
 def test_display_list_builder_transform_methods():
     """Test DisplayListBuilder_ transform methods."""
     # Create a display list builder
-    dl_builder = DisplayListBuilder_()
+    dl_builder = DisplayListBuilder()
 
     # Test save and restore
     save_count = dl_builder.save_count()
@@ -158,48 +159,37 @@ def test_display_list_builder_transform_methods():
     assert transform is not None
 
     # Test set_transform
-    identity_matrix = Matrix_(
-        [
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-        ]
-    )
+    identity_matrix = Matrix.identity()
     result = dl_builder.set_transform(identity_matrix)
     assert result is dl_builder
 
     # Test push_transform
-    scale_matrix = Matrix_(
+    scale_matrix = Matrix(
         [
-            2.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            2.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
-            0.0,
-            0.0,
-            0.0,
-            0.0,
-            1.0,
+            [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+            ],
+            [
+                0.0,
+                2.0,
+                0.0,
+                0.0,
+            ],
+            [
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+            ],
+            [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+            ],
         ]
     )
     result = dl_builder.push_transform(scale_matrix)
@@ -211,7 +201,7 @@ def test_display_list_builder_transform_methods():
     assert dl_builder.save_count() == save_count
 
     # Test save_layer
-    paint = Paint_()
+    paint = Paint()
     paint.set_color(Color(r=1.0, g=0.0, b=0.0, a=0.5))
     result = dl_builder.save_layer(Rect(10, 10, 100, 100), paint)
     assert result is dl_builder
@@ -236,13 +226,13 @@ def test_display_list_builder_transform_methods():
 def test_display_list_builder_draw_complex():
     """Test DisplayListBuilder_ with complex drawing operations."""
     # Create a display list builder
-    dl_builder = DisplayListBuilder_()
+    dl_builder = DisplayListBuilder()
 
     # Create paints
-    red_paint = Paint_()
+    red_paint = Paint()
     red_paint.set_color(Color(r=1.0, g=0.0, b=0.0, a=1.0))
 
-    blue_paint = Paint_()
+    blue_paint = Paint()
     blue_paint.set_color(Color(r=0.0, g=0.0, b=1.0, a=1.0))
     blue_paint.set_draw_style(DrawStyle.STROKE)
     blue_paint.set_stroke_width(5.0)
@@ -265,14 +255,14 @@ def test_display_list_builder_draw_complex():
     dl_builder.restore()
 
     # Draw a path
-    path_builder = PathBuilder_()
+    path_builder = PathBuilder()
     path_builder.move_to(Point(350, 50))
     path_builder.line_to(Point(450, 50))
     path_builder.line_to(Point(400, 150))
     path_builder.close()
     path = path_builder.build(FillType.NON_ZERO)
 
-    green_paint = Paint_()
+    green_paint = Paint()
     green_paint.set_color(Color(r=0.0, g=1.0, b=0.0, a=1.0))
 
     dl_builder.draw_path(path, green_paint)

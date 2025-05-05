@@ -1,9 +1,10 @@
 from impellerpy import *
 
+
 def test_typography_context_creation():
     """Test TypographyContext_ creation."""
     # Create a typography context
-    typography_ctx = TypographyContext_()
+    typography_ctx = TypographyContext()
 
     # We can't directly test the properties of the context, but we can verify it was created
     assert typography_ctx is not None
@@ -12,7 +13,7 @@ def test_typography_context_creation():
 def test_paragraph_style_creation():
     """Test ParagraphStyle_ creation and methods."""
     # Create a paragraph style
-    style = ParagraphStyle_()
+    style = ParagraphStyle()
 
     # We can't directly test the default properties, but we can verify it was created
     assert style is not None
@@ -54,13 +55,13 @@ def test_paragraph_style_creation():
     assert result is style
 
     # Test set_font_foreground
-    paint = Paint_()
+    paint = Paint()
     paint.set_color(Color(r=0.0, g=0.0, b=0.0, a=1.0))
     result = style.set_font_foreground(paint)
     assert result is style
 
     # Test set_background
-    bg_paint = Paint_()
+    bg_paint = Paint()
     bg_paint.set_color(Color(r=1.0, g=1.0, b=1.0, a=0.5))
     result = style.set_background(bg_paint)
     assert result is style
@@ -69,16 +70,16 @@ def test_paragraph_style_creation():
 def test_paragraph_builder_creation():
     """Test ParagraphBuilder_ creation and methods."""
     # Create a typography context
-    typography_ctx = TypographyContext_()
+    typography_ctx = TypographyContext()
 
     # Create a paragraph builder
-    builder = ParagraphBuilder_(typography_ctx)
+    builder = ParagraphBuilder(typography_ctx)
 
     # We can't directly test the default properties, but we can verify it was created
     assert builder is not None
 
     # Test push_style
-    style = ParagraphStyle_()
+    style = ParagraphStyle()
     style.set_font_family("Arial")
     style.set_font_size(24.0)
     result = builder.push_style(style)
@@ -100,10 +101,10 @@ def test_paragraph_builder_creation():
 def test_paragraph_methods():
     """Test Paragraph_ methods."""
     # Create a typography context, builder, and paragraph
-    typography_ctx = TypographyContext_()
-    builder = ParagraphBuilder_(typography_ctx)
+    typography_ctx = TypographyContext()
+    builder = ParagraphBuilder(typography_ctx)
 
-    style = ParagraphStyle_()
+    style = ParagraphStyle()
     style.set_font_family("Arial")
     style.set_font_size(24.0)
     builder.push_style(style)
@@ -141,10 +142,10 @@ def test_paragraph_methods():
 def test_line_metrics_methods():
     """Test LineMetrics_ methods."""
     # Create a typography context, builder, and paragraph to get line metrics
-    typography_ctx = TypographyContext_()
-    builder = ParagraphBuilder_(typography_ctx)
+    typography_ctx = TypographyContext()
+    builder = ParagraphBuilder(typography_ctx)
 
-    style = ParagraphStyle_()
+    style = ParagraphStyle()
     style.set_font_family("Arial")
     style.set_font_size(24.0)
     builder.push_style(style)
@@ -172,10 +173,10 @@ def test_line_metrics_methods():
 def test_glyph_info_methods():
     """Test GlyphInfo_ methods."""
     # Create a typography context, builder, and paragraph to get glyph info
-    typography_ctx = TypographyContext_()
-    builder = ParagraphBuilder_(typography_ctx)
+    typography_ctx = TypographyContext()
+    builder = ParagraphBuilder(typography_ctx)
 
-    style = ParagraphStyle_()
+    style = ParagraphStyle()
     style.set_font_family("Arial")
     style.set_font_size(24.0)
     builder.push_style(style)
@@ -192,7 +193,7 @@ def test_glyph_info_methods():
         assert glyph_info.grapheme_cluster_code_unit_range_end() >= 0
 
         bounds = glyph_info.grapheme_cluster_bounds()
-        assert isinstance(bounds, Rect_)
+        assert isinstance(bounds, Rect)
 
         assert isinstance(glyph_info.is_ellipsis(), bool)
         assert isinstance(glyph_info.text_direction(), TextDirection)

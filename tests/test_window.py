@@ -1,9 +1,10 @@
 from impellerpy import *
 
+
 def test_window_creation():
     """Test Window_ creation."""
     # Create a window
-    window = Window_()
+    window = Window()
 
     # We can't directly test the properties of the window, but we can verify it was created
     assert window is not None
@@ -12,7 +13,7 @@ def test_window_creation():
 def test_window_methods():
     """Test Window_ methods."""
     # Create a window
-    window = Window_()
+    window = Window()
 
     # Test should_close method
     should_close = window.should_close()
@@ -22,6 +23,6 @@ def test_window_methods():
     window.poll_events()  # Just verify it doesn't crash
 
     # Test create_render_surface method
-    context = Context_()
+    context = Context()
     surface = window.create_render_surface(context)
     assert surface is not None
