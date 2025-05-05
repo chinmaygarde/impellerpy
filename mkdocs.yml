@@ -33,7 +33,8 @@ plugins:
       handlers:
         python:
           options:
-            show_source: true
+            show_source: false
+            show_if_no_docstring: true
 
 markdown_extensions:
   - admonition

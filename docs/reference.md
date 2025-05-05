@@ -1,3 +1,3 @@
-# Reference
+# API Reference
 
 ::: impellerpy

@@ -17,24 +17,35 @@ def get_version() -> int:
 class FillType(Enum):
     """
     Determines how overlapping contours in a path are filled.
-
-    NON_ZERO: Uses the non-zero winding rule for filling paths.
-    ODD: Uses the even-odd rule for filling paths.
     """
 
+
+
     NON_ZERO = 0
+    """
+    Uses the non-zero winding rule for filling paths.
+    """
+
     ODD = 1
+    """
+    Uses the even-odd rule for filling paths.
+    """
+
 
 class ClipOperation(Enum):
     """
     Determines how clip regions are combined.
-
-    DIFFERENCE: Subtracts the new clip region from the current clip.
-    INTERSECT: Intersects the new clip region with the current clip.
     """
 
     DIFFERENCE = 0
+    """
+    Subtracts the new clip region from the current clip.
+    """
+
     INTERSECT = 1
+    """
+    Intersects the new clip region with the current clip.
+    """
 
 class BlendMode(Enum):
     """
@@ -44,207 +55,362 @@ class BlendMode(Enum):
     and additional blend modes from PDF and SVG specifications.
     """
 
-    CLEAR = 0  # Clear destination (0)
-    SOURCE = 1  # Copy source (S)
-    DESTINATION = 2  # Preserve destination (D)
-    SOURCE_OVER = 3  # Source over destination (S + (1-Sa)*D)
-    DESTINATION_OVER = 4  # Destination over source (D + (1-Da)*S)
-    SOURCE_IN = 5  # Source where destination is non-zero (Da*S)
-    DESTINATION_IN = 6  # Destination where source is non-zero (Sa*D)
-    SOURCE_OUT = 7  # Source where destination is zero ((1-Da)*S)
-    DESTINATION_OUT = 8  # Destination where source is zero ((1-Sa)*D)
-    SOURCE_ATOP = 9  # Source atop destination (Da*S + (1-Sa)*D)
-    DESTINATION_ATOP = 10  # Destination atop source (Sa*D + (1-Da)*S)
-    XOR = 11  # Exclusive OR ((1-Sa)*D + (1-Da)*S)
-    PLUS = 12  # Sum of source and destination (S + D)
-    MODULATE = 13  # Product of source and destination (S*D)
-    SCREEN = 14  # Screen blend mode
-    OVERLAY = 15  # Overlay blend mode
-    DARKEN = 16  # Darker of source and destination
-    LIGHTEN = 17  # Lighter of source and destination
-    COLOR_DODGE = 18  # Brightens destination based on source
-    COLOR_BURN = 19  # Darkens destination based on source
-    HARD_LIGHT = 20  # Hard light blend mode
-    SOFT_LIGHT = 21  # Soft light blend mode
-    DIFFERENCE = 22  # Absolute difference between source and destination
-    EXCLUSION = 23  # Similar to DIFFERENCE but with lower contrast
-    MULTIPLY = 24  # Multiply source and destination
-    HUE = 25  # Hue from source, saturation and luminosity from destination
-    SATURATION = (
-        26  # Saturation from source, hue and luminosity from destination
-    )
-    COLOR = 27  # Hue and saturation from source, luminosity from destination
-    LUMINOSITY = (
-        28  # Luminosity from source, hue and saturation from destination
-    )
+    CLEAR = 0
+    """
+    Clear destination (0)
+    """
+    SOURCE = 1
+    """
+    Copy source (S)
+    """
+    DESTINATION = 2
+    """
+    Preserve destination (D)
+    """
+    SOURCE_OVER = 3
+    """
+    Source over destination (S + (1-Sa)*D)
+    """
+    DESTINATION_OVER = 4
+    """
+    Destination over source (D + (1-Da)*S)
+    """
+    SOURCE_IN = 5
+    """
+    Source where destination is non-zero (Da*S)
+    """
+    DESTINATION_IN = 6
+    """
+    Destination where source is non-zero (Sa*D)
+    """
+    SOURCE_OUT = 7
+    """
+    Source where destination is zero ((1-Da)*S)
+    """
+    DESTINATION_OUT = 8
+    """
+    Destination where source is zero ((1-Sa)*D)
+    """
+    SOURCE_ATOP = 9
+    """
+    Source atop destination (Da*S + (1-Sa)*D)
+    """
+    DESTINATION_ATOP = 10
+    """
+    Destination atop source (Sa*D + (1-Da)*S)
+    """
+    XOR = 11
+    """
+    Exclusive OR ((1-Sa)*D + (1-Da)*S)
+    """
+    PLUS = 12
+    """
+    Sum of source and destination (S + D)
+    """
+    MODULATE = 13
+    """
+    Product of source and destination (S*D)
+    """
+    SCREEN = 14
+    """
+    Screen blend mode
+    """
+    OVERLAY = 15
+    """
+    Overlay blend mode
+    """
+    DARKEN = 16
+    """
+    Darker of source and destination
+    """
+    LIGHTEN = 17
+    """
+    Lighter of source and destination
+    """
+    COLOR_DODGE = 18
+    """
+    Brightens destination based on source
+    """
+    COLOR_BURN = 19
+    """
+    Darkens destination based on source
+    """
+    HARD_LIGHT = 20
+    """
+    Hard light blend mode
+    """
+    SOFT_LIGHT = 21
+    """
+    Soft light blend mode
+    """
+    DIFFERENCE = 22
+    """
+    Absolute difference between source and destination
+    """
+    EXCLUSION = 23
+    """
+    Similar to DIFFERENCE but with lower contrast
+    """
+    MULTIPLY = 24
+    """
+    Multiply source and destination
+    """
+    HUE = 25
+    """
+    Hue from source, saturation and luminosity from destination
+    """
+    SATURATION = 26
+    """
+    Saturation from source, hue and luminosity from destination
+    """
+    COLOR = 27
+    """
+    Hue and saturation from source, luminosity from destination
+    """
+    LUMINOSITY = 28
+    """
+    Luminosity from source, hue and saturation from destination
+    """
 
 class DrawStyle(Enum):
     """
     Determines how shapes are rendered.
-
-    FILL: Fill the shape with the paint.
-    STROKE: Stroke the outline of the shape with the paint.
-    STROKE_AND_FILL: Both fill and stroke the shape with the paint.
     """
 
     FILL = 0
+    """
+    Fill the shape with the paint.
+    """
     STROKE = 1
+    """
+    Stroke the outline of the shape with the paint.
+    """
     STROKE_AND_FILL = 2
+    """
+    Both fill and stroke the shape with the paint.
+    """
 
 class StrokeCap(Enum):
     """
     Determines how the ends of stroked lines are rendered.
-
-    BUTT: End the stroke at the path's endpoint.
-    ROUND: End the stroke with a semicircle at the path's endpoint.
-    SQUARE: End the stroke with a square at the path's endpoint.
     """
 
     BUTT = 0
+    """
+    End the stroke at the path's endpoint.
+    """
     ROUND = 1
+    """
+    End the stroke with a semicircle at the path's endpoint.
+    """
     SQUARE = 2
+    """
+    End the stroke with a square at the path's endpoint.
+    """
 
 class StrokeJoin(Enum):
     """
     Determines how corners in stroked paths are rendered.
-
-    MITER: Join segments with a sharp corner.
-    ROUND: Join segments with a rounded corner.
-    BEVEL: Join segments with a flat corner.
     """
 
     MITER = 0
+    """
+    Join segments with a sharp corner.
+    """
     ROUND = 1
+    """
+    Join segments with a rounded corner.
+    """
     BEVEL = 2
+    """
+    Join segments with a flat corner.
+    """
 
 class PixelFormat(Enum):
     """
     Specifies the format of pixels in textures and surfaces.
-
-    RGBA8888: 8 bits per channel, red, green, blue, alpha.
     """
 
     RGBA8888 = 0
+    """
+    8 bits per channel, red, green, blue, alpha.
+    """
 
 class TextureSampling(Enum):
     """
     Determines how textures are sampled when drawn.
-
-    NEAREST_NEIGHBOR: Use the nearest pixel value.
-    LINEAR: Interpolate between neighboring pixels.
     """
 
     NEAREST_NEIGHBOR = 0
+    """
+    Use the nearest pixel value.
+    """
     LINEAR = 1
+    """
+    Interpolate between neighboring pixels.
+    """
 
 class TileMode(Enum):
     """
     Determines how textures and gradients behave outside their bounds.
-
-    CLAMP: Use the color at the nearest edge.
-    REPEAT: Repeat the texture or gradient.
-    MIRROR: Repeat the texture or gradient, mirroring on each repetition.
-    DECAL: Use transparent black outside the bounds.
     """
 
     CLAMP = 0
+    """
+    Use the color at the nearest edge.
+    """
     REPEAT = 1
+    """
+    Repeat the texture or gradient.
+    """
     MIRROR = 2
+    """
+    Repeat the texture or gradient, mirroring on each repetition.
+    """
     DECAL = 3
+    """
+    Use transparent black outside the bounds.
+    """
 
 class BlurStyle(Enum):
     """
     Determines how blur mask filters are applied.
-
-    NORMAL: Blur in all directions.
-    SOLID: Blur and preserve the original shape.
-    OUTER: Blur only outside the shape.
-    INNER: Blur only inside the shape.
     """
 
     NORMAL = 0
+    """
+    Blur in all directions.
+    """
     SOLID = 1
+    """
+    Blur and preserve the original shape.
+    """
     OUTER = 2
+    """
+    Blur only outside the shape.
+    """
     INNER = 3
+    """
+    Blur only inside the shape.
+    """
 
 class ColorSpace(Enum):
     """
     Specifies the color space for colors.
-
-    SRGB: Standard RGB color space.
-    EXTENDED_SRGB: Extended sRGB color space with values outside [0,1].
-    DISPLAY_P3: Display P3 color space with wider gamut than sRGB.
     """
 
     SRGB = 0
+    """
+    Standard RGB color space.
+    """
     EXTENDED_SRGB = 1
+    """
+    Extended sRGB color space with values outside [0,1].
+    """
     DISPLAY_P3 = 2
+    """
+    Display P3 color space with wider gamut than sRGB.
+    """
 
 class FontWeight(Enum):
     """
     Specifies the weight (boldness) of a font.
-
-    W100: Thin
-    W200: Extra-Light
-    W300: Light
-    W400: Normal/Regular
-    W500: Medium
-    W600: Semi-bold
-    W700: Bold
-    W800: Extra-Bold
-    W900: Black
     """
 
-    W100 = 0  # Thin
-    W200 = 1  # Extra-Light
-    W300 = 2  # Light
-    W400 = 3  # Normal/Regular
-    W500 = 4  # Medium
-    W600 = 5  # Semi-bold
-    W700 = 6  # Bold
-    W800 = 7  # Extra-Bold
-    W900 = 8  # Black
+    W100 = 0
+    """
+    Thin
+    """
+    W200 = 1
+    """
+    Light
+    """
+    W300 = 2
+    """
+    Light
+    """
+    W400 = 3
+    """
+    Regular
+    """
+    W500 = 4
+    """
+    Medium
+    """
+    W600 = 5
+    """
+    bold
+    """
+    W700 = 6
+    """
+    Bold
+    """
+    W800 = 7
+    """
+    Bold
+    """
+    W900 = 8
+    """
+    Black
+    """
 
 class FontStyle(Enum):
     """
     Specifies the style of a font.
-
-    NORMAL: Regular font style.
-    ITALIC: Italic font style.
     """
 
     NORMAL = 0
+    """
+    Regular font style.
+    """
     ITALIC = 1
+    """
+    Italic font style.
+    """
 
 class TextAlignment(Enum):
     """
     Specifies the horizontal alignment of text.
-
-    LEFT: Align text to the left.
-    RIGHT: Align text to the right.
-    CENTER: Center text horizontally.
-    JUSTIFY: Stretch text to fill the width.
-    START: Align text to the start of the line (depends on text direction).
-    END: Align text to the end of the line (depends on text direction).
     """
 
     LEFT = 0
+    """
+    Align text to the left.
+    """
     RIGHT = 1
+    """
+    Align text to the right.
+    """
     CENTER = 2
+    """
+    Center text horizontally.
+    """
     JUSTIFY = 3
+    """
+    Stretch text to fill the width.
+    """
     START = 4
+    """
+    Align text to the start of the line (depends on text direction).
+    """
     END = 5
+    """
+    Align text to the end of the line (depends on text direction).
+    """
 
 class TextDirection(Enum):
     """
     Specifies the direction of text flow.
-
-    RTL: Right-to-left text direction.
-    LTR: Left-to-right text direction.
     """
 
     RTL = 0
+    """
+    Right-to-left text direction.
+    """
     LTR = 1
+    """
+    Left-to-right text direction.
+    """
 
 class Rect_:
     """
