@@ -67,14 +67,25 @@ nanobind_add_module(impellerpy
   LTO STABLE_ABI NB_STATIC
   bindings.cc
   bindings.h
-  cocoa.h
-  cocoa.mm
+  platform.h
   impellerpy.cc
   setup.cc
   setup.h
   window.cc
   window.h
 )
+
+if (APPLE)
+target_sources(impellerpy
+  PRIVATE
+    platform.mm
+)
+else()
+target_sources(impellerpy
+  PRIVATE
+    platform.cc
+)
+endif()
 
 target_link_libraries(impellerpy
   PRIVATE

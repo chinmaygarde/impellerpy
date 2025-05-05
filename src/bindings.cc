@@ -1,6 +1,7 @@
 #include "bindings.h"
 
 #include <nanobind/stl/unique_ptr.h>
+#include <cstring>
 #include <impeller.hpp>
 #include <memory>
 
@@ -577,7 +578,16 @@ static void BindWindow(nb::module_& m) {
 }
 
 static ImpellerContext CreateContextNew() {
+#if defined(__APPLE__)
   return ImpellerContextCreateMetalNew(IMPELLER_VERSION);
+#else
+  return ImpellerContextCreateOpenGLESNew(
+      IMPELLER_VERSION,
+      [](const char* proc_name, void* user_data) -> void* {
+        return reinterpret_cast<void*>(::glfwGetProcAddress(proc_name));
+      },
+      NULL);
+#endif
 }
 
 static void BindContext(nb::module_& m) {

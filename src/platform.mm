@@ -1,4 +1,4 @@
-#include "cocoa.h"
+#include "platform.h"
 
 #define GLFW_EXPOSE_NATIVE_COCOA
 #include <GLFW/glfw3native.h>
@@ -7,7 +7,11 @@
 
 namespace impeller::py {
 
-bool ConfigureCocoaWindow(GLFWwindow* window) {
+void ApplyGLFWWindowHints() {
+  ::glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+}
+
+bool ConfigurePlatformWindow(GLFWwindow* window) {
   NSWindow* cocoa_window = ::glfwGetCocoaWindow(window);
 
   if (cocoa_window == nil) {
