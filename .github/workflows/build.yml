@@ -18,12 +18,16 @@ jobs:
       fail-fast: true
       matrix:
         # macos-13 is an Intel runner, macos-15 is Apple Silicon
-        os: [ macos-13, macos-15 ]
+        os: [ macos-13, macos-15, ubuntu-latest ]
     steps:
       - name: Update Submodules
         uses: actions/checkout@v4
         with:
           submodules: true
+
+      - name: Install Dependencies
+        if: ${{ runner.os == 'Linux' }}
+        run: sudo apt update && sudo apt install -y libwayland-dev libxkbcommon-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libgles2-mesa-dev
 
       - name: Build Wheel
         uses: pypa/cibuildwheel@v2.23.3
