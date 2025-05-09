@@ -4,7 +4,7 @@
 cmake_policy(SET CMP0135 NEW)
 include(FetchContent)
 
-set(IMPELLER_SDK_SHA 97f358fd0a7e06be8e36c634671f1a228ccf42c8)
+set(IMPELLER_SDK_SHA 7592aeaa90495784353fbbe5116f7e33cc8f9a4a)
 if(CMAKE_HOST_APPLE)
   set(IMPELLER_PLATFORM darwin)
   set(IMPELLER_DYLIB libimpeller.dylib)
