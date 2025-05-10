@@ -21,3 +21,4 @@ site/
 !.aider.conf.yml
 wheelhouse/
 skbuild/
+cache/

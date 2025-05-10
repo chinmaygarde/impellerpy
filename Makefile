@@ -1,7 +1,7 @@
 # This project uses CMake and Git sub-modules. This Makefile is just in place
 # to make common tasks easier.
 
-.PHONY: clean build sync test format check serve_docs deploy_docs clean_package package
+.PHONY: clean build sync test format check serve_docs deploy_docs clean_package package docker
 
 build: build/args.gn
 	cmake --build --preset default
@@ -15,6 +15,9 @@ test: build check
 clean: clean_package
 	rm -rf build
 	rm -rf .venv
+	rm -rf cache
+
+clean_package:
 	rm -rf dist
 
 sync:
@@ -35,3 +38,7 @@ deploy_docs:
 
 package: clean_package
 	uv build --wheel -v
+
+docker: clean
+	docker build -t chinmaygarde/impellerpy .
+	docker run --rm -it -v `pwd`:/impellerpy -w /impellerpy chinmaygarde/impellerpy /bin/bash
