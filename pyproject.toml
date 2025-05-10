@@ -88,3 +88,8 @@ test-skip="*"
 # Needed for full C++17 support
 [tool.cibuildwheel.macos.environment]
 MACOSX_DEPLOYMENT_TARGET = "11.0"
+
+[tool.cibuildwheel.linux]
+before-all = [
+    "yum install -y cmake libX11-devel libXrandr-devel libXinerama-devel libXi-devel libXcursor-devel mesa-libGL-devel libXdamage-devel libudev-devel wayland-devel libxkbcommon-devel"
+]
