@@ -18,7 +18,7 @@ jobs:
       fail-fast: true
       matrix:
         # macos-13 is an Intel runner, macos-15 is Apple Silicon
-        os: [ macos-13, macos-15, ubuntu-latest ]
+        os: [ macos-13, macos-15 ]
     steps:
       - name: Update Submodules
         uses: actions/checkout@v4
