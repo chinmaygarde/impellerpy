@@ -42,3 +42,7 @@ package: clean_package
 docker: clean
 	docker build -t chinmaygarde/impellerpy .
 	docker run --rm -it -v `pwd`:/impellerpy -w /impellerpy chinmaygarde/impellerpy /bin/bash
+
+docker_manylinux: clean
+	docker build -f manylinux.Dockerfile -t chinmaygarde/impellerpy_manylinux .
+	docker run --rm -it -v `pwd`:/impellerpy -w /impellerpy chinmaygarde/impellerpy_manylinux /bin/bash
