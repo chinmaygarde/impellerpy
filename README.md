@@ -2,21 +2,7 @@
 
 Python bindings to [Impeller](https://github.com/flutter/flutter/blob/main/engine/src/flutter/impeller/README.md), [Flutter's](https://flutter.dev/) GPU-accelerated 2D rendering engine. ImpellerPy lets Python developers create high-performance graphics applications — with windows, vector paths, gradients, image filters, and rich typography — without requiring Flutter or Dart.
 
-> **Status**: Early development (v0.1.2)
-
----
-
 ## Overview
-
-```mermaid
-graph TD
-    A[Python Application] -->|import impellerpy| B[Python API Layer]
-    B --> C[C++ nanobind Bindings]
-    C --> D[Impeller C SDK]
-    D --> E[GPU / Metal / Vulkan / OpenGL]
-    B --> F[GLFW Window]
-    F --> G[OS Window System]
-```
 
 ImpellerPy is structured in three layers:
 
@@ -26,41 +12,6 @@ ImpellerPy is structured in three layers:
 | **C++ Bindings** (`src/*.cc`) | C++ | nanobind bridge between Python and Impeller |
 | **Impeller SDK** | C/C++ | Flutter's rendering engine (downloaded automatically at build time) |
 
----
-
-## Architecture
-
-```mermaid
-graph LR
-    subgraph Python Package
-        init[__init__.py\nPublic API]
-        wrappers[impeller.py\nWrapper Classes]
-        stubs[impellerpy.pyi\nType Stubs]
-    end
-
-    subgraph C++ Extension Module
-        bindings[bindings.cc\nnanobind Glue]
-        core[impellerpy.cc\nModule Init + Enums]
-        window[window.cc\nGLFW Window]
-        platform[platform.cc/mm\nPlatform Code]
-        setup[setup.cc\nInitialization]
-    end
-
-    subgraph Third Party
-        impeller[Impeller SDK\nlibimpeller.dylib/.so]
-        glfw[GLFW\nSubmodule]
-        nanobind[nanobind 1.3.2+\nvia vcpkg]
-    end
-
-    init --> wrappers
-    wrappers --> bindings
-    bindings --> core
-    bindings --> impeller
-    window --> glfw
-    platform --> impeller
-```
-
----
 
 ## Features
 
@@ -74,100 +25,8 @@ graph LR
 - **Typography** — paragraph layout, font weight/style, text alignment, direction, line metrics, glyph info
 - **Windowing** — create GPU-backed windows via GLFW with an event loop
 
----
-
-## Rendering Pipeline
-
-```mermaid
-sequenceDiagram
-    participant App as Python App
-    participant DLB as DisplayListBuilder
-    participant DL as DisplayList
-    participant Surface as Surface
-    participant GPU as GPU
-
-    App->>DLB: create DisplayListBuilder()
-    App->>DLB: draw_rect(), draw_path(), draw_paragraph()...
-    App->>DLB: build()
-    DLB-->>DL: DisplayList (recorded commands)
-    App->>Surface: draw_display_list(dl)
-    Surface->>GPU: submit draw calls
-    GPU-->>App: rendered frame
-```
-
----
-
-## Public API
-
-The library exports 44 symbols organized by category:
-
-```mermaid
-mindmap
-  root((impellerpy))
-    Geometry
-      Rect
-      Point
-      Size
-      ISize
-      Matrix
-      ColorMatrix
-      RoundingRadii
-      Range
-    Rendering
-      DisplayList
-      DisplayListBuilder
-      Surface
-      Context
-      Texture
-      TextureDescriptor
-    Paint & Color
-      Color
-      Paint
-      ColorFilter
-      ColorSource
-      ImageFilter
-      MaskFilter
-    Typography
-      Paragraph
-      ParagraphBuilder
-      ParagraphStyle
-      TypographyContext
-      GlyphInfo
-      LineMetrics
-    Paths
-      Path
-      PathBuilder
-    Enums
-      BlendMode
-      FillType
-      DrawStyle
-      StrokeCap
-      StrokeJoin
-      TileMode
-      BlurStyle
-      FontWeight
-      FontStyle
-      TextAlignment
-      TextDirection
-      PixelFormat
-      TextureSampling
-      ClipOperation
-      ColorSpace
-    Window
-      Window
-```
-
----
 
 ## Usage
-
-### Install from PyPI
-
-```sh
-pip install impellerpy
-# or
-uv add impellerpy
-```
 
 ### Basic Drawing
 
@@ -253,8 +112,6 @@ para = (
 dl = DisplayListBuilder().draw_paragraph(para, Point(50, 50)).build()
 ```
 
----
-
 ## Prerequisites
 
 - A C11 and C++20 compiler
@@ -262,8 +119,6 @@ dl = DisplayListBuilder().draw_paragraph(para, Point(50, 50)).build()
 - Git
 - Ninja
 - [vcpkg](https://vcpkg.io/en/index.html) — set the `VCPKG_ROOT` environment variable
-
-vcpkg compiles CPython 3 from source. Install the required tools first:
 
 **macOS:**
 ```sh
@@ -276,8 +131,6 @@ sudo apt-get install -y autoconf automake autoconf-archive \
   libx11-dev libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev \
   mesa-libGL-devel wayland-devel libxkbcommon-devel libudev-devel
 ```
-
----
 
 ## Building from Source
 
@@ -317,8 +170,6 @@ just check
 | `just serve-docs` | Serve documentation locally |
 | `just deploy-docs` | Deploy documentation to GitHub Pages |
 
----
-
 ## Project Structure
 
 ```
@@ -344,8 +195,6 @@ impellerpy/
 └── justfile
 ```
 
----
-
 ## Platform Support
 
 | Platform | Architecture | Status |
@@ -355,23 +204,6 @@ impellerpy/
 | Linux | x64 | Supported |
 | Windows | x64 | In progress |
 
----
-
-## Development Dependencies
-
-```toml
-[dependency-groups.dev]
-cibuildwheel   # Cross-platform wheel building
-pytest         # Test framework
-pillow         # Image I/O for tests
-pyglm          # GLM math types for tests
-ruff           # Linting and formatting
-mkdocs         # Documentation
-mkdocstrings   # Auto-generate API docs from docstrings
-twine          # PyPI upload
-```
-
----
 
 ## License
 
