@@ -44,7 +44,7 @@ jobs:
       # https://docs.pypi.org/trusted-publishers/
       id-token: write
     steps:
-    - uses: actions/setup-python@v5
+    - uses: actions/setup-python@v6
       name: Setup Python
     - uses: actions/download-artifact@v4
       name: Download Previously Built Wheels.
