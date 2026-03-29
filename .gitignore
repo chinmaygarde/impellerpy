@@ -19,6 +19,8 @@ wheels/
 site/
 .aider*
 !.aider.conf.yml
+.claude/settings.local.json
+.claude/memory/
 wheelhouse/
 skbuild/
 cache/
