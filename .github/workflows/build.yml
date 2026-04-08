@@ -21,7 +21,7 @@ jobs:
         os: [ macos-13, macos-15 ]
     steps:
       - name: Update Submodules
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: true
 
